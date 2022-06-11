@@ -1,0 +1,42 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  jpa:
+    show-sql: true
+
+debug: true
+logging:
+  level:
+    hu.zza.bulbman: DEBUG
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /a
+      exposure:
+        include: '*'
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+---
+
+spring:
+  profiles:
+    active: prod
+
+server:
+  error:
+    include-message: always
+
+#springdoc:
+#  swagger-ui:
+#    url: /Bulbman_OpenAPI.yaml
