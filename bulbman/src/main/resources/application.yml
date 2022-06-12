@@ -44,11 +44,6 @@ server:
   error:
     include-message: always
 
-#springdoc:
-#  swagger-ui:
-#    url: /Bulbman_OpenAPI.yaml
-
-bulbman:
-  device-catalog:
-    source:
-      hu.zza.bulbman.model: hu.zza.bulbman.repository
+springdoc:
+  swagger-ui:
+    url: /Bulbman_OpenAPI.yaml
