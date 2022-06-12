@@ -15,7 +15,7 @@
 	<description>Manager for smart lights</description>
 	<properties>
 		<java.version>17</java.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<mapstruct.version>1.5.1.Final</mapstruct.version>
 		<springdoc.version>1.6.9</springdoc.version>
 		<problem.version>0.27.0</problem.version>
 	</properties>
