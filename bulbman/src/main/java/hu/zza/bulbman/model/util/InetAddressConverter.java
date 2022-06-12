@@ -29,15 +29,18 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
     return joiner.toString();
   }
 
+  public InetAddress parse(String address) {
+    return convertToEntityAttribute(address);
+  }
   @Override
   public InetAddress convertToEntityAttribute(String address) {
     if (address == null) {
       return DeviceAddress.NULL_IP;
     }
-    return parse(address);
+    return tryToParse(address);
   }
 
-  private InetAddress parse(String address) {
+  private InetAddress tryToParse(String address) {
     try {
       return InetAddress.getByAddress(
           ByteArrayUtil.getAsByteArray(

@@ -1,0 +1,7 @@
+body {
+  --bs-text-primary: #448fff;
+  --bs-primary-rgb: 68, 143, 255;
+  --bs-text-light: silver;
+  --bs-light-rgb: 192, 192, 192;
+  --bs-body-bg: #333;
+}

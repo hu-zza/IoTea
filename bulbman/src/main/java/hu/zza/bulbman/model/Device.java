@@ -1,15 +1,44 @@
 package hu.zza.bulbman.model;
 
-public interface Device {
-  String getId();
+import java.util.Objects;
+import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-  void setId(String id);
+@Entity
+@Table(name = "devices")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Device implements Addressable {
+  @Id
+  @Column(nullable = false)
+  private String id;
 
-  String getName();
+  @Column(nullable = false)
+  private String name;
 
-  void setName(String name);
+  @Embedded
+  @Column(nullable = false)
+  private DeviceAddress address;
 
-  DeviceAddress getAddress();
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+      return false;
+    }
+    Device other = (Device) o;
+    return getId() != null && Objects.equals(getId(), other.getId());
+  }
 
-  void setAddress(DeviceAddress address);
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
 }
+

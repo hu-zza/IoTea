@@ -1,1 +1,0 @@
-CREATE TABLE xiaomi_yeelight_yeelight (id VARCHAR(255) NOT NULL, name TEXT NOT NULL, address TEXT NOT NULL, CONSTRAINT pk_xiaomi_yeelight_yeelight PRIMARY KEY (id));

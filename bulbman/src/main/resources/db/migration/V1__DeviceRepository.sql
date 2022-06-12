@@ -1,0 +1,1 @@
+CREATE TABLE devices (id VARCHAR(255) NOT NULL, name TEXT NOT NULL, address TEXT NOT NULL, CONSTRAINT pk_devices PRIMARY KEY (id));
