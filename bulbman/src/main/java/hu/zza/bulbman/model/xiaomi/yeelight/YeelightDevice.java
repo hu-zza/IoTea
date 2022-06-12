@@ -8,18 +8,22 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 @Entity
+@Table(name = "xiaomi_yeelight_yeelight")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class YeelightDevice implements Device {
-
   @Id
-  @Column(name = "id", nullable = false)
-  private Long id;
+  @Column(nullable = false)
+  private String id;
 
+  @Column(nullable = false)
   private String name;
+
+  @Embedded
+  @Column(nullable = false)
   private DeviceAddress address;
 
   @Override

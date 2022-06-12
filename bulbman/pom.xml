@@ -44,6 +44,11 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
@@ -80,11 +85,11 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.zalando</groupId>
 			<artifactId>problem-spring-web-starter</artifactId>
 			<version>${problem.version}</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>

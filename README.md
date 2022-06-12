@@ -1,1 +1,3 @@
-# java-sv2-adv-project-SzaboLaszloAndras
+# `> BULBMAN!`
+
+Simple and concise interface to manage smart lights for both machines and humans.

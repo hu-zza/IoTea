@@ -1,5 +1,6 @@
 package hu.zza.bulbman.model.util;
 
+import hu.zza.bulbman.model.DeviceAddress;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
   @Override
   public String convertToDatabaseColumn(InetAddress inetAddress) {
     if (inetAddress == null) {
-      return convertToDatabaseColumn(InetAddress.getLoopbackAddress());
+      return convertToDatabaseColumn(DeviceAddress.NULL_IP);
     }
     return stringify(inetAddress.getAddress());
   }
@@ -31,7 +32,7 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
   @Override
   public InetAddress convertToEntityAttribute(String address) {
     if (address == null) {
-      return InetAddress.getLoopbackAddress();
+      return DeviceAddress.NULL_IP;
     }
     return parse(address);
   }
@@ -40,13 +41,17 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
     try {
       return InetAddress.getByAddress(
           ByteArrayUtil.getAsByteArray(
-              Stream.of(address)
-                  .flatMap(string -> Arrays.stream(string.split(";")))
-                  .mapToInt(Integer::parseInt)
-                  .toArray()));
+              getAsIntArray(address)));
     } catch (UnknownHostException exception) {
       // TODO: log...
-      return InetAddress.getLoopbackAddress();
+      return DeviceAddress.NULL_IP;
     }
+  }
+
+  private int[] getAsIntArray(String address) {
+    return Stream.of(address)
+        .flatMap(string -> Arrays.stream(string.split(";")))
+        .mapToInt(Integer::parseInt)
+        .toArray();
   }
 }

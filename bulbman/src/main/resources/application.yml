@@ -4,6 +4,13 @@ spring:
       on-profile: test
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mariadb://localhost:3306/bulbman_test?useUnicode=true
+    username: bulbmanApp
+    password: s@n2Xt98XsxqjZj%io9wV^6p&vpkGgSe
+
 
 debug: true
 logging:
@@ -31,7 +38,7 @@ spring:
 
 spring:
   profiles:
-    active: prod
+    active: test
 
 server:
   error:
@@ -40,3 +47,8 @@ server:
 #springdoc:
 #  swagger-ui:
 #    url: /Bulbman_OpenAPI.yaml
+
+bulbman:
+  device-catalog:
+    source:
+      hu.zza.bulbman.model: hu.zza.bulbman.repository

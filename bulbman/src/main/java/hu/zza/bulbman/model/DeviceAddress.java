@@ -1,10 +1,9 @@
 package hu.zza.bulbman.model;
 
-import java.io.Serializable;
 import java.net.InetAddress;
 
-public interface DeviceAddress extends Serializable {
+public interface DeviceAddress {
+  InetAddress NULL_IP = InetAddress.getLoopbackAddress();
   InetAddress getIp();
-
   void setIp(InetAddress ip);
 }
