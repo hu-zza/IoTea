@@ -1,5 +1,6 @@
 package hu.zza.bulbman.model;
 
+import hu.zza.bulbman.model.util.Default;
 import hu.zza.bulbman.model.util.InetAddressConverter;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,7 +9,6 @@ import lombok.*;
 
 @Embeddable
 @Data
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DeviceAddress {
   public static final InetAddress NULL_IP = InetAddress.getLoopbackAddress();
@@ -19,11 +19,17 @@ public class DeviceAddress {
   @Column(name = "address")
   private InetAddress ip;
 
+  @Default
+  public DeviceAddress(InetAddress ip) {
+    this.ip = ip;
+  }
+
   public DeviceAddress(String ip) {
     this(converter.parse(ip));
   }
 
   public boolean isReachable() {
+
     if (ip.isLoopbackAddress()) {
       return false;
     } else {

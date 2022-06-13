@@ -1,6 +1,9 @@
 package hu.zza.bulbman.service;
 
-import hu.zza.bulbman.model.Device;
+import hu.zza.bulbman.model.dto.DeviceInput;
+import hu.zza.bulbman.model.dto.DeviceOutput;
+import hu.zza.bulbman.model.util.DeviceInputMapper;
+import hu.zza.bulbman.model.util.DeviceOutputMapper;
 import hu.zza.bulbman.repository.DeviceRepository;
 import java.util.List;
 import java.util.Optional;
@@ -11,14 +14,19 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class DeviceService {
   private DeviceRepository repository;
+  private DeviceInputMapper inMapper;
+  private DeviceOutputMapper outMapper;
 
-  public List<Device> getAllDevices() {
-    return repository.findAll();
+  public List<DeviceOutput> getAllDevices() {
+    return outMapper.toDto(repository.findAll());
   }
-  public Optional<Device> getDeviceById(String id) {
-    return repository.findById(id);
+
+  public Optional<DeviceOutput> getDeviceById(String id) {
+    return repository.findById(id).map(outMapper::toDto);
   }
-  public Device saveDevice(Device addressable) {
-    return repository.save(addressable);
+
+  public DeviceOutput saveDevice(DeviceInput deviceInput) {
+    var device = inMapper.toEntity(deviceInput);
+    return outMapper.toDto(repository.save(device));
   }
 }

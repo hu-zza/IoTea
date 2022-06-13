@@ -33,12 +33,17 @@ spring:
   config:
     activate:
       on-profile: prod
+  flyway:
+    cleanDisabled: true
 
 ---
 
 spring:
   profiles:
     active: test
+  flyway:
+    connectRetries: 15
+    connectRetriesInterval: 60
 
 server:
   error:
