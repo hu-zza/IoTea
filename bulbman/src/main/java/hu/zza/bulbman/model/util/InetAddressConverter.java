@@ -29,9 +29,20 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
     return joiner.toString();
   }
 
+  /**
+   * @param address An IP address to parse. It can be in general form (which is parsable by
+   *     InetAddress) or in a custom one. In the second case, the converter tries to split it by
+   *     [^//d-] and then get the result from it.
+   * @return InetAddress - the parsed address or loopback in case of invalid input
+   */
   public InetAddress parse(String address) {
+    try {
+      return InetAddress.getByName(address);
+    } catch (UnknownHostException ignored) {
+    }
     return convertToEntityAttribute(address);
   }
+
   @Override
   public InetAddress convertToEntityAttribute(String address) {
     if (address == null) {
@@ -42,9 +53,7 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
 
   private InetAddress tryToParse(String address) {
     try {
-      return InetAddress.getByAddress(
-          ByteArrayUtil.getAsByteArray(
-              getAsIntArray(address)));
+      return InetAddress.getByAddress(ByteArrayUtil.getAsByteArray(getAsIntArray(address)));
     } catch (UnknownHostException exception) {
       // TODO: log...
       return DeviceAddress.NULL_IP;
@@ -53,7 +62,7 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
 
   private int[] getAsIntArray(String address) {
     return Stream.of(address)
-        .flatMap(string -> Arrays.stream(string.split(";")))
+        .flatMap(string -> Arrays.stream(string.split("[^\\d-]+")))
         .mapToInt(Integer::parseInt)
         .toArray();
   }
