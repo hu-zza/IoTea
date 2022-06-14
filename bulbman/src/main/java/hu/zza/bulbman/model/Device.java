@@ -17,8 +17,9 @@ public class Device implements Addressable {
   @Column(nullable = false)
   private String id;
 
-  @Column(nullable = false)
-  private String name;
+  @ManyToOne
+  @JoinColumn(name = "type_id", nullable = false)
+  private DeviceType type;
 
   @Embedded
   @Column(nullable = false)
@@ -27,8 +28,8 @@ public class Device implements Addressable {
   @Column(nullable = false)
   private int port;
 
-  @Enumerated(EnumType.STRING)
-  private DeviceType type;
+  @Column(nullable = false)
+  private String name;
 
   @Override
   public boolean equals(Object o) {

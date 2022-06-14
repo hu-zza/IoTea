@@ -1,23 +1,40 @@
 package hu.zza.bulbman.model;
 
-import hu.zza.bulbman.model.util.ConverterException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Objects;
+import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-public enum DeviceType {
-  XIAOMI_YEELIGHT;
+@Entity
+@Table(name = "device_types")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class DeviceType {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  private static final Logger logger = LoggerFactory.getLogger(DeviceType.class);
+  private String brand;
+  private String model;
+  private String version;
 
-  public static DeviceType parse(String deviceType) {
-    try {
-      return DeviceType.valueOf(
-          deviceType.toUpperCase().replaceAll("\\W+", "_"));
-    } catch (IllegalArgumentException exception) {
-      throw new ConverterException(
-          "Cannot parse '%s' as DeviceType. Available device types are: %s (Case-insensitive, regex cleanup: '\\W+' -> '_')"
-              .formatted(deviceType, DeviceType.values()),
-          exception);
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+      return false;
+    }
+    DeviceType that = (DeviceType) o;
+    return id != null && Objects.equals(id, that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
   }
 }
