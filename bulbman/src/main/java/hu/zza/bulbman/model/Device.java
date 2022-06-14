@@ -24,6 +24,12 @@ public class Device implements Addressable {
   @Column(nullable = false)
   private DeviceAddress address;
 
+  @Column(nullable = false)
+  private int port;
+
+  @Enumerated(EnumType.STRING)
+  private DeviceType type;
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

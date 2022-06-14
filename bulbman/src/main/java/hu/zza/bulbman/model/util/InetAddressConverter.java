@@ -8,9 +8,12 @@ import java.util.StringJoiner;
 import java.util.stream.Stream;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Converter
 public class InetAddressConverter implements AttributeConverter<InetAddress, String> {
+  private final Logger logger = LoggerFactory.getLogger(InetAddressConverter.class);
 
   @Override
   public String convertToDatabaseColumn(InetAddress inetAddress) {
@@ -54,16 +57,24 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
   private InetAddress tryToParse(String address) {
     try {
       return InetAddress.getByAddress(ByteArrayUtil.getAsByteArray(getAsIntArray(address)));
-    } catch (UnknownHostException exception) {
-      // TODO: log...
+    } catch (UnknownHostException | ConverterException exception) {
+      logger.warn("Cannot parse IP address '%s'".formatted(address), exception);
+      logger.warn("Return with '%s' as null-safe placeholder".formatted(DeviceAddress.NULL_IP));
       return DeviceAddress.NULL_IP;
     }
   }
 
-  private int[] getAsIntArray(String address) {
-    return Stream.of(address)
-        .flatMap(string -> Arrays.stream(string.split("[^\\d-]+")))
-        .mapToInt(Integer::parseInt)
-        .toArray();
+  private int[] getAsIntArray(String raw) {
+    var splitter = "[^\\d-]+";
+    try {
+      return Stream.of(raw)
+          .flatMap(string -> Arrays.stream(string.split(splitter)))
+          .mapToInt(Integer::parseInt)
+          .toArray();
+    } catch (Exception exception) {
+      throw new ConverterException(
+          "Cannot split (regex: '%s') and parse '%s' as an integer array".formatted(splitter, raw),
+          exception);
+    }
   }
 }
