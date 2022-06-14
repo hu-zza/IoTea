@@ -18,10 +18,11 @@ public class DeviceInput {
   private String ip;
 
   @NotNull(message = "Field 'port' cannot be null.")
-  @Size(min = 0, max = 65535, message = "The value of the field 'port' should be between 0 and 65535.")
+  @Min(value = 0, message = "The value of the field 'port' cannot be less than 0.")
+  @Max(value = 65535, message = "The value of the field 'port' cannot be more than 65535.")
   private Integer port;
 
-  @NotBlank(message = "Field 'type' cannot be null or blank.")
-  @Size(min = 1, max = 255, message = "The length of the field 'type' should be between 1 and 255.")
-  private String type;
+  @NotNull(message = "Field 'type' cannot be null.")
+  @Min(value = 0, message = "The value of the field 'type' cannot be less than 0.")
+  private Long type;
 }

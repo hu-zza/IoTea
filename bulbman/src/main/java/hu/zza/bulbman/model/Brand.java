@@ -6,28 +6,19 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 @Entity
-@Table(name = "device_types")
+@Table(name = "brands")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DeviceType {
+public class Brand {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "brand_id", nullable = false)
-  private Brand brand;
-
-  @ManyToOne
-  @JoinColumn(name = "model_id", nullable = false)
-  private DeviceModel model;
-
-  @ManyToOne
-  @JoinColumn(name = "version_id", nullable = false)
-  private DeviceVersion version;
+  @Column(nullable = false, unique = true)
+  private String name;
 
   @Override
   public boolean equals(Object o) {
@@ -37,8 +28,8 @@ public class DeviceType {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    DeviceType that = (DeviceType) o;
-    return id != null && Objects.equals(id, that.id);
+    Brand brand = (Brand) o;
+    return id != null && Objects.equals(id, brand.id);
   }
 
   @Override
