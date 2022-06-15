@@ -1,7 +1,8 @@
 package hu.zza.bulbman.controller;
 
-import hu.zza.bulbman.model.dto.DeviceOutput;
 import hu.zza.bulbman.model.dto.DeviceInput;
+import hu.zza.bulbman.model.dto.DeviceOutput;
+import hu.zza.bulbman.model.response.Response;
 import hu.zza.bulbman.service.DeviceService;
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +30,10 @@ public class DeviceController {
   @PutMapping("/{id}")
   public DeviceOutput postDevice(@PathVariable String id, @Valid @RequestBody DeviceInput device) {
     return service.saveDevice(device);
+  }
+
+  @PostMapping("/{id}")
+  public Response postPayload(@PathVariable String id, @RequestBody String payload) {
+    return service.sendPayload(id, payload);
   }
 }
