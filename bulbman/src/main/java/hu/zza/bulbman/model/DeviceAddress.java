@@ -16,7 +16,6 @@ public class DeviceAddress {
 
   private static final int REACHABLE_TIMEOUT_MS = 1000;
   @Convert(converter = InetAddressConverter.class)
-  @Column(name = "address")
   private InetAddress ip;
 
   @Default

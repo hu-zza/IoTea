@@ -17,10 +17,6 @@ public class Device implements Addressable {
   @Column(nullable = false)
   private String id;
 
-  @ManyToOne
-  @JoinColumn(name = "type_id", nullable = false)
-  private DeviceType type;
-
   @Embedded
   @Column(nullable = false)
   private DeviceAddress address;
@@ -28,7 +24,7 @@ public class Device implements Addressable {
   @Column(nullable = false)
   private int port;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
   @Override

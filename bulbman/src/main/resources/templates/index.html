@@ -35,8 +35,8 @@
                 <tr th:id="'bulb_' + ${bulb.id}" th:each="bulb : ${bulbs}" id="result_0">
                   <td th:text="${bulb.id}">e7f113d0-2a8e-4f5d-ab35-f97d8d78f2af</td>
                   <td th:text="${bulb.name}">Ceiling lamp</td>
-                  <td th:text="${bulb.address.ip} ?: 'unknown'">192.168.0.60</td>
-                  <td th:text="${bulb.address.reachable} ?: 'unknown'">true</td>
+                  <td th:text="${bulb.ip.ip} ?: 'unknown'">192.168.0.60</td>
+                  <td th:text="${bulb.ip.reachable} ?: 'unknown'">true</td>
                 </tr>
 
                 <tr id="bulb_23b047e7-372f-4d7f-ad20-37bdddcc736b">

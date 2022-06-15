@@ -1,6 +1,6 @@
 CREATE TABLE devices (
 	id VARCHAR(255) NOT NULL,
-  address VARCHAR(255) NULL,
+  ip VARCHAR(255) NULL,
   port INT NOT NULL,
   name VARCHAR(255) NOT NULL,
   CONSTRAINT pk_devices PRIMARY KEY (id)

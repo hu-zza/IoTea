@@ -9,10 +9,6 @@ public class DeviceInput {
   @Size(min = 1, max = 255, message = "The length of the field 'id' should be between 1 and 255.")
   private String id;
 
-  @NotBlank(message = "Field 'name' cannot be null or blank.")
-  @Size(min = 1, max = 255, message = "The length of the field 'name' should be between 1 and 255.")
-  private String name;
-
   @NotBlank(message = "Field 'ip' cannot be null or blank.")
   @Size(min = 1, max = 255, message = "The length of the field 'ip' should be between 1 and 255.")
   private String ip;
@@ -22,7 +18,7 @@ public class DeviceInput {
   @Max(value = 65535, message = "The value of the field 'port' cannot be more than 65535.")
   private Integer port;
 
-  @NotNull(message = "Field 'type' cannot be null.")
-  @Min(value = 0, message = "The value of the field 'type' cannot be less than 0.")
-  private Long type;
+  @NotBlank(message = "Field 'name' cannot be null or blank.")
+  @Size(min = 1, max = 255, message = "The length of the field 'name' should be between 1 and 255.")
+  private String name;
 }
