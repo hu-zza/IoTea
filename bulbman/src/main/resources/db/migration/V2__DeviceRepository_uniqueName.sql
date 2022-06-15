@@ -1,0 +1,1 @@
+ALTER TABLE devices ADD CONSTRAINT uc_devices_name UNIQUE (name);
