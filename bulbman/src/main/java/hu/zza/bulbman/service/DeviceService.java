@@ -39,6 +39,6 @@ public class DeviceService {
     if (device.isPresent()) {
       return commander.sendPayload(device.get(), payload);
     }
-    return new ServiceProblem("Cannot find Device by id: %s".formatted(id));
+    return new ServiceProblem(id, "TODO", "Cannot find Device by id: %s".formatted(id));
   }
 }
