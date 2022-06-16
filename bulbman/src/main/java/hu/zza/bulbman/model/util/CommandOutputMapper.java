@@ -11,5 +11,5 @@ public interface CommandOutputMapper {
   @Mapping(target = "note", defaultValue = "")
   CommandOutput toDto(Command command);
 
-  List<CommandOutput> toDto(List<CommandOutput> commandOutputs);
+  List<CommandOutput> toDto(List<Command> commandOutputs);
 }

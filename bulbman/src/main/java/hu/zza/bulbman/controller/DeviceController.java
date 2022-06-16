@@ -11,13 +11,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/devices")
 @AllArgsConstructor
 public class DeviceController {
 
   private DeviceService service;
 
-  @GetMapping("/")
+  @GetMapping
   public List<DeviceOutput> getAllDevices() {
     return service.getAllDevices();
   }
