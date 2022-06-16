@@ -29,6 +29,4 @@ public class CommandService {
     var command = inMapper.toEntity(commandInput);
     return outMapper.toDto(repository.save(command));
   }
-
-
 }

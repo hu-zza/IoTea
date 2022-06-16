@@ -10,5 +10,6 @@ import org.mapstruct.Mapping;
 public interface CommandInputMapper {
   @Mapping(target = "note", defaultValue = "")
   Command toEntity(CommandInput commandInput);
+
   List<Command> toEntity(List<CommandInput> commandInputs);
 }

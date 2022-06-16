@@ -1,6 +1,7 @@
 package hu.zza.bulbman.model.dto;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data

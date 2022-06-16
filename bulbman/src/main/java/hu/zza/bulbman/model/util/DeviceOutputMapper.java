@@ -10,5 +10,6 @@ import org.mapstruct.Mapping;
 public interface DeviceOutputMapper {
   @Mapping(target = "ip", source = "device.address")
   DeviceOutput toDto(Device device);
+
   List<DeviceOutput> toDto(List<Device> devices);
 }

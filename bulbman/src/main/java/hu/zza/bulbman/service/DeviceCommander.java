@@ -24,7 +24,7 @@ public class DeviceCommander {
   public Response sendPayload(Device device, String payload) {
     try {
       String rawResponse = sender.send(device.getAddress(), device.getPort(), payload);
-      return null;//objectMapper.readValue(rawResponse, Response.class);
+      return null; // objectMapper.readValue(rawResponse, Response.class);
 
     } catch (Exception exception) {
       var message =

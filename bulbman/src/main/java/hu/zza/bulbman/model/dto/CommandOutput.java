@@ -8,4 +8,3 @@ public class CommandOutput {
   private String template;
   private String note;
 }
-

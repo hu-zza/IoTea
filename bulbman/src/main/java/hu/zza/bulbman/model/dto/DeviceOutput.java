@@ -9,4 +9,3 @@ public class DeviceOutput {
   private int port;
   private String name;
 }
-

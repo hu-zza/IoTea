@@ -12,6 +12,7 @@ public interface DeviceInputMapper {
 
   @Mapping(target = "address", source = "deviceInput.ip")
   Device toEntity(DeviceInput deviceInput);
+
   List<Device> toEntity(List<DeviceInput> deviceInputs);
 
   default DeviceAddress map(String value) {

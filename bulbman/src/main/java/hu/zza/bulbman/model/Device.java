@@ -44,4 +44,3 @@ public class Device implements Addressable {
     return getClass().hashCode();
   }
 }
-

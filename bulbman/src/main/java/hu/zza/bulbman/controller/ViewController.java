@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class ViewController {
   private DeviceService service;
+
   @GetMapping("/")
   public String getIndex(Model model) {
     model.addAttribute("bulbs", service.getAllDevices());

@@ -4,7 +4,8 @@ import hu.zza.bulbman.model.util.Default;
 import hu.zza.bulbman.model.util.InetAddressConverter;
 import java.io.IOException;
 import java.net.InetAddress;
-import javax.persistence.*;
+import javax.persistence.Convert;
+import javax.persistence.Embeddable;
 import lombok.*;
 
 @Embeddable
@@ -15,6 +16,7 @@ public class DeviceAddress {
   private static final InetAddressConverter converter = new InetAddressConverter();
 
   private static final int REACHABLE_TIMEOUT_MS = 1000;
+
   @Convert(converter = InetAddressConverter.class)
   private InetAddress ip;
 
