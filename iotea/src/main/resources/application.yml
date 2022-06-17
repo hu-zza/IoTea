@@ -1,0 +1,54 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mariadb://localhost:3306/IoTea_test?useUnicode=true
+    username: IoTeaApp
+    password: SK*2yWJ46N*WVxSY2%gaAySvYcRM!m$f
+
+
+debug: true
+logging:
+  level:
+    hu.zza.iotea: DEBUG
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /a
+      exposure:
+        include: '*'
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  flyway:
+    cleanDisabled: true
+
+---
+
+spring:
+  profiles:
+    active: test
+  flyway:
+    connectRetries: 15
+    connectRetriesInterval: 60
+
+server:
+  error:
+    include-message: always
+
+#springdoc:
+#  swagger-ui:
+#    url: /IoTea_OpenAPI.yaml

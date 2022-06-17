@@ -1,3 +1,3 @@
-# `> BULBMAN!`
+# `IoTea`
 
-Simple and concise interface to manage smart lights for both machines and humans.
+Simple and concise interface to manage IoT devices for both machines and humans.

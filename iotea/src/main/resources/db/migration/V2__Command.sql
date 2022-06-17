@@ -1,0 +1,7 @@
+CREATE TABLE commands (
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	name VARCHAR(255) UNIQUE NOT NULL,
+  template TEXT NOT NULL,
+  note TEXT NOT NULL,
+  CONSTRAINT pk_commands PRIMARY KEY (id)
+);
