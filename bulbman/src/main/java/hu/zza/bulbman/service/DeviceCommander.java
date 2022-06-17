@@ -1,5 +1,6 @@
 package hu.zza.bulbman.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.zza.bulbman.model.Device;
 import hu.zza.bulbman.model.response.CommanderProblem;
 import hu.zza.bulbman.model.response.Response;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class DeviceCommander {
   private final Logger logger = LoggerFactory.getLogger(DeviceCommander.class);
   private Sender sender;
+  private ObjectMapper objectMapper;
 
   @Autowired
   @Qualifier("telnetSender")
@@ -21,10 +23,15 @@ public class DeviceCommander {
     this.sender = sender;
   }
 
+  @Autowired
+  public void setObjectMapper(ObjectMapper objectMapper) {
+    this.objectMapper = objectMapper;
+  }
+
   public Response sendPayload(Device device, String payload) {
     try {
       String rawResponse = sender.send(device.getAddress(), device.getPort(), payload);
-      return null; // objectMapper.readValue(rawResponse, Response.class);
+      return objectMapper.readValue(rawResponse, Response.class);
 
     } catch (Exception exception) {
       var message =
