@@ -5,6 +5,10 @@ import lombok.Data;
 
 @Data
 public class DeviceInput {
+  @NotBlank(message = "Field 'uid' cannot be null or blank.")
+  @Size(min = 1, max = 255, message = "The length of the field 'uid' should be between 1 and 255.")
+  private String uid;
+
   @NotBlank(message = "Field 'name' cannot be null or blank.")
   @Size(min = 1, max = 255, message = "The length of the field 'name' should be between 1 and 255.")
   private String name;

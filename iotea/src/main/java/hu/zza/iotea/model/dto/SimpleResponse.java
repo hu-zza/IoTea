@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class SimpleResponse implements Response {
-  private Long deviceId;
-  private Long commandId;
+  private Integer deviceId;
+  private Integer commandId;
   private String uri;
   private String title;
   private int statusCode;

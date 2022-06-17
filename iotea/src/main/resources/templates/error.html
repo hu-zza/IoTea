@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <title>Something went wrong | IoTea</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>IoTea : Something went wrong</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
-    <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}" href="../static/icons/bootstrap-icons.css">
-  </head>
-  <body>
-    Something went wrong! :-/
+  <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
+  <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}"
+        href="../static/icons/bootstrap-icons.css">
+</head>
+<body>
+Something went wrong! :-/
 
-    <div th:utext="'&lt;!--'" th:remove="tag"></div>
-    <div th:utext="'Failed URL: ' +  ${url}" th:remove="tag">${url}</div>
-    <div th:if="${exception}">
-      <div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
-      <ul th:remove="tag">
-        <li th:each="ste : ${exception.stackTrace}" th:remove="tag"><span
-            th:utext="${ste}" th:remove="tag">${ste}</span></li>
-      </ul>
-    </div>
-    <div th:utext="'--&gt;'" th:remove="tag"></div>
-    <script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
-  </body>
+<div th:utext="'&lt;!--'" th:remove="tag"></div>
+<div th:utext="'Failed URL: ' +  ${url}" th:remove="tag">${url}</div>
+<div th:if="${exception}">
+  <div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
+  <ul th:remove="tag">
+    <li th:each="ste : ${exception.stackTrace}" th:remove="tag"><span
+        th:utext="${ste}" th:remove="tag">${ste}</span></li>
+  </ul>
+</div>
+<div th:utext="'--&gt;'" th:remove="tag"></div>
+<script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
+</body>
 </html>

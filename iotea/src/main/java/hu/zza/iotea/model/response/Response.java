@@ -3,9 +3,9 @@ package hu.zza.iotea.model.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface Response {
-  Long getDeviceId();
+  Integer getDeviceId();
 
-  Long getCommandId();
+  Integer getCommandId();
 
   @JsonProperty("type")
   String getUri();

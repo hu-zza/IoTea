@@ -16,7 +16,10 @@ public class Device implements Identifiable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(nullable = false)
-  private Long id;
+  private Integer id;
+
+  @Column(nullable = false, unique = true)
+  private String uid;
 
   @Column(nullable = false, unique = true)
   private String name;

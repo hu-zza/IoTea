@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class DeviceOutput {
-  private Long id;
+  private Integer id;
+  private String uid;
   private String name;
   private DeviceAddressOutput ip;
   private int port;

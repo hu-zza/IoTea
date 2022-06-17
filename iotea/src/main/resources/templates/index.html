@@ -1,105 +1,112 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <title>Dashboard | IoTea</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>IoTea Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
-    <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}" href="../static/icons/bootstrap-icons.css">
-  </head>
-  <body>
-      
-    <main>
-      <div class="container py-4">
-        <header class="pb-3 mb-4 border-bottom">
-          <a href="/" class="d-flex align-items-center text-primary text-decoration-none">
-            <span class="fs-4">IoTea</span>
-          </a>
-        </header>
+  <link rel="stylesheet" th:href="@{'/style.css'}" href="../static/style.css">
+  <link rel="stylesheet" th:href="@{'/bootstrap.min.css'}" href="../static/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{'/icons/bootstrap-icons.css'}"
+        href="../static/icons/bootstrap-icons.css">
+</head>
+<body>
 
-        <div class="p-3 pb-5 mb-4 text-light bg-dark rounded-3">
-          <div class="container-fluid pb-5">
-            <table class="table table-dark table-hover" id="IoTea_devices">
-              <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Reachable</th>
-                <!-- <th>Actions</th> -->
-              </tr>
-              </thead>
-              <tbody th:remove="all-but-first">
-              <tr th:id="'device_' + ${device.id}" th:each="device : ${devices}" id="device_1">
-                <td th:text="${device.id}">1</td>
-                <td th:text="${device.name}">Ceiling lamp</td>
-                <td th:text="${device.ip.ip} ?: 'unknown'">192.168.0.60</td>
-                <td th:text="${device.ip.reachable} ?: 'unknown'">true</td>
-              </tr>
-              <tr id="device_2">
-                <td>2</td>
-                <td>Lamp @ desk</td>
-                <td>192.168.0.61</td>
-                <td>true</td>
-              </tr>
-              <tr id="device_3">
-                <td>3</td>
-                <td>Reading light</td>
-                <td>192.168.0.62</td>
-                <td>false</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+<main>
+  <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-primary text-decoration-none">
+        <span class="fs-4">IoTea</span>
+      </a>
+    </header>
 
-          <div class="container-fluid pb-5">
-            <table class="table table-dark table-hover" id="IoTea_commands">
-              <thead>
-              <tr>
-                <th>ID</th>
-                <th>Template</th>
-                <th>Note</th>
-                <!-- <th>Actions</th> -->
-              </tr>
-              </thead>
-              <tbody th:remove="all-but-first">
-              <tr th:id="'command_' + ${command.id}" th:each="command : ${commands}" id="command_1">
-                <td th:text="${command.id}">1</td>
-                <td th:text="${command.template}">{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 1]}</td>
-                <td th:text="${command.note} ?: ''">Yeelight power (day mode)</td>
-              </tr>
-              <tr id="command_2">
-                <td>2</td>
-                <td>{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 5]}</td>
-                <td>Yeelight power (night mode)</td>
-              </tr>
-              <tr id="command_3">
-                <td>3</td>
-                <td>{"id":1, "method": "set_bright", "params": [%d, "smooth", 1000]}</td>
-                <td>Yeelight set bright</td>
-              </tr>
-              <tr id="command_4">
-                <td>4</td>
-                <td>{"id": 1, "method": "toggle", "params": []}</td>
-                <td>Yeelight toggle</td>
-              </tr>
-              <tr id="command_5">
-                <td>5</td>
-                <td>{"id": 1, "method": "get_prop", "params": ["%s"]}</td>
-                <td>Yeelight get property</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <footer class="pt-3 mt-4 text-muted border-top">
-          &copy; 2022
-        </footer>
+    <div class="p-3 pb-5 mb-4 text-light bg-dark rounded-3">
+      <div class="container-fluid pb-5">
+        <table class="table table-dark table-hover" id="IoTea_devices">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Reachable</th>
+            <!-- <th>Actions</th> -->
+          </tr>
+          </thead>
+          <tbody th:remove="all-but-first">
+          <tr th:id="'device_' + ${device.id}" th:each="device : ${devices}" id="device_1">
+            <td th:text="${device.id}">1</td>
+            <td th:text="${command.uid}">2f4c4331-6f74-47e0-8273-baafee1e88c9</td>
+            <td th:text="${device.name}">Ceiling lamp</td>
+            <td th:text="${device.ip.ip} ?: 'unknown'">192.168.0.60</td>
+            <td th:text="${device.ip.reachable} ?: 'unknown'">true</td>
+          </tr>
+          <tr id="device_2">
+            <td>2</td>
+            <td>14e7ad66-42c7-44cc-a5a8-ecba31bb4c5b</td>
+            <td>Lamp @ desk</td>
+            <td>192.168.0.61</td>
+            <td>true</td>
+          </tr>
+          <tr id="device_3">
+            <td>3</td>
+            <td>fe18e0dd-5293-40c6-90af-6fcf5c8a3dce</td>
+            <td>Reading light</td>
+            <td>192.168.0.62</td>
+            <td>false</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-    </main>
-    <script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
-  </body>
+
+      <div class="container-fluid pb-5">
+        <table class="table table-dark table-hover" id="IoTea_commands">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Template</th>
+            <th>Note</th>
+            <!-- <th>Actions</th> -->
+          </tr>
+          </thead>
+          <tbody th:remove="all-but-first">
+          <tr th:id="'command_' + ${command.id}" th:each="command : ${commands}" id="command_1">
+            <td th:text="${command.id}">1</td>
+            <td th:text="${command.template}">{"id": 1, "method": "set_power", "params": ["%s",
+              "smooth", 1000, 1]}
+            </td>
+            <td th:text="${command.note} ?: ''">Yeelight power (day mode)</td>
+          </tr>
+          <tr id="command_2">
+            <td>2</td>
+            <td>{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 5]}</td>
+            <td>Yeelight power (night mode)</td>
+          </tr>
+          <tr id="command_3">
+            <td>3</td>
+            <td>{"id":1, "method": "set_bright", "params": [%d, "smooth", 1000]}</td>
+            <td>Yeelight set bright</td>
+          </tr>
+          <tr id="command_4">
+            <td>4</td>
+            <td>{"id": 1, "method": "toggle", "params": []}</td>
+            <td>Yeelight toggle</td>
+          </tr>
+          <tr id="command_5">
+            <td>5</td>
+            <td>{"id": 1, "method": "get_prop", "params": ["%s"]}</td>
+            <td>Yeelight get property</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      &copy; 2022
+    </footer>
+  </div>
+</main>
+<script th:src="@{'/bootstrap.bundle.min.js'}" src="../static/bootstrap.bundle.min.js"></script>
+</body>
 </html>

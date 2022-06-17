@@ -24,7 +24,7 @@ public class DeviceService {
     return outMapper.toDto(repository.findAll());
   }
 
-  public Optional<DeviceOutput> getDeviceById(Long id) {
+  public Optional<DeviceOutput> getDeviceById(Integer id) {
     return repository.findById(id).map(outMapper::toDto);
   }
 
@@ -33,12 +33,12 @@ public class DeviceService {
     return outMapper.toDto(repository.save(device));
   }
 
-  public Response sendPayload(Long id, String payload) {
+  public Response sendPayload(Integer id, String payload) {
     var device = repository.findById(id);
 
     if (device.isPresent()) {
       return commander.sendPayload(device.get(), payload);
     }
-    return new ServiceProblem(id, 0L, "Cannot find Device by id: %s".formatted(id));
+    return new ServiceProblem(id, 0, "Cannot find Device by id: %s".formatted(id));
   }
 }

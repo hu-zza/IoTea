@@ -23,17 +23,17 @@ public class DeviceController {
   }
 
   @GetMapping("/{id}")
-  public Optional<DeviceOutput> getDeviceById(@PathVariable Long id) {
+  public Optional<DeviceOutput> getDeviceById(@PathVariable Integer id) {
     return service.getDeviceById(id);
   }
 
   @PutMapping("/{id}")
-  public DeviceOutput postDevice(@PathVariable Long id, @Valid @RequestBody DeviceInput device) {
+  public DeviceOutput postDevice(@PathVariable Integer id, @Valid @RequestBody DeviceInput device) {
     return service.saveDevice(device);
   }
 
   @PostMapping("/{id}")
-  public Response postPayload(@PathVariable Long id, @RequestBody String payload) {
+  public Response postPayload(@PathVariable Integer id, @RequestBody String payload) {
     return service.sendPayload(id, payload);
   }
 }

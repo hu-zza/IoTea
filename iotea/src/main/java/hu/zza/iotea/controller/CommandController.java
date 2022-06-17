@@ -21,13 +21,13 @@ public class CommandController {
   }
 
   @GetMapping("/{id}")
-  public Optional<CommandOutput> getDeviceById(@PathVariable Long id) {
+  public Optional<CommandOutput> getDeviceById(@PathVariable Integer id) {
     return service.getCommandById(id);
   }
 
   @PutMapping("/{id}")
   public CommandOutput postDevice(
-      @PathVariable Long id, @Valid @RequestBody CommandInput command) {
+      @PathVariable Integer id, @Valid @RequestBody CommandInput command) {
     return service.saveCommand(command);
   }
 }

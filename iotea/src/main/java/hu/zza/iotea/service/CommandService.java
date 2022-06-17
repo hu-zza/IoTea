@@ -21,7 +21,7 @@ public class CommandService {
     return outMapper.toDto(repository.findAll());
   }
 
-  public Optional<CommandOutput> getCommandById(Long id) {
+  public Optional<CommandOutput> getCommandById(Integer id) {
     return repository.findById(id).map(outMapper::toDto);
   }
 

@@ -1,9 +1,9 @@
 package hu.zza.iotea.model;
 
 public interface Identifiable {
-  Long getId();
+  Integer getId();
 
-  void setId(Long id);
+  void setId(Integer id);
 
   String getName();
 

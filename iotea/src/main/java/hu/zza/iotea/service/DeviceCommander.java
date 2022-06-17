@@ -38,7 +38,7 @@ public class DeviceCommander {
           "Cannot send command to Addressable(address=%s, port=%d)"
               .formatted(device.getAddress(), device.getPort());
       logger.warn(message, exception);
-      return new CommanderProblem(device.getId(), 0L, message);
+      return new CommanderProblem(device.getId(), 0, message);
     }
   }
 }
