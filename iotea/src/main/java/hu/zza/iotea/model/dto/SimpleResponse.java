@@ -9,6 +9,6 @@ public class SimpleResponse implements Response {
   private Integer commandId;
   private String uri;
   private String title;
-  private int statusCode;
+  private Integer statusCode;
   private String detail;
 }

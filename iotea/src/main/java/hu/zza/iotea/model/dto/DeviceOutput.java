@@ -8,5 +8,5 @@ public class DeviceOutput {
   private String uid;
   private String name;
   private DeviceAddressOutput ip;
-  private int port;
+  private Integer port;
 }

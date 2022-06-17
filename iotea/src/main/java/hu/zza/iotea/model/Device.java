@@ -29,7 +29,7 @@ public class Device implements Identifiable {
   private DeviceAddress address;
 
   @Column(nullable = false)
-  private int port;
+  private Integer port;
 
   @Override
   public boolean equals(Object o) {

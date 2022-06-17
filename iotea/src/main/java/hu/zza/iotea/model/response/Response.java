@@ -13,7 +13,7 @@ public interface Response {
   String getTitle();
 
   @JsonProperty("status")
-  int getStatusCode();
+  Integer getStatusCode();
 
   String getDetail();
 }

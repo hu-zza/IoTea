@@ -26,7 +26,7 @@ public abstract class Problem extends AbstractThrowableProblem implements Respon
       Integer commandId,
       String type,
       String title,
-      int statusCode,
+      Integer statusCode,
       String detail) {
     this(deviceId, commandId, URI.create(type), title, Status.valueOf(statusCode), detail);
   }
@@ -37,7 +37,7 @@ public abstract class Problem extends AbstractThrowableProblem implements Respon
   }
 
   @Override
-  public int getStatusCode() {
+  public Integer getStatusCode() {
     return getStatus().getStatusCode();
   }
 }

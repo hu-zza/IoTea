@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class DeviceAddressOutput {
   private InetAddress ip;
-  private boolean reachable;
+  private Boolean reachable;
 }

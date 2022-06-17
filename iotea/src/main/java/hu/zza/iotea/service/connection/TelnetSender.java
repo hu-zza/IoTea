@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TelnetSender implements Sender {
 
-  public String send(DeviceAddress address, int port, String payload) {
+  public String send(DeviceAddress address, Integer port, String payload) {
     if (address.isReachable()) {
       try (var socket = new Socket(address.getIp(), port);
           var out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));

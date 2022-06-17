@@ -56,7 +56,7 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
 
   private InetAddress tryToParse(String address) {
     try {
-      return InetAddress.getByAddress(ByteArrayUtil.getAsByteArray(getAsIntArray(address)));
+      return InetAddress.getByAddress(NumberUtil.getIntArrayAsByteArray(getAsIntArray(address)));
     } catch (UnknownHostException | ConverterException exception) {
       logger.warn("Cannot parse IP address '%s'".formatted(address), exception);
       logger.warn("Return with '%s' as null-safe placeholder".formatted(DeviceAddress.NULL_IP));
