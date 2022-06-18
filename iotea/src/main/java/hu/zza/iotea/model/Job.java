@@ -1,10 +1,13 @@
 package hu.zza.iotea.model;
 
+import hu.zza.iotea.model.Run.RunBuilder;
 import hu.zza.iotea.model.util.ParameterUtil;
 import hu.zza.iotea.service.Commander;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants.Exclude;
 import org.hibernate.Hibernate;
 
 @Entity
@@ -12,7 +15,6 @@ import org.hibernate.Hibernate;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Job implements Identifiable {
   @Id
@@ -31,12 +33,31 @@ public class Job implements Identifiable {
   @JoinColumn(name = "command_id", nullable = false)
   private Command command;
 
+  @Transient private Run lastRun;
+
+  @Transient private Run.RunBuilder runBuilder;
+
+  public Job(Integer id, String name, Device device, Command command) {
+    this.id = id;
+    this.name = name;
+    this.device = device;
+    this.command = command;
+  }
+
   public String run(Commander commander, String parameters) {
+    runBuilder = new RunBuilder().started(LocalDateTime.now()).rawParameters(parameters);
     return run(commander, ParameterUtil.prepareParameters(parameters));
   }
 
   public String run(Commander commander, Object... parameters) {
-    return commander.sendPayload(device, command.build(parameters));
+    if (runBuilder == null) {
+      runBuilder = new Run.RunBuilder().started(LocalDateTime.now());
+    }
+    var payload = command.build(parameters);
+    var response = commander.sendPayload(device, payload);
+    lastRun = runBuilder.parameters(parameters).payload(payload).response(response).build();
+    runBuilder = null;
+    return response;
   }
 
   @Override
