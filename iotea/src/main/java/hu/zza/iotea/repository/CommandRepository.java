@@ -1,7 +1,6 @@
 package hu.zza.iotea.repository;
 
 import hu.zza.iotea.model.Command;
-import hu.zza.iotea.model.dto.CommandUpdate;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;

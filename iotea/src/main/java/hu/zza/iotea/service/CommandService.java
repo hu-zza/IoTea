@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommandService {
   private CommandRepository repository;
   private CommandInputMapper inMapper;
-  private CommandUpdateMapper updateMapper;
   private CommandOutputMapper outMapper;
 
   public Optional<Integer> getIdByName(String name) {
@@ -65,10 +64,10 @@ public class CommandService {
   }
 
   @Transactional
-  public CommandOutput updateCommand(Supplier<Optional<Integer>> idSupplier, CommandUpdate update) {
+  public CommandOutput updateCommand(Supplier<Optional<Integer>> idSupplier, CommandInput update) {
     var optId = idSupplier.get();
-    optId.ifPresentOrElse(update::setId, () -> update.setId(null));
-    var command = updateMapper.toEntity(update);
+    var command = inMapper.toEntity(update);
+    optId.ifPresentOrElse(command::setId, () -> command.setId(null));
 
     if (optId.isPresent()) {
       var id = optId.get();

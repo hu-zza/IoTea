@@ -42,14 +42,13 @@ public class CommandController {
 
   @PutMapping("/id/{id}")
   public CommandOutput putDeviceToId(
-      @PathVariable Integer id, @Valid @RequestBody CommandUpdate command) {
-    command.setId(id);
+      @PathVariable Integer id, @Valid @RequestBody CommandInput command) {
     return service.updateCommand(() -> Optional.of(id), command);
   }
 
   @PutMapping("/name/{name}")
   public CommandOutput putDeviceToName(
-      @PathVariable String name, @Valid @RequestBody CommandUpdate command) {
+      @PathVariable String name, @Valid @RequestBody CommandInput command) {
     command.setName(name);
     return service.updateCommand(() -> service.getIdByName(name), command);
   }
