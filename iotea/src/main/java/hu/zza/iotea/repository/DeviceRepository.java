@@ -1,7 +1,6 @@
 package hu.zza.iotea.repository;
 
 import hu.zza.iotea.model.Device;
-import hu.zza.iotea.model.util.InetAddressConverter;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;

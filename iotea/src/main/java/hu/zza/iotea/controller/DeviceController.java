@@ -1,7 +1,7 @@
 package hu.zza.iotea.controller;
 
-import hu.zza.iotea.model.dto.*;
-import hu.zza.iotea.model.response.Response;
+import hu.zza.iotea.model.dto.DeviceInput;
+import hu.zza.iotea.model.dto.DeviceOutput;
 import hu.zza.iotea.service.DeviceService;
 import java.util.List;
 import java.util.Optional;
@@ -88,11 +88,5 @@ public class DeviceController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteDeviceByName(@PathVariable String name) {
     service.deleteByName(name);
-  }
-
-  @Deprecated
-  @PostMapping("/{id}")
-  public Response postPayload(@PathVariable Integer id, @RequestBody String payload) {
-    return service.sendPayload(id, payload);
   }
 }

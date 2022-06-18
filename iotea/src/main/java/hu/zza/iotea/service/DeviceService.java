@@ -2,9 +2,8 @@ package hu.zza.iotea.service;
 
 import hu.zza.iotea.model.Device;
 import hu.zza.iotea.model.DeviceAddress;
-import hu.zza.iotea.model.dto.*;
-import hu.zza.iotea.model.response.Response;
-import hu.zza.iotea.model.response.ServiceProblem;
+import hu.zza.iotea.model.dto.DeviceInput;
+import hu.zza.iotea.model.dto.DeviceOutput;
 import hu.zza.iotea.model.util.*;
 import hu.zza.iotea.repository.DeviceRepository;
 import java.util.List;
@@ -66,6 +65,10 @@ public class DeviceService {
     return getDeviceByFunction(repository::findByName, name);
   }
 
+  Optional<Device> getByName(String name) {
+    return repository.findByName(name);
+  }
+
   public Optional<DeviceOutput> getDeviceByUid(String uid) {
     return getDeviceByFunction(repository::findByUid, uid);
   }
@@ -118,14 +121,5 @@ public class DeviceService {
   @Transactional
   public void deleteByName(String name) {
     repository.deleteByName(name);
-  }
-
-  public Response sendPayload(Integer id, String payload) {
-    var device = repository.findById(id);
-
-    if (device.isPresent()) {
-      return commander.sendPayload(device.get(), payload);
-    }
-    return new ServiceProblem(id, 0, "Cannot find Device by id: %s".formatted(id));
   }
 }

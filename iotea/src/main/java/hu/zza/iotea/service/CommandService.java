@@ -1,7 +1,8 @@
 package hu.zza.iotea.service;
 
 import hu.zza.iotea.model.Command;
-import hu.zza.iotea.model.dto.*;
+import hu.zza.iotea.model.dto.CommandInput;
+import hu.zza.iotea.model.dto.CommandOutput;
 import hu.zza.iotea.model.util.*;
 import hu.zza.iotea.repository.CommandRepository;
 import java.util.List;
@@ -53,6 +54,10 @@ public class CommandService {
 
   public Optional<CommandOutput> getCommandByName(String name) {
     return getCommandByFunction(repository::findByName, name);
+  }
+
+  Optional<Command> getByName(String name) {
+    return repository.findByName(name);
   }
 
   public CommandOutput saveCommand(CommandInput commandInput) {

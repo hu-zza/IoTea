@@ -1,6 +1,7 @@
 package hu.zza.iotea.controller;
 
-import hu.zza.iotea.model.dto.*;
+import hu.zza.iotea.model.dto.CommandInput;
+import hu.zza.iotea.model.dto.CommandOutput;
 import hu.zza.iotea.service.CommandService;
 import java.util.List;
 import java.util.Optional;

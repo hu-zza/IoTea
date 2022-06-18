@@ -1,10 +1,10 @@
 package hu.zza.iotea.model;
 
+import hu.zza.iotea.model.util.ParameterUtil;
+import hu.zza.iotea.service.Commander;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.*;
 import lombok.*;
-import lombok.ToString.Exclude;
 import org.hibernate.Hibernate;
 
 @Entity
@@ -12,7 +12,8 @@ import org.hibernate.Hibernate;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Job implements Identifiable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,21 +23,21 @@ public class Job implements Identifiable {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @Exclude
-  @ManyToMany
-  @JoinTable(
-      name = "job_device",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "device_id"))
-  private Set<Device> devices;
+  @ManyToOne
+  @JoinColumn(name = "device_id", nullable = false)
+  private Device device;
 
-  @Exclude
-  @ManyToMany
-  @JoinTable(
-      name = "job_command",
-      joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "command_id"))
-  private Set<Command> commands;
+  @ManyToOne
+  @JoinColumn(name = "command_id", nullable = false)
+  private Command command;
+
+  public String run(Commander commander, String parameters) {
+    return run(commander, ParameterUtil.prepareParameters(parameters));
+  }
+
+  public String run(Commander commander, Object... parameters) {
+    return commander.sendPayload(device, command.build(parameters));
+  }
 
   @Override
   public boolean equals(Object o) {

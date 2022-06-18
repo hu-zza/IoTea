@@ -42,6 +42,7 @@ public class DeviceAddress {
       return false;
     }
   }
+
   @Transient
   public String getAsDatabaseColumn() {
     return converter.convertToDatabaseColumn(ip);

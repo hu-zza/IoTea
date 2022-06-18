@@ -32,6 +32,9 @@ public class Command implements Identifiable {
   }
 
   public String build(Object... args) {
+    if (args == null || args.length == 0) {
+      return template.replace("%d", "0").replace("%s", "");
+    }
     return template.formatted(args);
   }
 
