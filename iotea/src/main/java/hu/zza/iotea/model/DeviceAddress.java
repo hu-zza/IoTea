@@ -3,8 +3,7 @@ package hu.zza.iotea.model;
 import hu.zza.iotea.model.util.InetAddressConverter;
 import java.io.IOException;
 import java.net.InetAddress;
-import javax.persistence.Convert;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import lombok.*;
 
 @Embeddable
@@ -42,5 +41,9 @@ public class DeviceAddress {
     } catch (IOException ignored) {
       return false;
     }
+  }
+  @Transient
+  public String getAsDatabaseColumn() {
+    return converter.convertToDatabaseColumn(ip);
   }
 }

@@ -54,21 +54,20 @@ public class DeviceController {
 
   @PutMapping("/id/{id}")
   public DeviceOutput putDeviceToId(
-      @PathVariable Integer id, @Valid @RequestBody DeviceUpdate device) {
-    device.setId(id);
+      @PathVariable Integer id, @Valid @RequestBody DeviceInput device) {
     return service.updateDevice(() -> Optional.of(id), device);
   }
 
   @PutMapping("/uid/{uid}")
   public DeviceOutput putDeviceToUid(
-      @PathVariable String uid, @Valid @RequestBody DeviceUpdate device) {
+      @PathVariable String uid, @Valid @RequestBody DeviceInput device) {
     device.setUid(uid);
     return service.updateDevice(() -> service.getIdByUid(uid), device);
   }
 
   @PutMapping("/name/{name}")
   public DeviceOutput putDeviceToName(
-      @PathVariable String name, @Valid @RequestBody DeviceUpdate device) {
+      @PathVariable String name, @Valid @RequestBody DeviceInput device) {
     device.setName(name);
     return service.updateDevice(() -> service.getIdByName(name), device);
   }

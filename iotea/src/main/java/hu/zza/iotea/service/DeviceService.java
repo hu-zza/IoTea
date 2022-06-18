@@ -24,7 +24,6 @@ public class DeviceService {
   private DeviceRepository repository;
   private DeviceCommander commander;
   private DeviceInputMapper inMapper;
-  private DeviceUpdateMapper updateMapper;
   private DeviceOutputMapper outMapper;
 
   public Optional<Integer> getIdByUid(String uid) {
@@ -91,16 +90,16 @@ public class DeviceService {
   }
 
   @Transactional
-  public DeviceOutput updateDevice(Supplier<Optional<Integer>> idSupplier, DeviceUpdate update) {
+  public DeviceOutput updateDevice(Supplier<Optional<Integer>> idSupplier, DeviceInput input) {
     var optId = idSupplier.get();
-    optId.ifPresentOrElse(update::setId, () -> update.setId(null));
-    var device = updateMapper.toEntity(update);
+    var device = inMapper.toEntity(input);
+    optId.ifPresentOrElse(device::setId, () -> device.setId(null));
 
     if (optId.isPresent()) {
       var id = optId.get();
 
       if (!repository.existsById(id)) {
-        repository.insertWithId(update);
+        repository.insertWithId(device);
         return getDeviceById(id).orElseThrow();
       }
     }
