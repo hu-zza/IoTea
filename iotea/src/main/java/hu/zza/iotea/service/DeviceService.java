@@ -9,7 +9,8 @@ import hu.zza.iotea.model.util.*;
 import hu.zza.iotea.repository.DeviceRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -91,13 +92,19 @@ public class DeviceService {
 
   @Transactional
   public DeviceOutput updateDevice(Supplier<Optional<Integer>> idSupplier, DeviceUpdate update) {
-    var id = idSupplier.get();
+    var optId = idSupplier.get();
+    optId.ifPresent(update::setId);
     var device = updateMapper.toEntity(update);
 
-    if (id.isPresent()) {
-      update.setId(id.get());
-      repository.saveUnderId(update);
-      return getDeviceById(id.get()).orElseThrow();
+    if (optId.isPresent()) {
+      var id = optId.get();
+
+      if (repository.existsById(id)) {
+        repository.updateById(update);
+      } else {
+        repository.insertWithId(update);
+      }
+      return getDeviceById(id).orElseThrow();
     }
     return saveDevice(device);
   }
@@ -106,10 +113,12 @@ public class DeviceService {
     repository.deleteById(id);
   }
 
+  @Transactional
   public void deleteByUid(String uid) {
     repository.deleteByUid(uid);
   }
 
+  @Transactional
   public void deleteByName(String name) {
     repository.deleteByName(name);
   }

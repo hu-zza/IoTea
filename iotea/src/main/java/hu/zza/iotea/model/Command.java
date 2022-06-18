@@ -11,7 +11,7 @@ import org.hibernate.Hibernate;
 @Setter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Command implements Identifiable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,11 @@ public class Command implements Identifiable {
   private String template;
 
   @Column(nullable = false)
-  private String note;
+  private String note = "";
+
+  public void setNote(String note) {
+    this.note = note != null ? note : "";
+  }
 
   public String build(Object... args) {
     return template.formatted(args);

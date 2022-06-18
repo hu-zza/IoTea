@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface DeviceUpdateMapper {
-
   @Mapping(target = "address", source = "deviceUpdate.ip")
   Device toEntity(DeviceUpdate deviceUpdate);
 

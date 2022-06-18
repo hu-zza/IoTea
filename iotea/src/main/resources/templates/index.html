@@ -76,6 +76,7 @@
           <thead>
           <tr>
             <th>ID</th>
+            <th>Name</th>
             <th>Template</th>
             <th>Note</th>
             <!-- <th>Actions</th> -->
@@ -84,6 +85,7 @@
           <tbody th:remove="all-but-first">
           <tr th:id="'command_' + ${command.id}" th:each="command : ${commands}" id="command_1">
             <td th:text="${command.id}">1</td>
+            <td th:text="${command.name}">YeeDay</td>
             <td th:text="${command.template}">{"id": 1, "method": "set_power", "params": ["%s",
               "smooth", 1000, 1]}
             </td>
@@ -91,21 +93,25 @@
           </tr>
           <tr id="command_2">
             <td>2</td>
+            <td>YeeNight</td>
             <td>{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 5]}</td>
             <td>Yeelight power (night mode)</td>
           </tr>
           <tr id="command_3">
             <td>3</td>
+            <td>YeeBright</td>
             <td>{"id":1, "method": "set_bright", "params": [%d, "smooth", 1000]}</td>
             <td>Yeelight set bright</td>
           </tr>
           <tr id="command_4">
             <td>4</td>
+            <td>YeeToggle</td>
             <td>{"id": 1, "method": "toggle", "params": []}</td>
             <td>Yeelight toggle</td>
           </tr>
           <tr id="command_5">
             <td>5</td>
+            <td>YeeProp</td>
             <td>{"id": 1, "method": "get_prop", "params": ["%s"]}</td>
             <td>Yeelight get property</td>
           </tr>

@@ -1,12 +1,12 @@
 package hu.zza.iotea.controller;
 
-import hu.zza.iotea.model.dto.CommandInput;
-import hu.zza.iotea.model.dto.CommandOutput;
+import hu.zza.iotea.model.dto.*;
 import hu.zza.iotea.service.CommandService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,14 +20,49 @@ public class CommandController {
     return service.getAllCommands();
   }
 
-  @GetMapping("/{id}")
-  public Optional<CommandOutput> getDeviceById(@PathVariable Integer id) {
+  @GetMapping("/{identifier}")
+  public List<CommandOutput> getCommandsByIdentifier(@PathVariable String identifier) {
+    return service.getCommandsByIdentifier(identifier);
+  }
+
+  @GetMapping("/id/{id}")
+  public Optional<CommandOutput> getCommandById(@PathVariable Integer id) {
     return service.getCommandById(id);
   }
 
-  @PutMapping("/{id}")
-  public CommandOutput postDevice(
-      @PathVariable Integer id, @Valid @RequestBody CommandInput command) {
+  @GetMapping("/name/{name}")
+  public Optional<CommandOutput> getCommandByName(@PathVariable String name) {
+    return service.getCommandByName(name);
+  }
+
+  @PostMapping
+  public CommandOutput postDevice(@Valid @RequestBody CommandInput command) {
     return service.saveCommand(command);
+  }
+
+  @PutMapping("/id/{id}")
+  public CommandOutput putDeviceToId(
+      @PathVariable Integer id, @Valid @RequestBody CommandUpdate command) {
+    command.setId(id);
+    return service.updateCommand(() -> Optional.of(id), command);
+  }
+
+  @PutMapping("/name/{name}")
+  public CommandOutput putDeviceToName(
+      @PathVariable String name, @Valid @RequestBody CommandUpdate command) {
+    command.setName(name);
+    return service.updateCommand(() -> service.getIdByName(name), command);
+  }
+
+  @DeleteMapping("/id/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteCommandById(@PathVariable Integer id) {
+    service.deleteById(id);
+  }
+
+  @DeleteMapping("/name/{name}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteCommandByName(@PathVariable String name) {
+    service.deleteByName(name);
   }
 }
