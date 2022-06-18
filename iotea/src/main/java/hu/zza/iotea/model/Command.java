@@ -11,7 +11,7 @@ import org.hibernate.Hibernate;
 @Setter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Command implements Identifiable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
