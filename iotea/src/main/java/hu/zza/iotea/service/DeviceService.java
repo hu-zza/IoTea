@@ -93,18 +93,16 @@ public class DeviceService {
   @Transactional
   public DeviceOutput updateDevice(Supplier<Optional<Integer>> idSupplier, DeviceUpdate update) {
     var optId = idSupplier.get();
-    optId.ifPresent(update::setId);
+    optId.ifPresentOrElse(update::setId, () -> update.setId(null));
     var device = updateMapper.toEntity(update);
 
     if (optId.isPresent()) {
       var id = optId.get();
 
-      if (repository.existsById(id)) {
-        repository.updateById(update);
-      } else {
+      if (!repository.existsById(id)) {
         repository.insertWithId(update);
+        return getDeviceById(id).orElseThrow();
       }
-      return getDeviceById(id).orElseThrow();
     }
     return saveDevice(device);
   }

@@ -20,12 +20,5 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
       nativeQuery = true)
   void insertWithId(@Param("e") Command entity);
 
-  @Modifying
-  @Query(
-      value =
-          "UPDATE commands SET name = :#{#e.name}, template = :#{#e.template}, note = :#{#e.note} WHERE id = :#{#e.id}",
-      nativeQuery = true)
-  void updateById(@Param("e") Command entity);
-
   void deleteByName(String name);
 }

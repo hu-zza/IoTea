@@ -26,13 +26,6 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
       nativeQuery = true)
   void insertWithId(@Param("e") DeviceUpdate entity);
 
-  @Modifying
-  @Query(
-      value =
-          "UPDATE devices SET uid = :#{#e.uid}, name = :#{#e.name}, ip = :#{#e.ip}, port = :#{#e.port} WHERE id = :#{#e.id}",
-      nativeQuery = true)
-  void updateById(@Param("e") DeviceUpdate entity);
-
   void deleteByUid(String uid);
 
   void deleteByName(String name);

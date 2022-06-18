@@ -67,18 +67,16 @@ public class CommandService {
   @Transactional
   public CommandOutput updateCommand(Supplier<Optional<Integer>> idSupplier, CommandUpdate update) {
     var optId = idSupplier.get();
-    optId.ifPresent(update::setId);
+    optId.ifPresentOrElse(update::setId, () -> update.setId(null));
     var command = updateMapper.toEntity(update);
 
     if (optId.isPresent()) {
       var id = optId.get();
 
-      if (repository.existsById(id)) {
-        repository.updateById(command);
-      } else {
+      if (!repository.existsById(id)) {
         repository.insertWithId(command);
+        return getCommandById(id).orElseThrow();
       }
-      return getCommandById(id).orElseThrow();
     }
     return saveCommand(command);
   }
