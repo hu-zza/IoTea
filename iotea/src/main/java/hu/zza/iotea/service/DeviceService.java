@@ -1,11 +1,11 @@
 package hu.zza.iotea.service;
 
-import hu.zza.iotea.model.*;
+import hu.zza.iotea.model.Device;
+import hu.zza.iotea.model.DeviceAddress;
 import hu.zza.iotea.model.dto.*;
 import hu.zza.iotea.model.response.Response;
 import hu.zza.iotea.model.response.ServiceProblem;
 import hu.zza.iotea.model.util.*;
-import hu.zza.iotea.repository.DeviceCrudRepository;
 import hu.zza.iotea.repository.DeviceRepository;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DeviceService {
   private DeviceRepository repository;
-  private DeviceCrudRepository crudRepository;
   private DeviceCommander commander;
   private DeviceInputMapper inMapper;
   private DeviceUpdateMapper updateMapper;
@@ -78,7 +77,7 @@ public class DeviceService {
   private List<Device> getByIp(String ip) {
     return repository.findAll(
         Example.of(
-            new Device(null, null, null, new DeviceAddress(ip), null, false),
+            new Device(null, null, null, new DeviceAddress(ip), null),
             ExampleMatcher.matchingAll().withIgnoreNullValues()));
   }
 
@@ -96,24 +95,9 @@ public class DeviceService {
     var device = updateMapper.toEntity(update);
 
     if (id.isPresent()) {
-      // CRUD
-      //device.setId(id.get());
-      //return outMapper.toDto(crudRepository.save(device));
-
-      // Persistable class
-      //var persistable = PersistableDevice.of(device);
-      //persistable.setId(id.get());
-      //return saveDevice(persistable);
-
-      // Persistable
-      device.setId(id.get());
-      //device.setNew(true);
-      return saveDevice(device);
-
-      // ugly
-      //update.setId(id.get());
-      //repository.saveUnderId(update);
-      //return getDeviceById(id.get()).orElseThrow();
+      update.setId(id.get());
+      repository.saveUnderId(update);
+      return getDeviceById(id.get()).orElseThrow();
     }
     return saveDevice(device);
   }

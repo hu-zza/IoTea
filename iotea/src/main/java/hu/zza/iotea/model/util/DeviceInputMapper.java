@@ -11,7 +11,6 @@ import org.mapstruct.Mapping;
 public interface DeviceInputMapper {
 
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "new", ignore = true)
   @Mapping(target = "address", source = "deviceInput.ip")
   Device toEntity(DeviceInput deviceInput);
 

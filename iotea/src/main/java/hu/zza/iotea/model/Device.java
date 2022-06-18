@@ -4,7 +4,6 @@ import java.util.Objects;
 import javax.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.data.domain.Persistable;
 
 @Entity
 @Table(name = "devices")
@@ -12,8 +11,8 @@ import org.springframework.data.domain.Persistable;
 @Setter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
-public class Device implements Identifiable, Persistable<Integer>{
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Device implements Identifiable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(nullable = false)
@@ -31,15 +30,6 @@ public class Device implements Identifiable, Persistable<Integer>{
 
   @Column(nullable = false)
   private Integer port;
-
-  @Transient
-  private boolean isNew = true;
-
-  @PostLoad
-  @PrePersist
-  void trackNotNew() {
-    this.isNew = false;
-  }
 
   @Override
   public boolean equals(Object o) {
