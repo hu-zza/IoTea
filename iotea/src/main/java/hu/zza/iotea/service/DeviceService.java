@@ -9,8 +9,7 @@ import hu.zza.iotea.model.util.*;
 import hu.zza.iotea.repository.DeviceRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -96,8 +95,9 @@ public class DeviceService {
     var device = updateMapper.toEntity(update);
 
     if (id.isPresent()) {
-      device.setId(id.get());
-      return saveDevice(device);
+      update.setId(id.get());
+      repository.saveUnderId(update);
+      return getDeviceById(id.get()).orElseThrow();
     }
     return saveDevice(device);
   }

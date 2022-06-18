@@ -1,9 +1,10 @@
 package hu.zza.iotea.repository;
 
 import hu.zza.iotea.model.Device;
+import hu.zza.iotea.model.dto.DeviceUpdate;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +18,13 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
   Optional<Device> findByUid(String uid);
 
   Optional<Device> findByName(String name);
+
+  @Modifying
+  @Query(
+      value =
+          "INSERT INTO devices VALUES (:#{#e.id}, :#{#e.uid}, :#{#e.name}, :#{#e.ip}, :#{#e.port})",
+      nativeQuery = true)
+  void saveUnderId(@Param("e") DeviceUpdate entity);
 
   void deleteByUid(String uid);
 
