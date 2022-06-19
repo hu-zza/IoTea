@@ -26,6 +26,10 @@ public class DeviceService {
   private DeviceInputMapper inMapper;
   private DeviceOutputMapper outMapper;
 
+  Device getById(Integer id) {
+    return repository.findById(id).orElseThrow();
+  }
+
   public Optional<Integer> getIdByUid(String uid) {
     return repository.getIdByUid(uid);
   }

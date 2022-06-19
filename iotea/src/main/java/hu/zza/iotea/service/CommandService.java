@@ -23,6 +23,10 @@ public class CommandService {
   private CommandInputMapper inMapper;
   private CommandOutputMapper outMapper;
 
+  Command getById(Integer id) {
+    return repository.findById(id).orElseThrow();
+  }
+
   public Optional<Integer> getIdByName(String name) {
     return repository.getIdByName(name);
   }

@@ -1,14 +1,19 @@
 package hu.zza.iotea.service;
 
 import hu.zza.iotea.model.Job;
+import hu.zza.iotea.model.JobContext;
+import hu.zza.iotea.model.dto.JobInput;
 import hu.zza.iotea.model.dto.JobOutput;
 import hu.zza.iotea.model.exception.ServiceProblem;
 import hu.zza.iotea.model.util.NumberUtil;
+import hu.zza.iotea.model.util.ParameterUtil;
+import hu.zza.iotea.model.util.mapping.JobInputMapper;
 import hu.zza.iotea.model.util.mapping.JobOutputMapper;
 import hu.zza.iotea.repository.JobRepository;
 import hu.zza.iotea.service.connection.Commander;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,15 +23,20 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class JobService {
   private JobRepository repository;
-  private JobOutputMapper mapper;
+  private JobInputMapper inMapper;
+  private JobOutputMapper outMapper;
 
   private Commander commander;
 
   private DeviceService deviceService;
   private CommandService commandService;
 
+  public Optional<Integer> getIdByName(String name) {
+    return repository.getIdByName(name);
+  }
+
   public List<JobOutput> getAllJobs() {
-    return mapper.toDto(repository.findAll());
+    return outMapper.toDto(repository.findAll());
   }
 
   public List<JobOutput> getJobsByIdentifier(String identifier) {
@@ -40,7 +50,7 @@ public class JobService {
   }
 
   private <T> Optional<JobOutput> getJobByFunction(Function<T, Optional<Job>> func, T param) {
-    return getByFunction(func, param).map(mapper::toDto);
+    return getByFunction(func, param).map(outMapper::toDto);
   }
 
   private <T> Optional<Job> getByFunction(Function<T, Optional<Job>> func, T param) {
@@ -55,6 +65,41 @@ public class JobService {
     return getJobByFunction(repository::findByName, name);
   }
 
+  public JobOutput saveJob(JobInput jobInput) {
+    return saveJob(inMapper.toEntity(jobInput));
+  }
+
+  private JobOutput saveJob(Job job) {
+    return outMapper.toDto(repository.save(job));
+  }
+
+  @Transactional
+  public JobOutput updateJob(Supplier<Optional<Integer>> idSupplier, JobInput input) {
+    var optId = idSupplier.get();
+    var job = inMapper.toEntity(input);
+    optId.ifPresentOrElse(job::setId, () -> job.setId(null));
+
+    if (optId.isPresent()) {
+      var id = optId.get();
+
+      if (!repository.existsById(id)) {
+        repository.insertWithId(job);
+        return getJobById(id).orElseThrow();
+      }
+    }
+    return saveJob(job);
+  }
+
+  public JobOutput setName(Integer id, String name) {
+    var job = getById(id);
+    job.setName(name);
+    return outMapper.toDto(job);
+  }
+
+  private Job getById(Integer id) {
+    return repository.findById(id).orElseThrow(() -> new ServiceProblem("")); // TODO
+  }
+
   public JobOutput createJob(String deviceName, String commandName) {
     return createNamedJob(UUID.randomUUID().toString(), deviceName, commandName);
   }
@@ -63,7 +108,7 @@ public class JobService {
     var optJob = createOptionalJob(jobName, deviceName, commandName);
     return optJob
         .map(repository::save)
-        .map(mapper::toDto)
+        .map(outMapper::toDto)
         .orElseThrow(() -> new ServiceProblem("")); // TODO
   }
 
@@ -77,39 +122,32 @@ public class JobService {
             : null);
   }
 
-  public JobOutput setName(Integer id, String name) {
-    var job = getById(id);
-    job.setName(name);
-    return mapper.toDto(job);
-  }
-
-  private Job getById(Integer id) {
-    return repository.findById(id).orElseThrow(() -> new ServiceProblem("")); // TODO
-  }
-
-  public JobOutput runJob(String name) {
-    return runJob(name, "");
-  }
-
-  public JobOutput runJob(Integer id) {
-    return runJob(id, "");
-  }
-
   private Job getByName(String name) {
     return repository.findByName(name).orElseThrow(() -> new ServiceProblem("")); // TODO
   }
 
-  public JobOutput runJob(String name, String parameters) {
-    return runJob(getByName(name), parameters);
+  public JobOutput runJob(String name) {
+    return runJob(name, new JobContext());
   }
 
-  private JobOutput runJob(Job job, String parameters) {
-    job.run(commander, parameters); // TODO
-    return mapper.toDto(job);
+  public JobOutput runJob(String name, JobContext context) {
+    return runJob(getByName(name), context);
   }
 
-  public JobOutput runJob(Integer id, String parameters) {
-    return runJob(getById(id), parameters);
+  private JobOutput runJob(Job job, JobContext context) {
+    job.run(commander, context);
+    return outMapper.toDto(job);
+  }
+
+  public JobOutput runJob(Integer id, JobContext context) {
+    return runJob(getById(id), context);
+  }
+
+  public JobOutput runJob(String name, String rawParameters) {
+    var context = new JobContext();
+    context.setParameters(ParameterUtil.prepareParameters(rawParameters));
+
+    return runJob(name, context);
   }
 
   public void deleteById(Integer id) {

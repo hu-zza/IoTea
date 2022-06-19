@@ -1,15 +1,18 @@
 package hu.zza.iotea.controller;
 
+import hu.zza.iotea.model.JobContext;
+import hu.zza.iotea.model.dto.JobInput;
 import hu.zza.iotea.model.dto.JobOutput;
 import hu.zza.iotea.service.JobService;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/jobs")
 @AllArgsConstructor
 public class JobController {
   private JobService service;
@@ -34,52 +37,30 @@ public class JobController {
     return service.getJobByName(name);
   }
 
-  @GetMapping("/{deviceName}/{commandName}")
-  public JobOutput createJob(@PathVariable String deviceName, @PathVariable String commandName) {
-    return service.createJob(deviceName, commandName);
+  @PostMapping
+  public JobOutput postJob(@Valid @RequestBody JobInput job) {
+    return service.saveJob(job);
   }
 
-  @GetMapping("/name/{jobName}/{deviceName}/{commandName}")
-  public JobOutput createNamedJob(
-      @PathVariable String jobName,
-      @PathVariable String deviceName,
-      @PathVariable String commandName) {
-    return service.createNamedJob(jobName, deviceName, commandName);
+  @PostMapping("/id/{id}")
+  public JobOutput runJobById(@PathVariable Integer id, @Valid @RequestBody JobContext context) {
+    return service.runJob(id, context);
   }
 
-  @GetMapping("/call/{id}/as/{name}")
-  public JobOutput setJobName(@PathVariable Integer id, @PathVariable String name) {
-    return service.setName(id, name);
+  @PostMapping("/name/{name}")
+  public JobOutput runJobByName(@PathVariable String name, @Valid @RequestBody JobContext context) {
+    return service.runJob(name, context);
   }
 
-  @GetMapping("/run/{name}")
-  public JobOutput runJobByNameAlias(@PathVariable String name) {
-    return runJobByName(name);
+  @PutMapping("/id/{id}")
+  public JobOutput putJobToId(@PathVariable Integer id, @Valid @RequestBody JobInput job) {
+    return service.updateJob(() -> Optional.of(id), job);
   }
 
-  @GetMapping("/run/id/{name}")
-  public JobOutput runJobById(@PathVariable Integer id) {
-    return service.runJob(id);
-  }
-
-  @GetMapping("/run/name/{name}")
-  public JobOutput runJobByName(@PathVariable String name) {
-    return service.runJob(name);
-  }
-
-  @GetMapping("/run/id/{id}/{parameters}")
-  public JobOutput runJobById(@PathVariable Integer id, @PathVariable String parameters) {
-    return service.runJob(id, parameters);
-  }
-
-  @GetMapping("/run/{name}/{parameters}")
-  public JobOutput runJobByNameAlias(@PathVariable String name, @PathVariable String parameters) {
-    return runJobByName(name, parameters);
-  }
-
-  @GetMapping("/run/name/{name}/{parameters}")
-  public JobOutput runJobByName(@PathVariable String name, @PathVariable String parameters) {
-    return service.runJob(name, parameters);
+  @PutMapping("/name/{name}")
+  public JobOutput putJobToName(@PathVariable String name, @Valid @RequestBody JobInput job) {
+    job.setName(name);
+    return service.updateJob(() -> service.getIdByName(name), job);
   }
 
   @DeleteMapping("/id/{id}")

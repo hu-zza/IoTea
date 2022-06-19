@@ -9,5 +9,5 @@ public class JobOutput {
   private String name;
   private DeviceOutput device;
   private CommandOutput command;
-  private Run lastRun;
+  private Run result;
 }
