@@ -89,8 +89,8 @@
             <td th:text="${device.id}">1</td>
             <td th:text="${device.uid}">2f4c4331-6f74-47e0-8273-baafee1e88c9</td>
             <td th:text="${device.name}">Ceiling lamp</td>
-            <td th:text="${device.ip.ip.hostAddress} ?: 'unknown'">192.168.0.60</td>
-            <td th:text="${device.ip.reachable} ?: 'unknown'">true</td>
+            <td th:text="${device.address.ip}">192.168.0.60</td>
+            <td th:text="${device.address.reachable}">true</td>
           </tr>
           <tr id="device_2">
             <td>2</td>

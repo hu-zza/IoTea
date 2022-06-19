@@ -7,6 +7,6 @@ public class DeviceOutput {
   private Integer id;
   private String uid;
   private String name;
-  private DeviceAddressOutput ip;
+  private DeviceAddressOutput address;
   private Integer port;
 }
