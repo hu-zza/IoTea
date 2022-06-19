@@ -3,7 +3,7 @@ package hu.zza.iotea.service;
 import hu.zza.iotea.model.Command;
 import hu.zza.iotea.model.dto.CommandInput;
 import hu.zza.iotea.model.dto.CommandOutput;
-import hu.zza.iotea.model.util.NumberUtil;
+import hu.zza.iotea.model.util.Numbers;
 import hu.zza.iotea.model.util.mapping.CommandInputMapper;
 import hu.zza.iotea.model.util.mapping.CommandOutputMapper;
 import hu.zza.iotea.repository.CommandRepository;
@@ -38,7 +38,7 @@ public class CommandService {
   public List<CommandOutput> getCommandsByIdentifier(String identifier) {
     return Stream.of(
             getCommandByFunction(
-                repository::findById, NumberUtil.parseDatabaseIdIfPossible(identifier)),
+                repository::findById, Numbers.parseDatabaseIdIfPossible(identifier)),
             getCommandByFunction(repository::findByName, identifier))
         .filter(Optional::isPresent)
         .map(Optional::get)

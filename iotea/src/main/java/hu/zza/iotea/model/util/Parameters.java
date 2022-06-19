@@ -2,7 +2,7 @@ package hu.zza.iotea.model.util;
 
 import java.util.Arrays;
 
-public interface ParameterUtil {
+public interface Parameters {
   String DELIMITER = "[^\\w.-]";
 
   static Object[] prepareParameters(String raw) {
@@ -16,7 +16,7 @@ public interface ParameterUtil {
     if (parameters == null) {
       return new Object[0];
     }
-    return Arrays.stream(parameters).map(ParameterUtil::prepareParameter).toArray();
+    return Arrays.stream(parameters).map(Parameters::prepareParameter).toArray();
   }
 
   static Object prepareParameter(String parameter) {

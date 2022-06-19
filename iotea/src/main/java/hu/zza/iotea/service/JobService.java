@@ -5,8 +5,8 @@ import hu.zza.iotea.model.JobContext;
 import hu.zza.iotea.model.dto.JobInput;
 import hu.zza.iotea.model.dto.JobOutput;
 import hu.zza.iotea.model.exception.ServiceProblem;
-import hu.zza.iotea.model.util.NumberUtil;
-import hu.zza.iotea.model.util.ParameterUtil;
+import hu.zza.iotea.model.util.Numbers;
+import hu.zza.iotea.model.util.Parameters;
 import hu.zza.iotea.model.util.mapping.JobInputMapper;
 import hu.zza.iotea.model.util.mapping.JobOutputMapper;
 import hu.zza.iotea.repository.JobRepository;
@@ -42,7 +42,7 @@ public class JobService {
   public List<JobOutput> getJobsByIdentifier(String identifier) {
     return Stream.of(
             getJobByFunction(
-                repository::findById, NumberUtil.parseDatabaseIdIfPossible(identifier)),
+                repository::findById, Numbers.parseDatabaseIdIfPossible(identifier)),
             getJobByFunction(repository::findByName, identifier))
         .filter(Optional::isPresent)
         .map(Optional::get)
@@ -145,7 +145,7 @@ public class JobService {
 
   public JobOutput runJob(String name, String rawParameters) {
     var context = new JobContext();
-    context.setParameters(ParameterUtil.prepareParameters(rawParameters));
+    context.setParameters(Parameters.prepareParameters(rawParameters));
 
     return runJob(name, context);
   }

@@ -13,7 +13,7 @@ public class DeviceAddress {
   public static final InetAddress NULL_IP = InetAddress.getLoopbackAddress();
   private static final InetAddressConverter converter = new InetAddressConverter();
 
-  private static final int REACHABLE_TIMEOUT_MS = 1000;
+  private static final int REACHABLE_TIMEOUT_MS = 500;
 
   @Convert(converter = InetAddressConverter.class)
   private InetAddress ip;

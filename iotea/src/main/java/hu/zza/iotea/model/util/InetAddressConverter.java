@@ -20,17 +20,9 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
     if (inetAddress == null) {
       return convertToDatabaseColumn(DeviceAddress.NULL_IP);
     }
-    return stringify(inetAddress.getAddress());
+    return inetAddress.getHostAddress();
   }
 
-  private String stringify(byte[] address) {
-    StringJoiner joiner = new StringJoiner(";");
-
-    for (byte b : address) {
-      joiner.add(String.valueOf(b));
-    }
-    return joiner.toString();
-  }
 
   /**
    * @param address An IP address to parse. It can be in general form (which is parsable by
@@ -56,25 +48,11 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
 
   private InetAddress tryToParse(String address) {
     try {
-      return InetAddress.getByAddress(NumberUtil.getIntArrayAsByteArray(getAsIntArray(address)));
+      return InetAddress.getByName(address);
     } catch (UnknownHostException | ConverterException exception) {
       logger.warn("Cannot parse IP address '%s'".formatted(address), exception);
       logger.warn("Return with '%s' as null-safe placeholder".formatted(DeviceAddress.NULL_IP));
       return DeviceAddress.NULL_IP;
-    }
-  }
-
-  private int[] getAsIntArray(String raw) {
-    var splitter = "[^\\d-]+";
-    try {
-      return Stream.of(raw)
-          .flatMap(string -> Arrays.stream(string.split(splitter)))
-          .mapToInt(Integer::parseInt)
-          .toArray();
-    } catch (Exception exception) {
-      throw new ConverterException(
-          "Cannot split (regex: '%s') and parse '%s' as an integer array".formatted(splitter, raw),
-          exception);
     }
   }
 }

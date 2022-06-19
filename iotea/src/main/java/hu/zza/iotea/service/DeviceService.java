@@ -4,7 +4,7 @@ import hu.zza.iotea.model.Device;
 import hu.zza.iotea.model.DeviceAddress;
 import hu.zza.iotea.model.dto.DeviceInput;
 import hu.zza.iotea.model.dto.DeviceOutput;
-import hu.zza.iotea.model.util.NumberUtil;
+import hu.zza.iotea.model.util.Numbers;
 import hu.zza.iotea.model.util.mapping.DeviceInputMapper;
 import hu.zza.iotea.model.util.mapping.DeviceOutputMapper;
 import hu.zza.iotea.repository.DeviceRepository;
@@ -45,7 +45,7 @@ public class DeviceService {
   public List<DeviceOutput> getDevicesByIdentifier(String identifier) {
     return Stream.of(
             getDeviceByFunction(
-                repository::findById, NumberUtil.parseDatabaseIdIfPossible(identifier)),
+                repository::findById, Numbers.parseDatabaseIdIfPossible(identifier)),
             getDeviceByFunction(repository::findByName, identifier),
             getDeviceByFunction(repository::findByUid, identifier))
         .filter(Optional::isPresent)
