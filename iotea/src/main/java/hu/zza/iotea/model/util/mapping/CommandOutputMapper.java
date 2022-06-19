@@ -1,4 +1,4 @@
-package hu.zza.iotea.model.util;
+package hu.zza.iotea.model.util.mapping;
 
 import hu.zza.iotea.model.Command;
 import hu.zza.iotea.model.dto.CommandOutput;

@@ -1,4 +1,4 @@
-package hu.zza.iotea.service;
+package hu.zza.iotea.service.connection;
 
 import hu.zza.iotea.model.Device;
 

@@ -1,4 +1,4 @@
-package hu.zza.iotea.model.response;
+package hu.zza.iotea.model.exception;
 
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 

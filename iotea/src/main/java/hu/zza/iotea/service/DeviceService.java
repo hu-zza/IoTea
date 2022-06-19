@@ -4,7 +4,9 @@ import hu.zza.iotea.model.Device;
 import hu.zza.iotea.model.DeviceAddress;
 import hu.zza.iotea.model.dto.DeviceInput;
 import hu.zza.iotea.model.dto.DeviceOutput;
-import hu.zza.iotea.model.util.*;
+import hu.zza.iotea.model.util.NumberUtil;
+import hu.zza.iotea.model.util.mapping.DeviceInputMapper;
+import hu.zza.iotea.model.util.mapping.DeviceOutputMapper;
 import hu.zza.iotea.repository.DeviceRepository;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DeviceService {
   private DeviceRepository repository;
-  private DeviceCommander commander;
   private DeviceInputMapper inMapper;
   private DeviceOutputMapper outMapper;
 

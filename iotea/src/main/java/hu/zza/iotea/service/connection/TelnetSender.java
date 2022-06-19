@@ -18,7 +18,7 @@ public class TelnetSender implements Sender {
 
       } catch (Exception exception) {
         throw new SenderException(
-            "Cannot send to the address '%s' (port: %d)".formatted(address.getIp(), port),
+            "Cannot send payload to the address '%s' (port: %d)".formatted(address.getIp(), port),
             exception);
       }
     }

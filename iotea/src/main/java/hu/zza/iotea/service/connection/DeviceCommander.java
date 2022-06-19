@@ -1,8 +1,7 @@
-package hu.zza.iotea.service;
+package hu.zza.iotea.service.connection;
 
 import hu.zza.iotea.model.Device;
-import hu.zza.iotea.model.response.CommanderProblem;
-import hu.zza.iotea.service.connection.Sender;
+import hu.zza.iotea.model.exception.ConnectionProblem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +25,10 @@ public class DeviceCommander implements Commander {
 
     } catch (Exception exception) {
       var message =
-          "Cannot send command to Addressable(address=%s, port=%d)"
-              .formatted(device.getAddress(), device.getPort());
+          "Cannot send command to Device (ID: %d, UID: %s, name: %s)"
+              .formatted(device.getId(), device.getUid(), device.getName());
       logger.warn(message, exception);
-      throw new CommanderProblem(message);
+      throw new ConnectionProblem(message);
     }
   }
 }

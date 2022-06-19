@@ -1,7 +1,8 @@
 package hu.zza.iotea.model;
 
 import java.time.LocalDateTime;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder

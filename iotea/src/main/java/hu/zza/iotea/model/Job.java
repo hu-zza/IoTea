@@ -2,12 +2,11 @@ package hu.zza.iotea.model;
 
 import hu.zza.iotea.model.Run.RunBuilder;
 import hu.zza.iotea.model.util.ParameterUtil;
-import hu.zza.iotea.service.Commander;
+import hu.zza.iotea.service.connection.Commander;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldNameConstants.Exclude;
 import org.hibernate.Hibernate;
 
 @Entity

@@ -2,10 +2,11 @@ package hu.zza.iotea.service;
 
 import hu.zza.iotea.model.Job;
 import hu.zza.iotea.model.dto.JobOutput;
-import hu.zza.iotea.model.response.ServiceProblem;
-import hu.zza.iotea.model.util.JobOutputMapper;
+import hu.zza.iotea.model.exception.ServiceProblem;
 import hu.zza.iotea.model.util.NumberUtil;
+import hu.zza.iotea.model.util.mapping.JobOutputMapper;
 import hu.zza.iotea.repository.JobRepository;
+import hu.zza.iotea.service.connection.Commander;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ public class JobService {
   private JobRepository repository;
   private JobOutputMapper mapper;
 
-  private DeviceCommander commander;
+  private Commander commander;
 
   private DeviceService deviceService;
   private CommandService commandService;

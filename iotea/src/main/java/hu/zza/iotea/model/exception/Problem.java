@@ -1,4 +1,4 @@
-package hu.zza.iotea.model.response;
+package hu.zza.iotea.model.exception;
 
 import java.net.URI;
 import lombok.Getter;
