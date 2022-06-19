@@ -1,0 +1,4 @@
+### Returns a list with all Devices
+
+GET http://localhost:8080/api/devices
+Accept: application/json

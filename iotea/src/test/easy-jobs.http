@@ -1,0 +1,4 @@
+### Returns a list with all Jobs
+
+GET http://localhost:8080/api
+Accept: application/json

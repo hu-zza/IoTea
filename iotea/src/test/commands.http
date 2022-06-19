@@ -1,0 +1,4 @@
+### Returns a list with all Commands
+
+GET http://localhost:8080/api/commands
+Accept: application/json
