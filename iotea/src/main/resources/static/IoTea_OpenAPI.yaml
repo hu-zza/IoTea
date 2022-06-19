@@ -20,6 +20,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceOutput'
+      summary: Returns a list with all Devices
     post:
       tags:
       - Device Management
@@ -37,6 +38,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Creates a Device
   /api/devices/{identifier}:
     get:
       tags:
@@ -57,6 +59,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceOutput'
+      summary: Gets all Devices those id, uid or name matches {identifier}
   /api/devices/id/{id}:
     get:
       tags:
@@ -76,6 +79,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Gets a Device identified by {id}
     put:
       tags:
       - Device Management
@@ -100,6 +104,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Creates or updates a Device under specified {id}
     delete:
       tags:
       - Device Management
@@ -114,6 +119,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Device identified by {id}
   /api/devices/uid/{uid}:
     get:
       tags:
@@ -132,6 +138,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Gets a Device identified by {uid}
     put:
       tags:
       - Device Management
@@ -155,6 +162,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Creates or updates a Device under specified {uid}
     delete:
       tags:
       - Device Management
@@ -168,6 +176,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Device identified by {uid}
   /api/devices/name/{name}:
     get:
       tags:
@@ -186,6 +195,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Gets a Device identified by {name}
     put:
       tags:
       - Device Management
@@ -209,6 +219,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+      summary: Creates or updates a Device under specified {name}
     delete:
       tags:
       - Device Management
@@ -222,6 +233,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Device identified by {name}
   /api/devices/ip/{ip}:
     get:
       tags:
@@ -242,6 +254,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceOutput'
+      summary: Gets all Device those ip matches {identifier}
 
   /api/commands:
     get:
@@ -257,6 +270,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CommandOutput'
+      summary: Returns a list with all Commands
     post:
       tags:
       - Command Management
@@ -274,6 +288,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+      summary: Creates a Command
   /api/commands/{identifier}:
     get:
       tags:
@@ -294,6 +309,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CommandOutput'
+      summary: Gets all Commands those id or name matches {identifier}
   /api/commands/id/{id}:
     get:
       tags:
@@ -313,6 +329,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+      summary: Gets a Command identified by {id}
     put:
       tags:
       - Command Management
@@ -337,6 +354,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+      summary: Creates or updates a Command under specified {id}
     delete:
       tags:
       - Command Management
@@ -351,6 +369,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Command identified by {id}
   /api/commands/name/{name}:
     get:
       tags:
@@ -369,6 +388,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+      summary: Gets a Command identified by {name}
     put:
       tags:
       - Command Management
@@ -392,6 +412,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+      summary: Creates or updates a Command under specified {name}
     delete:
       tags:
       - Command Management
@@ -405,6 +426,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Command identified by {name}
 
   /api/jobs:
     get:
@@ -420,6 +442,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
+      summary: Returns a list with all Jobs
     post:
       tags:
       - Job Management
@@ -437,6 +460,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Creates a Job
   /api/jobs/{identifier}:
     get:
       tags:
@@ -457,6 +481,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
+      summary: Gets all Job those id or name matches {identifier}
   /api/jobs/id/{id}:
     get:
       tags:
@@ -476,6 +501,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Gets a Job identified by {id}
     put:
       tags:
       - Job Management
@@ -500,6 +526,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Creates or updates a Job under specified {id}
     post:
       tags:
       - Job Management
@@ -524,6 +551,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Runs a Job specified by {id} with parameters (request body)
     delete:
       tags:
       - Job Management
@@ -538,6 +566,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Job identified by {id}
   /api/jobs/name/{name}:
     get:
       tags:
@@ -556,6 +585,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Gets a Job identified by {name}
     put:
       tags:
       - Job Management
@@ -579,6 +609,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Creates or updates a Job under specified {name}
     post:
       tags:
       - Job Management
@@ -602,6 +633,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Runs a Job specified by {name} with parameters (request body)
     delete:
       tags:
       - Job Management
@@ -615,6 +647,7 @@ paths:
       responses:
         "204":
           description: No Content
+      summary: Deletes a Job identified by {name}
 
   /api:
     get:
@@ -630,6 +663,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
+      summary: Returns a list with all Jobs
   /api/{identifier}:
     get:
       tags:
@@ -650,6 +684,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
+      summary: Gets all Job those id or name matches {identifier}
   /api/id/{id}:
     get:
       tags:
@@ -669,6 +704,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Gets a Job identified by {id}
   /api/name/{name}:
     get:
       tags:
@@ -687,6 +723,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Gets a Job identified by {name}
   /api/call/{id}/as/{name}:
     get:
       tags:
@@ -711,6 +748,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Sets the name of a Job identified by {id}
   /api/{deviceName}/{commandName}:
     get:
       tags:
@@ -734,6 +772,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Creates a Job with auto-generated name
   /api/{deviceName}/{commandName}/name/{jobName}:
     get:
       tags:
@@ -762,6 +801,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Creates a Job with the specified {jobName}
   /api/run/{name}:
     get:
       tags:
@@ -780,6 +820,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Runs a Job specified by {name}
   /api/run/{name}/{parameters}:
     get:
       tags:
@@ -803,6 +844,22 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+      summary: Runs a Job specified by {name} with raw {parameters}
+  /api/delete/{name}:
+    get:
+      tags:
+      - LOLLful
+      operationId: deleteJobByName_1
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Deletes a Job identified by {name}
 components:
   schemas:
     DeviceInput:

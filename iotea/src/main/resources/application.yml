@@ -53,6 +53,6 @@ server:
   error:
     include-message: always
 
-#springdoc:
-#  swagger-ui:
-#    url: /IoTea_OpenAPI.yaml
+springdoc:
+  swagger-ui:
+    url: /IoTea_OpenAPI.yaml
