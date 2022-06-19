@@ -93,7 +93,7 @@ public class JobService {
   public JobOutput setName(Integer id, String name) {
     var job = getById(id);
     job.setName(name);
-    return outMapper.toDto(job);
+    return outMapper.toDto(repository.save(job));
   }
 
   private Job getById(Integer id) {
