@@ -1,197 +1,29 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
+  title: IoTea
   version: v0
 servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
-  /api/jobs/name/{name}:
+  /api/devices:
     get:
       tags:
-      - job-controller
-      operationId: getJobByName_1
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+      - Device Management
+      operationId: getAllDevices
       responses:
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/JobOutput'
-    put:
-      tags:
-      - job-controller
-      operationId: putJobToName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobInput'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceOutput'
     post:
       tags:
-      - job-controller
-      operationId: runJobByName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobContext'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-    delete:
-      tags:
-      - job-controller
-      operationId: deleteJobByName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-  /api/jobs/id/{id}:
-    get:
-      tags:
-      - job-controller
-      operationId: getJobById
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-    put:
-      tags:
-      - job-controller
-      operationId: putJobToId
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobInput'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-    post:
-      tags:
-      - job-controller
-      operationId: runJobById
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobContext'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-    delete:
-      tags:
-      - job-controller
-      operationId: deleteJobById
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "204":
-          description: No Content
-  /api/devices/uid/{uid}:
-    get:
-      tags:
-      - device-controller
-      operationId: getDeviceByUid
-      parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DeviceOutput'
-    put:
-      tags:
-      - device-controller
-      operationId: putDeviceToUid
-      parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
+      - Device Management
+      operationId: postDevice
       requestBody:
         content:
           application/json:
@@ -205,26 +37,13 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
-    delete:
-      tags:
-      - device-controller
-      operationId: deleteDeviceByUid
-      parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-  /api/devices/name/{name}:
+  /api/devices/{identifier}:
     get:
       tags:
-      - device-controller
-      operationId: getDeviceByName
+      - Device Management
+      operationId: getDevicesByIdentifier
       parameters:
-      - name: name
+      - name: identifier
         in: path
         required: true
         schema:
@@ -235,47 +54,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/DeviceOutput'
-    put:
-      tags:
-      - device-controller
-      operationId: putDeviceToName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeviceInput'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DeviceOutput'
-    delete:
-      tags:
-      - device-controller
-      operationId: deleteDeviceByName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceOutput'
   /api/devices/id/{id}:
     get:
       tags:
-      - device-controller
+      - Device Management
       operationId: getDeviceById
       parameters:
       - name: id
@@ -293,7 +78,7 @@ paths:
                 $ref: '#/components/schemas/DeviceOutput'
     put:
       tags:
-      - device-controller
+      - Device Management
       operationId: putDeviceToId
       parameters:
       - name: id
@@ -317,7 +102,7 @@ paths:
                 $ref: '#/components/schemas/DeviceOutput'
     delete:
       tags:
-      - device-controller
+      - Device Management
       operationId: deleteDeviceById
       parameters:
       - name: id
@@ -329,11 +114,65 @@ paths:
       responses:
         "204":
           description: No Content
-  /api/commands/name/{name}:
+  /api/devices/uid/{uid}:
     get:
       tags:
-      - command-controller
-      operationId: getCommandByName
+      - Device Management
+      operationId: getDeviceByUid
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+    put:
+      tags:
+      - Device Management
+      operationId: putDeviceToUid
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+    delete:
+      tags:
+      - Device Management
+      operationId: deleteDeviceByUid
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/devices/name/{name}:
+    get:
+      tags:
+      - Device Management
+      operationId: getDeviceByName
       parameters:
       - name: name
         in: path
@@ -346,17 +185,82 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CommandOutput'
+                $ref: '#/components/schemas/DeviceOutput'
     put:
       tags:
-      - command-controller
-      operationId: putDeviceToName_1
+      - Device Management
+      operationId: putDeviceToName
       parameters:
       - name: name
         in: path
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+    delete:
+      tags:
+      - Device Management
+      operationId: deleteDeviceByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+  /api/devices/ip/{ip}:
+    get:
+      tags:
+      - Device Management
+      operationId: getDevicesByIp
+      parameters:
+      - name: ip
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceOutput'
+
+  /api/commands:
+    get:
+      tags:
+      - Command Management
+      operationId: getAllCommands
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommandOutput'
+    post:
+      tags:
+      - Command Management
+      operationId: postDevice_1
       requestBody:
         content:
           application/json:
@@ -370,23 +274,30 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
-    delete:
+  /api/commands/{identifier}:
+    get:
       tags:
-      - command-controller
-      operationId: deleteCommandByName
+      - Command Management
+      operationId: getCommandsByIdentifier
       parameters:
-      - name: name
+      - name: identifier
         in: path
         required: true
         schema:
           type: string
       responses:
-        "204":
-          description: No Content
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommandOutput'
   /api/commands/id/{id}:
     get:
       tags:
-      - command-controller
+      - Command Management
       operationId: getCommandById
       parameters:
       - name: id
@@ -404,7 +315,7 @@ paths:
                 $ref: '#/components/schemas/CommandOutput'
     put:
       tags:
-      - command-controller
+      - Command Management
       operationId: putDeviceToId_1
       parameters:
       - name: id
@@ -428,7 +339,7 @@ paths:
                 $ref: '#/components/schemas/CommandOutput'
     delete:
       tags:
-      - command-controller
+      - Command Management
       operationId: deleteCommandById
       parameters:
       - name: id
@@ -440,10 +351,65 @@ paths:
       responses:
         "204":
           description: No Content
+  /api/commands/name/{name}:
+    get:
+      tags:
+      - Command Management
+      operationId: getCommandByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommandOutput'
+    put:
+      tags:
+      - Command Management
+      operationId: putDeviceToName_1
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommandOutput'
+    delete:
+      tags:
+      - Command Management
+      operationId: deleteCommandByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+
   /api/jobs:
     get:
       tags:
-      - job-controller
+      - Job Management
       operationId: getAllJobs_1
       responses:
         "200":
@@ -456,7 +422,7 @@ paths:
                   $ref: '#/components/schemas/JobOutput'
     post:
       tags:
-      - job-controller
+      - Job Management
       operationId: postJob
       requestBody:
         content:
@@ -471,11 +437,17 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/JobOutput'
-  /api/devices:
+  /api/jobs/{identifier}:
     get:
       tags:
-      - device-controller
-      operationId: getAllDevices
+      - Job Management
+      operationId: getJobsByIdentifier_1
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -484,47 +456,42 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DeviceOutput'
-    post:
-      tags:
-      - device-controller
-      operationId: postDevice
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeviceInput'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DeviceOutput'
-  /api/commands:
+                  $ref: '#/components/schemas/JobOutput'
+  /api/jobs/id/{id}:
     get:
       tags:
-      - command-controller
-      operationId: getAllCommands
+      - Job Management
+      operationId: getJobById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CommandOutput'
-    post:
+                $ref: '#/components/schemas/JobOutput'
+    put:
       tags:
-      - command-controller
-      operationId: postDevice_1
+      - Job Management
+      operationId: putJobToId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommandInput'
+              $ref: '#/components/schemas/JobInput'
         required: true
       responses:
         "200":
@@ -532,11 +499,127 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CommandOutput'
+                $ref: '#/components/schemas/JobOutput'
+    post:
+      tags:
+      - Job Management
+      operationId: runJobById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobContext'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+    delete:
+      tags:
+      - Job Management
+      operationId: deleteJobById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "204":
+          description: No Content
+  /api/jobs/name/{name}:
+    get:
+      tags:
+      - Job Management
+      operationId: getJobByName_1
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+    put:
+      tags:
+      - Job Management
+      operationId: putJobToName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+    post:
+      tags:
+      - Job Management
+      operationId: runJobByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobContext'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+    delete:
+      tags:
+      - Job Management
+      operationId: deleteJobByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+
   /api:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: getAllJobs
       responses:
         "200":
@@ -550,7 +633,7 @@ paths:
   /api/{identifier}:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: getJobsByIdentifier
       parameters:
       - name: identifier
@@ -567,10 +650,71 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
+  /api/id/{id}:
+    get:
+      tags:
+      - LOLLful
+      operationId: getJobById_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+  /api/name/{name}:
+    get:
+      tags:
+      - LOLLful
+      operationId: getJobByName
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+  /api/call/{id}/as/{name}:
+    get:
+      tags:
+      - LOLLful
+      operationId: setJobName
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
   /api/{deviceName}/{commandName}:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: createJob
       parameters:
       - name: deviceName
@@ -593,7 +737,7 @@ paths:
   /api/{deviceName}/{commandName}/name/{jobName}:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: createNamedJob
       parameters:
       - name: jobName
@@ -621,7 +765,7 @@ paths:
   /api/run/{name}:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: runJobByNameAlias
       parameters:
       - name: name
@@ -639,7 +783,7 @@ paths:
   /api/run/{name}/{parameters}:
     get:
       tags:
-      - easy-job-controller
+      - LOLLful
       operationId: runJobByNameAlias_1
       parameters:
       - name: name
@@ -659,234 +803,8 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/JobOutput'
-  /api/name/{name}:
-    get:
-      tags:
-      - easy-job-controller
-      operationId: getJobByName
-      parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-  /api/jobs/{identifier}:
-    get:
-      tags:
-      - job-controller
-      operationId: getJobsByIdentifier_1
-      parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/JobOutput'
-  /api/id/{id}:
-    get:
-      tags:
-      - easy-job-controller
-      operationId: getJobById_1
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
-  /api/devices/{identifier}:
-    get:
-      tags:
-      - device-controller
-      operationId: getDevicesByIdentifier
-      parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DeviceOutput'
-  /api/devices/ip/{ip}:
-    get:
-      tags:
-      - device-controller
-      operationId: getDevicesByIp
-      parameters:
-      - name: ip
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DeviceOutput'
-  /api/commands/{identifier}:
-    get:
-      tags:
-      - command-controller
-      operationId: getCommandsByIdentifier
-      parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CommandOutput'
-  /api/call/{id}/as/{name}:
-    get:
-      tags:
-      - easy-job-controller
-      operationId: setJobName
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/JobOutput'
 components:
   schemas:
-    JobInput:
-      required:
-      - command_id
-      - device_id
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 1
-          type: string
-        device_id:
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-          format: int32
-        command_id:
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-          format: int32
-    CommandOutput:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        template:
-          type: string
-        note:
-          type: string
-    DeviceAddressOutput:
-      type: object
-      properties:
-        ip:
-          type: string
-        reachable:
-          type: boolean
-    DeviceOutput:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        uid:
-          type: string
-        name:
-          type: string
-        address:
-          $ref: '#/components/schemas/DeviceAddressOutput'
-        port:
-          type: integer
-          format: int32
-    JobOutput:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        device:
-          $ref: '#/components/schemas/DeviceOutput'
-        command:
-          $ref: '#/components/schemas/CommandOutput'
-        result:
-          $ref: '#/components/schemas/Run'
-    Run:
-      type: object
-      properties:
-        started:
-          type: string
-          format: date-time
-        parameters:
-          type: array
-          items:
-            type: object
-        payload:
-          type: string
-        response:
-          type: string
-        raw_parameters:
-          type: string
     DeviceInput:
       required:
       - ip
@@ -912,6 +830,29 @@ components:
           minimum: 0
           type: integer
           format: int32
+    DeviceOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        uid:
+          type: string
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/DeviceAddressOutput'
+        port:
+          type: integer
+          format: int32
+    DeviceAddressOutput:
+      type: object
+      properties:
+        ip:
+          type: string
+        reachable:
+          type: boolean
+
     CommandInput:
       required:
       - name
@@ -930,6 +871,54 @@ components:
           maxLength: 30000
           minLength: 0
           type: string
+    CommandOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        template:
+          type: string
+        note:
+          type: string
+
+    JobInput:
+      required:
+      - command_id
+      - device_id
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        device_id:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+        command_id:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+    JobOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        device:
+          $ref: '#/components/schemas/DeviceOutput'
+        command:
+          $ref: '#/components/schemas/CommandOutput'
+        result:
+          $ref: '#/components/schemas/Run'
     JobContext:
       type: object
       properties:
@@ -937,3 +926,19 @@ components:
           type: array
           items:
             type: object
+    Run:
+      type: object
+      properties:
+        started:
+          type: string
+          format: date-time
+        parameters:
+          type: array
+          items:
+            type: object
+        payload:
+          type: string
+        response:
+          type: string
+        raw_parameters:
+          type: string
