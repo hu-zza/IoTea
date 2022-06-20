@@ -277,3 +277,14 @@ A `Run` a `Job` egy lefutását összegzi. Adatbázisban nem kerül tárolásra,
 
 ---
 
+## Futtatás
+
+A projekt főkönyvtárában adjuk ki a `docker-compose up -d` parancsot.
+
+| Komponens  | Elérési út                               |
+| :--------: | ---------------------------------------- |
+| MariaDB    | Nincs kivezetve.                         | 
+| Frontend   | http://localhost:8080/                   |
+| REST       | http://localhost:8080/api                |
+| Swagger UI | http://localhost:8080/swagger-ui.html    |
+| OpenAPI    | http://localhost:8080/IoTea_OpenAPI.yaml |
