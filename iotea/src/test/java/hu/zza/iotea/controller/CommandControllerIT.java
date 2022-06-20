@@ -11,7 +11,8 @@ import hu.zza.iotea.repository.CommandRepository;
 import hu.zza.iotea.repository.JobRepository;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -70,8 +71,14 @@ class CommandControllerIT {
   }
 
   @Test
-  @Disabled
-  void getCommandsByIdentifier() {}
+  void getCommandsByIdentifier() {
+    var c = helper.createDummyInputs(4, 6);
+
+    helper.postInputs(c);
+    helper.updateMockOutputs(c, o -> "name_5".equals(o.getName()));
+
+    helper.resultListCheckWithMockOutputs("/api/commands/name_5", 1);
+  }
 
   @Test
   void getCommandById() {

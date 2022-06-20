@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -114,8 +116,14 @@ class JobControllerIT {
   }
 
   @Test
-  @Disabled
-  void getJobsByIdentifier() {}
+  void getJobsByIdentifier() {
+    var j = helper.createDummyInputs(4, 6);
+
+    helper.postInputs(j);
+    helper.updateMockOutputs(j, o -> "name_5".equals(o.getName()));
+
+    helper.resultListCheckWithMockOutputs("/api/jobs/name_5", 1);
+  }
 
   @Test
   void getJobById() {
@@ -141,12 +149,64 @@ class JobControllerIT {
   }
 
   @Test
-  @Disabled
-  void runJobById() {}
+  void runJobById() {
+    var jobs = helper.createDummyInputs(9, 10);
+    helper.postInputs(jobs);
+    helper.updateIDsWithAllID();
+
+    var id = helper.getIDs().get(0);
+
+
+    deviceService.updateDevice(
+        () -> Optional.of(9), createDummyDevice("T9", "T9", "192.168.0.50", 55443));
+
+    assertThat(
+            client
+                .post()
+                .uri("/api/jobs/id/" + id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"parameters\": [222]}")
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody(JobOutput.class)
+                .returnResult()
+                .getResponseBody()
+                .getResult())
+        .hasFieldOrPropertyWithValue("payload", "{\"id\": 9, \"command\": \"222\"}");
+
+
+    deviceService.updateDevice(
+        () -> Optional.of(9), createDummyDevice("D9", "D9", "127.0.0.1", 9));
+
+  }
 
   @Test
-  @Disabled
-  void runJobByName() {}
+  void runJobByName() {
+    var jobs = helper.createDummyInputs(15, 16);
+    helper.postInputs(jobs);
+
+    deviceService.updateDevice(
+        () -> Optional.of(16), createDummyDevice("T16", "T16", "192.168.0.50", 55443));
+
+    assertThat(
+            client
+                .post()
+                .uri("/api/jobs/name/name_16")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"parameters\": [8888]}")
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody(JobOutput.class)
+                .returnResult()
+                .getResponseBody()
+                .getResult())
+        .hasFieldOrPropertyWithValue("payload", "{\"id\": 16, \"command\": \"8888\"}");
+
+    deviceService.updateDevice(
+        () -> Optional.of(16), createDummyDevice("D16", "D16", "127.0.0.1", 16));
+  }
 
   @Test
   void putJobToId() {
