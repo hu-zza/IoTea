@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CommandOutputMapper {
+public interface CommandOutputMapper extends OutputMapper<Command, CommandOutput> {
   @Mapping(target = "note", defaultValue = "")
   CommandOutput toDto(Command command);
 

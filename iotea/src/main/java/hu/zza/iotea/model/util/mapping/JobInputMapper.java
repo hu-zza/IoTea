@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(
     componentModel = "spring",
     uses = {ModelProvider.class})
-public interface JobInputMapper {
+public interface JobInputMapper extends InputMapper<Job, JobInput>{
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "device", source = "deviceId")
   @Mapping(target = "command", source = "commandId")

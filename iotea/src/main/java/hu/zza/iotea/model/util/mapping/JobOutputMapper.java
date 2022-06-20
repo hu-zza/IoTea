@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(
     componentModel = "spring",
     uses = {DeviceOutputMapper.class, CommandOutputMapper.class})
-public interface JobOutputMapper {
+public interface JobOutputMapper extends OutputMapper<Job, JobOutput>{
 
   JobOutput toDto(Job job);
 

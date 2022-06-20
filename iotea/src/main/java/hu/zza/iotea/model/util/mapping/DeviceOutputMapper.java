@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(
     componentModel = "spring",
     uses = {DeviceAddressOutputMapper.class})
-public interface DeviceOutputMapper {
+public interface DeviceOutputMapper extends OutputMapper<Device, DeviceOutput>{
   DeviceOutput toDto(Device device);
 
   List<DeviceOutput> toDto(List<Device> devices);

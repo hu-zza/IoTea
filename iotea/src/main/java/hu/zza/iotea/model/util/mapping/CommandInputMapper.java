@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CommandInputMapper {
+public interface CommandInputMapper extends InputMapper<Command, CommandInput> {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "note", defaultValue = "")
   Command toEntity(CommandInput commandInput);
