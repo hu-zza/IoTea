@@ -3,9 +3,6 @@ package hu.zza.iotea.model.util;
 import hu.zza.iotea.model.DeviceAddress;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.StringJoiner;
-import java.util.stream.Stream;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import org.slf4j.Logger;
@@ -22,7 +19,6 @@ public class InetAddressConverter implements AttributeConverter<InetAddress, Str
     }
     return inetAddress.getHostAddress();
   }
-
 
   /**
    * @param address An IP address to parse. It can be in general form (which is parsable by

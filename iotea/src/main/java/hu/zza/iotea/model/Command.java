@@ -2,12 +2,9 @@ package hu.zza.iotea.model;
 
 import hu.zza.iotea.model.util.Commands;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import javax.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "commands")

@@ -41,8 +41,7 @@ public class JobService {
 
   public List<JobOutput> getJobsByIdentifier(String identifier) {
     return Stream.of(
-            getJobByFunction(
-                repository::findById, Numbers.parseDatabaseIdIfPossible(identifier)),
+            getJobByFunction(repository::findById, Numbers.parseDatabaseIdIfPossible(identifier)),
             getJobByFunction(repository::findByName, identifier))
         .filter(Optional::isPresent)
         .map(Optional::get)

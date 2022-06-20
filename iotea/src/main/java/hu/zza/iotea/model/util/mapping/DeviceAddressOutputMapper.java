@@ -5,7 +5,6 @@ import hu.zza.iotea.model.dto.DeviceAddressOutput;
 import java.net.InetAddress;
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface DeviceAddressOutputMapper {

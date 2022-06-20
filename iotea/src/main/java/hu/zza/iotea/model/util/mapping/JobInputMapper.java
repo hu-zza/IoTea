@@ -1,12 +1,14 @@
 package hu.zza.iotea.model.util.mapping;
 
-import hu.zza.iotea.model.*;
+import hu.zza.iotea.model.Job;
 import hu.zza.iotea.model.dto.JobInput;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {ModelProvider.class})
+@Mapper(
+    componentModel = "spring",
+    uses = {ModelProvider.class})
 public interface JobInputMapper {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "device", source = "deviceId")

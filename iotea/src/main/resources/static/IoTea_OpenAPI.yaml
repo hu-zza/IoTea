@@ -3,13 +3,13 @@ info:
   title: IoTea
   version: v0
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 paths:
   /api/devices:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getAllDevices
       responses:
         "200":
@@ -23,7 +23,7 @@ paths:
       summary: Returns a list with all Devices
     post:
       tags:
-      - Device Management
+        - Device Management
       operationId: postDevice
       requestBody:
         content:
@@ -42,14 +42,14 @@ paths:
   /api/devices/{identifier}:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getDevicesByIdentifier
       parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -63,15 +63,15 @@ paths:
   /api/devices/id/{id}:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getDeviceById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "200":
           description: OK
@@ -82,15 +82,15 @@ paths:
       summary: Gets a Device identified by {id}
     put:
       tags:
-      - Device Management
+        - Device Management
       operationId: putDeviceToId
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       requestBody:
         content:
           application/json:
@@ -107,15 +107,15 @@ paths:
       summary: Creates or updates a Device under specified {id}
     delete:
       tags:
-      - Device Management
+        - Device Management
       operationId: deleteDeviceById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "204":
           description: No Content
@@ -123,14 +123,14 @@ paths:
   /api/devices/uid/{uid}:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getDeviceByUid
       parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -141,14 +141,14 @@ paths:
       summary: Gets a Device identified by {uid}
     put:
       tags:
-      - Device Management
+        - Device Management
       operationId: putDeviceToUid
       parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -165,14 +165,14 @@ paths:
       summary: Creates or updates a Device under specified {uid}
     delete:
       tags:
-      - Device Management
+        - Device Management
       operationId: deleteDeviceByUid
       parameters:
-      - name: uid
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: No Content
@@ -180,14 +180,14 @@ paths:
   /api/devices/name/{name}:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getDeviceByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -198,14 +198,14 @@ paths:
       summary: Gets a Device identified by {name}
     put:
       tags:
-      - Device Management
+        - Device Management
       operationId: putDeviceToName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -222,14 +222,14 @@ paths:
       summary: Creates or updates a Device under specified {name}
     delete:
       tags:
-      - Device Management
+        - Device Management
       operationId: deleteDeviceByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: No Content
@@ -237,14 +237,14 @@ paths:
   /api/devices/ip/{ip}:
     get:
       tags:
-      - Device Management
+        - Device Management
       operationId: getDevicesByIp
       parameters:
-      - name: ip
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: ip
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -259,7 +259,7 @@ paths:
   /api/commands:
     get:
       tags:
-      - Command Management
+        - Command Management
       operationId: getAllCommands
       responses:
         "200":
@@ -273,7 +273,7 @@ paths:
       summary: Returns a list with all Commands
     post:
       tags:
-      - Command Management
+        - Command Management
       operationId: postDevice_1
       requestBody:
         content:
@@ -292,14 +292,14 @@ paths:
   /api/commands/{identifier}:
     get:
       tags:
-      - Command Management
+        - Command Management
       operationId: getCommandsByIdentifier
       parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -313,15 +313,15 @@ paths:
   /api/commands/id/{id}:
     get:
       tags:
-      - Command Management
+        - Command Management
       operationId: getCommandById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "200":
           description: OK
@@ -332,15 +332,15 @@ paths:
       summary: Gets a Command identified by {id}
     put:
       tags:
-      - Command Management
+        - Command Management
       operationId: putDeviceToId_1
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       requestBody:
         content:
           application/json:
@@ -357,15 +357,15 @@ paths:
       summary: Creates or updates a Command under specified {id}
     delete:
       tags:
-      - Command Management
+        - Command Management
       operationId: deleteCommandById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "204":
           description: No Content
@@ -373,14 +373,14 @@ paths:
   /api/commands/name/{name}:
     get:
       tags:
-      - Command Management
+        - Command Management
       operationId: getCommandByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -391,14 +391,14 @@ paths:
       summary: Gets a Command identified by {name}
     put:
       tags:
-      - Command Management
+        - Command Management
       operationId: putDeviceToName_1
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -415,14 +415,14 @@ paths:
       summary: Creates or updates a Command under specified {name}
     delete:
       tags:
-      - Command Management
+        - Command Management
       operationId: deleteCommandByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: No Content
@@ -431,7 +431,7 @@ paths:
   /api/jobs:
     get:
       tags:
-      - Job Management
+        - Job Management
       operationId: getAllJobs_1
       responses:
         "200":
@@ -445,7 +445,7 @@ paths:
       summary: Returns a list with all Jobs
     post:
       tags:
-      - Job Management
+        - Job Management
       operationId: postJob
       requestBody:
         content:
@@ -464,14 +464,14 @@ paths:
   /api/jobs/{identifier}:
     get:
       tags:
-      - Job Management
+        - Job Management
       operationId: getJobsByIdentifier_1
       parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -485,15 +485,15 @@ paths:
   /api/jobs/id/{id}:
     get:
       tags:
-      - Job Management
+        - Job Management
       operationId: getJobById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "200":
           description: OK
@@ -504,15 +504,15 @@ paths:
       summary: Gets a Job identified by {id}
     put:
       tags:
-      - Job Management
+        - Job Management
       operationId: putJobToId
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       requestBody:
         content:
           application/json:
@@ -529,15 +529,15 @@ paths:
       summary: Creates or updates a Job under specified {id}
     post:
       tags:
-      - Job Management
+        - Job Management
       operationId: runJobById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       requestBody:
         content:
           application/json:
@@ -554,15 +554,15 @@ paths:
       summary: Runs a Job specified by {id} with parameters (request body)
     delete:
       tags:
-      - Job Management
+        - Job Management
       operationId: deleteJobById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "204":
           description: No Content
@@ -570,14 +570,14 @@ paths:
   /api/jobs/name/{name}:
     get:
       tags:
-      - Job Management
+        - Job Management
       operationId: getJobByName_1
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -588,14 +588,14 @@ paths:
       summary: Gets a Job identified by {name}
     put:
       tags:
-      - Job Management
+        - Job Management
       operationId: putJobToName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -612,14 +612,14 @@ paths:
       summary: Creates or updates a Job under specified {name}
     post:
       tags:
-      - Job Management
+        - Job Management
       operationId: runJobByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -636,14 +636,14 @@ paths:
       summary: Runs a Job specified by {name} with parameters (request body)
     delete:
       tags:
-      - Job Management
+        - Job Management
       operationId: deleteJobByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: No Content
@@ -652,7 +652,7 @@ paths:
   /api:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: getAllJobs
       responses:
         "200":
@@ -667,14 +667,14 @@ paths:
   /api/{identifier}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: getJobsByIdentifier
       parameters:
-      - name: identifier
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -688,15 +688,15 @@ paths:
   /api/id/{id}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: getJobById_1
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       responses:
         "200":
           description: OK
@@ -708,14 +708,14 @@ paths:
   /api/name/{name}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: getJobByName
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -727,20 +727,20 @@ paths:
   /api/call/{id}/as/{name}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: setJobName
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -752,19 +752,19 @@ paths:
   /api/{deviceName}/{commandName}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: createJob
       parameters:
-      - name: deviceName
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: commandName
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: deviceName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commandName
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -776,24 +776,24 @@ paths:
   /api/{deviceName}/{commandName}/name/{jobName}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: createNamedJob
       parameters:
-      - name: jobName
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: deviceName
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: commandName
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: jobName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deviceName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commandName
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -805,14 +805,14 @@ paths:
   /api/run/{name}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: runJobByNameAlias
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -824,19 +824,19 @@ paths:
   /api/run/{name}/{parameters}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: runJobByNameAlias_1
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: parameters
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: parameters
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -848,14 +848,14 @@ paths:
   /api/delete/{name}:
     get:
       tags:
-      - LOLLful
+        - LOLLful
       operationId: deleteJobByName_1
       parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: No Content
@@ -864,10 +864,10 @@ components:
   schemas:
     DeviceInput:
       required:
-      - ip
-      - name
-      - port
-      - uid
+        - ip
+        - name
+        - port
+        - uid
       type: object
       properties:
         uid:
@@ -912,8 +912,8 @@ components:
 
     CommandInput:
       required:
-      - name
-      - template
+        - name
+        - template
       type: object
       properties:
         name:
@@ -943,9 +943,9 @@ components:
 
     JobInput:
       required:
-      - command_id
-      - device_id
-      - name
+        - command_id
+        - device_id
+        - name
       type: object
       properties:
         name:
