@@ -40,11 +40,6 @@ class DeviceControllerIT {
             this::createDummyDeviceInput);
   }
 
-  @BeforeEach
-  void setUp() {
-    helper.cleanRepository();
-  }
-
   DeviceInput createDummyDeviceInput(Integer i) {
     return createDummy("uid_" + i, "name_" + i, "127.0.0.1", i);
   }
@@ -56,6 +51,11 @@ class DeviceControllerIT {
     result.setIp(ip);
     result.setPort(port);
     return result;
+  }
+
+  @BeforeEach
+  void setUp() {
+    helper.cleanRepository();
   }
 
   @Test

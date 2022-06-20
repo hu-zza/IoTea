@@ -134,7 +134,7 @@ public class IntegrationTestHelper<ID, TYPE, IN, OUT extends Identifiable> {
             list -> {
               IDs.clear();
               var body = list.getResponseBody();
-              if (body!= null) body.stream().map(OUT::getId).sorted().forEach(IDs::add);
+              if (body != null) body.stream().map(OUT::getId).sorted().forEach(IDs::add);
             });
   }
 

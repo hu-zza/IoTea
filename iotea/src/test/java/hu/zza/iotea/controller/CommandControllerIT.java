@@ -3,12 +3,11 @@ package hu.zza.iotea.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import hu.zza.iotea.model.Command;
-import hu.zza.iotea.model.Device;
-import hu.zza.iotea.model.dto.*;
+import hu.zza.iotea.model.dto.CommandInput;
+import hu.zza.iotea.model.dto.CommandOutput;
 import hu.zza.iotea.model.util.mapping.CommandInputMapper;
 import hu.zza.iotea.model.util.mapping.CommandOutputMapper;
 import hu.zza.iotea.repository.CommandRepository;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.junit.jupiter.api.*;
@@ -68,8 +67,7 @@ class CommandControllerIT {
 
   @Test
   @Disabled
-  void getCommandsByIdentifier() {
-  }
+  void getCommandsByIdentifier() {}
 
   @Test
   void getCommandById() {
@@ -93,11 +91,11 @@ class CommandControllerIT {
     helper.updateMockOutputs(commands, o -> "11".equals(o.getNote()));
     helper.resultCheckWithMockOutputs("/api/commands/name/name_11");
   }
-  
+
   @Test
   void putCommandToId() {
     var commands = helper.createDummyInputs(16, 18);
-    // port equals dummy's ordinal 16, 17, 18
+    // note equals dummy's ordinal 16, 17, 18
     helper.putInputs(commands, "id", c -> Integer.valueOf(c.getNote()));
 
     helper.updateIDsWithAllID();
@@ -112,7 +110,7 @@ class CommandControllerIT {
   @Test
   void putCommandToName() {
     var commands = helper.createDummyInputs(22, 24);
-    // port equals dummy's ordinal 22, 23, 24
+    // note equals dummy's ordinal 22, 23, 24
     helper.putInputs(commands, "name", CommandInput::getNote);
 
     // "name_22" -> "22"
