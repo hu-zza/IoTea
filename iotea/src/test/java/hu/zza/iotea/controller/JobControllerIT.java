@@ -156,7 +156,6 @@ class JobControllerIT {
 
     var id = helper.getIDs().get(0);
 
-
     deviceService.updateDevice(
         () -> Optional.of(9), createDummyDevice("T9", "T9", "192.168.0.50", 55443));
 
@@ -175,10 +174,7 @@ class JobControllerIT {
                 .getResult())
         .hasFieldOrPropertyWithValue("payload", "{\"id\": 9, \"command\": \"222\"}");
 
-
-    deviceService.updateDevice(
-        () -> Optional.of(9), createDummyDevice("D9", "D9", "127.0.0.1", 9));
-
+    deviceService.updateDevice(() -> Optional.of(9), createDummyDevice("D9", "D9", "127.0.0.1", 9));
   }
 
   @Test
