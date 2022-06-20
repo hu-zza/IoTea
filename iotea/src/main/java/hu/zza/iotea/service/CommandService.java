@@ -91,11 +91,11 @@ public class CommandService {
     return saveCommand(command);
   }
 
-  @Transactional
   public void deleteById(Integer id) {
     repository.deleteById(id);
   }
 
+  @Transactional
   public void deleteByName(String name) {
     repository.deleteByName(name);
   }
