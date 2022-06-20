@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  iotea-backend:
+    build: .
+    image: iotea-backend
+    restart: always
+    depends_on:
+      - iotea-database
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: "jdbc:mariadb://iotea-database:3306/${SCHEMA_NAME}?useUnicode=true"
+      SPRING_DATASOURCE_USERNAME: ${MARIADB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MARIADB_PASSWORD}
+
+  iotea-database:
+    image: mariadb:10.8.3
+    restart: always
+    expose:
+      - "3306"
+    environment:
+      MARIADB_ROOT_HOST: localhost
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${SCHEMA_NAME}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+
+
