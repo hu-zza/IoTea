@@ -30,7 +30,7 @@ class JobControllerIT {
   @Autowired private CommandService commandService;
   @Autowired private DeviceRepository deviceRepository;
   @Autowired private CommandRepository commandRepository;
-  private boolean prepared = false;
+  private static boolean prepared = false;
 
   private IntegrationTestHelper<Integer, Job, JobInput, JobOutput> helper;
 
@@ -63,13 +63,13 @@ class JobControllerIT {
   void setUp() {
     if (!prepared) {
       deviceRepository.deleteAll();
-      IntStream.rangeClosed(0, 40)
+      IntStream.rangeClosed(1, 40)
           .mapToObj(i -> createDummyDevice("uid_" + i, "name_" + i, "127.0.0.1", i))
           .toList()
           .forEach(d -> deviceService.updateDevice(() -> Optional.of(d.getPort()), d));
 
       commandRepository.deleteAll();
-      IntStream.rangeClosed(0, 40)
+      IntStream.rangeClosed(1, 40)
           .mapToObj(
               i ->
                   createDummyCommand(

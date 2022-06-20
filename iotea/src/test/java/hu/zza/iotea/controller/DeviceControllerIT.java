@@ -8,6 +8,7 @@ import hu.zza.iotea.model.dto.DeviceOutput;
 import hu.zza.iotea.model.util.mapping.DeviceInputMapper;
 import hu.zza.iotea.model.util.mapping.DeviceOutputMapper;
 import hu.zza.iotea.repository.DeviceRepository;
+import hu.zza.iotea.repository.JobRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,6 +22,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class DeviceControllerIT {
   @Autowired private DeviceRepository repository;
+  @Autowired private JobRepository jobRepository;
   @Autowired private WebTestClient client;
   @Autowired private DeviceInputMapper inMapper;
   @Autowired private DeviceOutputMapper outMapper;
@@ -55,6 +57,7 @@ class DeviceControllerIT {
 
   @BeforeEach
   void setUp() {
+    jobRepository.deleteAll();
     helper.cleanRepository();
   }
 

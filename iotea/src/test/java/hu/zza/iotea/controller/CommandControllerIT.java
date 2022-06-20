@@ -8,6 +8,7 @@ import hu.zza.iotea.model.dto.CommandOutput;
 import hu.zza.iotea.model.util.mapping.CommandInputMapper;
 import hu.zza.iotea.model.util.mapping.CommandOutputMapper;
 import hu.zza.iotea.repository.CommandRepository;
+import hu.zza.iotea.repository.JobRepository;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.junit.jupiter.api.*;
@@ -19,6 +20,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class CommandControllerIT {
   @Autowired private CommandRepository repository;
+  @Autowired private JobRepository jobRepository;
+
   @Autowired private WebTestClient client;
   @Autowired private CommandInputMapper inMapper;
   @Autowired private CommandOutputMapper outMapper;
@@ -52,7 +55,8 @@ class CommandControllerIT {
 
   @BeforeEach
   void setUp() {
-    repository.deleteAll();
+    jobRepository.deleteAll();
+    helper.cleanRepository();
   }
 
   @Test
