@@ -8,17 +8,14 @@ import hu.zza.iotea.model.dto.DeviceOutput;
 import hu.zza.iotea.model.util.mapping.DeviceInputMapper;
 import hu.zza.iotea.model.util.mapping.DeviceOutputMapper;
 import hu.zza.iotea.repository.DeviceRepository;
-import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -82,7 +79,8 @@ class DeviceControllerIT {
         .forEach(devices::add);
 
     helper.postInputs(devices);
-    helper.updateMockOutputs(devices, o -> "uid_5".equals(o.getUid()) || "uid_5".equals(o.getName()));
+    helper.updateMockOutputs(
+        devices, o -> "uid_5".equals(o.getUid()) || "uid_5".equals(o.getName()));
 
     // There is two Device with 'uid_5' identifier: One with UID: 'uid_5', other with name: 'uid_5'
     helper.resultListCheckWithMockOutputs("/api/devices/uid_5", 2);
@@ -136,7 +134,9 @@ class DeviceControllerIT {
     helper.putInputs(devices, "id", DeviceInput::getPort);
 
     helper.updateIDsWithAllID();
-    assertThat(helper.getIDs()).as("PUT .../id/16 .. 18 -> IDs = {16, 17, 18}").isEqualTo(List.of(16, 17, 18));
+    assertThat(helper.getIDs())
+        .as("PUT .../id/16 .. 18 -> IDs = {16, 17, 18}")
+        .isEqualTo(List.of(16, 17, 18));
 
     helper.updateMockOutputs(devices);
     helper.resultListCheckWithMockOutputs("/api/devices", 3);

@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface DeviceInputMapper extends InputMapper<Device, DeviceInput>{
+public interface DeviceInputMapper extends InputMapper<Device, DeviceInput> {
 
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "address", source = "deviceInput.ip")

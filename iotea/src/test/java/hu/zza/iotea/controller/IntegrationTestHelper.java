@@ -133,7 +133,8 @@ public class IntegrationTestHelper<ID, TYPE, IN, OUT extends Identifiable> {
         .consumeWith(
             list -> {
               IDs.clear();
-              list.getResponseBody().stream().map(OUT::getId).sorted().forEach(IDs::add);
+              var body = list.getResponseBody();
+              if (body!= null) body.stream().map(OUT::getId).sorted().forEach(IDs::add);
             });
   }
 
