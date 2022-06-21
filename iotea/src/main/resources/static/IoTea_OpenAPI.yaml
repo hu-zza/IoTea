@@ -59,7 +59,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceOutput'
-      summary: Gets all Devices those id, uid or name matches {identifier}
+      summary: Gets all Devices (as a list) those id, uid or name matches {identifier}
   /api/devices/id/{id}:
     get:
       tags:
@@ -309,7 +309,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CommandOutput'
-      summary: Gets all Commands those id or name matches {identifier}
+      summary: Gets all Commands (as a list) those id or name matches {identifier}
   /api/commands/id/{id}:
     get:
       tags:
@@ -481,7 +481,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
-      summary: Gets all Job those id or name matches {identifier}
+      summary: Gets all Job (as a list) those id or name matches {identifier}
   /api/jobs/id/{id}:
     get:
       tags:
@@ -684,7 +684,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/JobOutput'
-      summary: Gets all Job those id or name matches {identifier}
+      summary: Gets all Job (as a list) those id or name matches {identifier}
   /api/id/{id}:
     get:
       tags:
@@ -748,7 +748,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
-      summary: Sets the name of a Job identified by {id}
+      summary: Sets the {name} of a Job identified by {id}
   /api/{deviceName}/{commandName}:
     get:
       tags:
@@ -773,7 +773,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/JobOutput'
       summary: Creates a Job with auto-generated name
-  /api/{deviceName}/{commandName}/name/{jobName}:
+  /api/{deviceName}/{commandName}/as/{jobName}:
     get:
       tags:
         - LOLLful
