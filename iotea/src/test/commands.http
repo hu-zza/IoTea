@@ -2,3 +2,69 @@
 
 GET http://localhost:8080/api/commands
 Accept: application/json
+
+
+### Creates a Command
+
+POST http://localhost:8080/api/commands
+Accept: application/json
+
+{
+    "name": "YeeToggle",
+    "template": "{\"id\": 1, \"method\": \"toggle\", \"params\":
+    []}"
+}
+
+
+### Gets all Commands (as a list) those id or name matches {identifier} = 1
+
+GET http://localhost:8080/api/commands/1
+Accept: application/json
+
+
+### Gets a Command identified by {id} = 1
+
+GET http://localhost:8080/api/commands/id/1
+Accept: application/json
+
+
+### Creates or updates a Command under specified {id} = 1
+
+PUT http://localhost:8080/api/commands/id/1
+Accept: application/json
+
+{
+    "name": "YeeToggle",
+    "template": "{\"id\": 1, \"method\": \"toggle\", \"params\":
+    []}"
+}
+
+
+### Deletes a Command identified by {id} = 1
+
+DELETE http://localhost:8080/api/commands/id/1
+Accept: application/json
+
+
+### Gets a Command identified by {name} = YeeToggle
+
+GET http://localhost:8080/api/commands/name/YeeToggle
+Accept: application/json
+
+
+### Creates or updates a Command under specified {name} = YeeToggle
+
+PUT http://localhost:8080/api/commands/name/YeeToggle
+Accept: application/json
+
+{
+    "name": "YeeToggle",
+    "template": "{\"id\": 1, \"method\": \"toggle\", \"params\":
+    []}"
+}
+
+
+### Deletes a Command identified by {name} = YeeToggle
+
+DELETE http://localhost:8080/api/commands/name/YeeToggle
+Accept: application/json

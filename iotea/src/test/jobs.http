@@ -2,3 +2,88 @@
 
 GET http://localhost:8080/api/jobs
 Accept: application/json
+
+
+### Creates a Job
+
+POST http://localhost:8080/api/jobs
+Accept: application/json
+
+{
+    "name": "ToggleDesk",
+    "device_id": 1,
+    "command_id": 1
+}
+
+
+### Gets all Job (as a list) those id or name matches {identifier} = 1
+
+GET http://localhost:8080/api/jobs/1
+Accept: application/json
+
+
+### Gets a Job identified by {id} = 1
+
+GET http://localhost:8080/api/jobs/id/1
+Accept: application/json
+
+
+### Creates or updates a Job under specified {id} = 1
+
+PUT http://localhost:8080/api/jobs/id/1
+Accept: application/json
+
+{
+    "name": "ToggleDesk",
+    "device_id": 1,
+    "command_id": 1
+}
+
+
+### Runs a Job specified by {id} = 1 with parameters (request body)
+
+POST http://localhost:8080/api/jobs/id/1
+Accept: application/json
+
+{
+		"parameters": []
+}
+
+
+### Deletes a Job identified by {id}
+
+DELETE http://localhost:8080/api/jobs/id/1
+Accept: application/json
+
+
+### Gets a Job identified by {name} = ToggleDesk
+
+GET http://localhost:8080/api/jobs/name/ToggleDesk
+Accept: application/json
+
+
+### Creates or updates a Job under specified {name} = ToggleDesk
+
+PUT http://localhost:8080/api/jobs/name/ToggleDesk
+Accept: application/json
+
+{
+    "name": "ToggleDesk",
+    "device_id": 1,
+    "command_id": 1
+}
+
+
+### Runs a Job specified by {name} = ToggleDesk with parameters (request body)
+
+POST http://localhost:8080/api/jobs/name/ToggleDesk
+Accept: application/json
+
+{
+		"parameters": []
+}
+
+### Deletes a Job identified by {name} = ToggleDesk
+
+DELETE http://localhost:8080/api/jobs/name/ToggleDesk
+Accept: application/json

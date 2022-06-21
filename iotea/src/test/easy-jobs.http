@@ -2,3 +2,57 @@
 
 GET http://localhost:8080/api
 Accept: application/json
+
+
+### Gets all Job (as a list) those id or name matches {identifier} = ToggleDesk
+
+GET http://localhost:8080/api/ToggleDesk
+Accept: application/json
+
+
+### Gets a Job identified by {id} = 1
+
+GET http://localhost:8080/api/id/1
+Accept: application/json
+
+
+### Gets a Job identified by {name} = ToggleDesk
+
+GET http://localhost:8080/api/name/ToggleDesk
+Accept: application/json
+
+
+### Sets the {name} = TD of a Job identified by {id} = 1
+
+GET http://localhost:8080/api/call/1/as/TD
+Accept: application/json
+
+
+### Creates a Job with auto-generated name
+
+GET http://localhost:8080/api/Toggle/Desk
+Accept: application/json
+
+
+### Creates a Job with the specified {jobName} = Switch
+
+GET http://localhost:8080/api/Toggle/Desk/as/Switch
+Accept: application/json
+
+
+### Runs a Job specified by {name} = ToggleDesk
+
+GET http://localhost:8080/api/run/ToggleDesk
+Accept: application/json
+
+
+### Runs a Job specified by {name} = DeskBright with raw {parameters} = 60;1000
+
+GET http://localhost:8080/api/run/DeskBright/60;1000
+Accept: application/json
+
+
+### Deletes a Job identified by {name} = ToggleDesk
+
+GET http://localhost:8080/api/delete/ToggleDesk
+Accept: application/json

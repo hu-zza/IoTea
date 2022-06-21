@@ -2,3 +2,103 @@
 
 GET http://localhost:8080/api/devices
 Accept: application/json
+
+
+### Creates a Device
+
+POST http://localhost:8080/api/devices
+Accept: application/json
+
+{
+    "uid": "0x000000003ac864d5",
+    "name": "Desk",
+    "ip": "192.168.0.50",
+    "port": 55443
+}
+
+
+### Gets all Devices (as a list) those id, uid or name matches {identifier} = 1
+
+GET http://localhost:8080/api/devices/1
+Accept: application/json
+
+
+### Gets a Device identified by {id} = 1
+
+GET http://localhost:8080/api/devices/id/1
+Accept: application/json
+
+
+### Creates or updates a Device under specified {id} = 1
+
+PUT http://localhost:8080/api/devices/id/1
+Accept: application/json
+
+{
+    "uid": "0x000000003ac864d5",
+    "name": "Desk",
+    "ip": "192.168.0.50",
+    "port": 55443
+}
+
+
+### Deletes a Device identified by {id} = 1
+
+DELETE http://localhost:8080/api/devices/id/1
+Accept: application/json
+
+
+### Gets a Device identified by {uid} = 0x000000003ac864d5
+
+GET http://localhost:8080/api/devices/uid/0x000000003ac864d5
+Accept: application/json
+
+
+### Creates or updates a Device under specified {uid} = 0x000000003ac864d5
+
+PUT http://localhost:8080/api/devices/uid/0x000000003ac864d5
+Accept: application/json
+
+{
+    "uid": "0x000000003ac864d5",
+    "name": "Desk",
+    "ip": "192.168.0.50",
+    "port": 55443
+}
+
+
+### Deletes a Device identified by {uid}
+
+DELETE http://localhost:8080/api/devices/uid/0x000000003ac864d5
+Accept: application/json
+
+
+### Gets a Device identified by {name} = Desk
+
+GET http://localhost:8080/api/devices/name/Desk
+Accept: application/json
+
+
+### Creates or updates a Device under specified {name} = Desk
+
+PUT http://localhost:8080/api/devices/name/Desk
+Accept: application/json
+
+{
+    "uid": "0x000000003ac864d5",
+    "name": "Desk",
+    "ip": "192.168.0.50",
+    "port": 55443
+}
+
+
+### Deletes a Device identified by {name} = Desk
+
+DELETE http://localhost:8080/api/devices/name/Desk
+Accept: application/json
+
+
+### Gets all Device those ip matches {ip} = 192.168.0.50
+
+GET http://localhost:8080/api/devices/ip/192.168.0.50
+Accept: application/json
