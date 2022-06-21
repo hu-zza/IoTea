@@ -166,10 +166,21 @@ A `Device` és a `Job` entitások között a `Job` felől egyirányú, 1:N kapcs
 
 Végpontok:
 
-| HTTP | Végpont                                          | Leírás                                                                             |
-| ---- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| GET  | `/api/devices/` | |
-| GET  | `/api/devices/` | |
+| HTTP   | Végpont                           | Leírás                                                                                          |
+| ------ | ----------------------------------| ----------------------------------------------------------------------------------------------- |
+| GET    | `/api/devices`                    | Listaként visszatér az adatbázisban tárolt összes Device entitással.                            |
+| POST   | `/api/devices`                    | Beküld az adatbázisba egy Device entitást. Az id automatikusan kerül hozzárendelésre.           |
+| GET    | `/api/devices/{identifier}`       | Listaként visszatér az egyező azonosítóval rendelkező (id, uid, name) Device entitásokkal.      |
+| GET    | `/api/devices/id/{id}`            | Lekérdezi az adott id alatt található Device entitást.                                          |
+| PUT    | `/api/devices/id/{id}`            | Az adott id alá létrehoz egy új Device entitást, vagy a meglévőt frissíti.                      |
+| DELETE | `/api/devices/id/{id}`            | Törli az adott id alatti Device entitást.                                                       |
+| GET    | `/api/devices/uid/{uid}`          | Lekérdezi az adott uid alatt található Device entitást.                                         | 
+| PUT    | `/api/devices/uid/{uid}`          | Az adott uid alá létrehoz egy új Device entitást, vagy a meglévőt frissíti. (Ha új: auto id)    |
+| DELETE | `/api/devices/uid/{uid}`          | Törli az adott uid alatti Device entitást.                                                      |
+| GET    | `/api/devices/name/{name}`        | Lekérdezi az adott név alatt található Device entitást.                                         |
+| PUT    | `/api/devices/name/{name}`        | Az adott név alá létrehoz egy új Device entitást, vagy a meglévőt frissíti. (Ha új: auto id)    |
+| DELETE | `/api/devices/name/{name}`        | Törli az adott név alatti Device entitást.                                                      |
+| GET    | `/api/devices/ip/{ip}`            | Listaként visszatér az egyező IP címmel rendelkező Device entitásokkal.                         |
 
 
 ---
@@ -208,10 +219,17 @@ A `Command` és a `Job` entitások között a `Job` felől egyirányú, 1:N kapc
 
 Végpontok:
 
-| HTTP | Végpont                                          | Leírás                                                                             |
-| ---- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| GET  | `/api/commands/` | |
-| GET  | `/api/commands/` | |
+| HTTP   | Végpont                           | Leírás                                                                                          |
+| ------ | ----------------------------------| ----------------------------------------------------------------------------------------------- |
+| GET    | `/api/commands`                   | Listaként visszatér az adatbázisban tárolt összes Command entitással.                           |
+| POST   | `/api/commands`                   | Beküld az adatbázisba egy Command entitást. Az id automatikusan kerül hozzárendelésre.          |
+| GET    | `/api/commands/{identifier}`      | Listaként visszatér az egyező azonosítóval rendelkező (id, name) Command entitásokkal.          |
+| GET    | `/api/commands/id/{id}`           | Lekérdezi az adott id alatt található Command entitást.                                         |
+| PUT    | `/api/commands/id/{id}`           | Az adott id alá létrehoz egy új Command entitást, vagy a meglévőt frissíti.                     |
+| DELETE | `/api/commands/id/{id}`           | Törli az adott id alatti Command entitást.                                                      |
+| GET    | `/api/commands/name/{name}`       | Lekérdezi az adott név alatt található Command entitást.                                        |
+| PUT    | `/api/commands/name/{name}`       | Az adott név alá létrehoz egy új Command entitást, vagy a meglévőt frissíti. (Ha új: auto id)   |
+| DELETE | `/api/commands/name/{name}`       | Törli az adott név alatti Command entitást.                                                     |
 
 
 
@@ -253,10 +271,20 @@ A `Job` és a `Command`  entitások között a `Job` felől egyirányú, N:1 kap
 
 Végpontok:
 
-| HTTP | Végpont                                          | Leírás                                                                             |
-| ---- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| GET  | `/api/jobs/` | |
-| GET  | `/api/jobs/` | |
+| HTTP   | Végpont                           | Leírás                                                                                          |
+| ------ | ----------------------------------| ----------------------------------------------------------------------------------------------- |
+| GET    | `/api/jobs`                       | Listaként visszatér az adatbázisban tárolt összes Job entitással.                               |
+| POST   | `/api/jobs`                       | Beküld az adatbázisba egy Job entitást. Az id automatikusan kerül hozzárendelésre.              |
+| GET    | `/api/jobs/{identifier}`          | Listaként visszatér az egyező azonosítóval rendelkező (id, uid, name) Job entitásokkal.         |
+| GET    | `/api/jobs/id/{id}`               | Lekérdezi az adott id alatt található Job entitást.                                             |
+| PUT    | `/api/jobs/id/{id}`               | Az adott id alá létrehoz egy új Job entitást, vagy a meglévőt frissíti.                         | 
+| POST   | `/api/jobs/id/{id}`               | Az adott id alatti Job entitást lefuttatja a kérés tözseként átadott paraméterekkel.            |
+| DELETE | `/api/jobs/id/{id}`               | Törli az adott id alatti Job entitást.                                                          |
+| GET    | `/api/jobs/name/{name}`           | Lekérdezi az adott név alatt található Job entitást.                                            | 
+| PUT    | `/api/jobs/name/{name}`           | Az adott név alá létrehoz egy új Job entitást, vagy a meglévőt frissíti. (Ha új: auto id)       |
+| POST   | `/api/jobs/name/{name}`           | Az adott név alatti Job entitást lefuttatja a kérés tözseként átadott paraméterekkel.           |
+| DELETE | `/api/jobs/name/{name}`           | Törli az adott név alatti Job entitást.                                                         |
+
 
 
 
@@ -268,11 +296,11 @@ A `Run` a `Job` egy lefutását összegzi. Adatbázisban nem kerül tárolásra,
 
 | Név           | Típus              | Leírás                                                                                                  | 
 | ------------- | ------------------ | ------------------------------------------------------------------------------------------------------- |
-| started       | LocalDateTime      |                                                                                                         |
-| rawParameters | String             |                                                                                                         |
-| parameters    | Object[]           |                                                                                                         |
-| payload       | String             |                                                                                                         |
-| response      | String             |                                                                                                         |
+| started       | LocalDateTime      | Az adott Job meghívásának időpontja. Például: "2022-01-10T20:30:40.299970222"                           |
+| rawParameters | String             | Ha @PathVariable által átadott paraméterrel / paraméterlistával hívjuk meg, az itt jelenik meg.         |
+| parameters    | Object[]           | Az átadott paraméterek listája. A feldolgozott rawParameters is megjelenik itt.                         |
+| payload       | String             | A Command entitás template-je, és a paraméterek által létrehozott body. A Device felé ez lett kiküldve. |
+| response      | String             | A payload-ra adott válasz, feldolgozás nélküli, nyers formában.                                         |
 
 
 ---
