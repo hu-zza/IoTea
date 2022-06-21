@@ -99,11 +99,37 @@ public class JobService {
     return repository.findById(id).orElseThrow(() -> new ServiceProblem("")); // TODO
   }
 
-  public JobOutput createJob(String deviceName, String commandName) {
-    return createNamedJob(UUID.randomUUID().toString(), deviceName, commandName);
+  /**
+   * Tries to find a short, relevant and unique name for job.
+   * If deviceName = "Desk" and commandName = "Toggle"
+   *
+   * First try: ToggleDesk, and then: ToggleDeskA, ToggleDeskB, ... ToggleDeskZ, finally it uses a UUID.
+   */
+  public JobOutput createJob(String commandName, String deviceName) {
+    String name = "%s%s".formatted(commandName, deviceName);
+
+    JobOutput result = createJobIfNameAvailable(name, deviceName, commandName);
+
+    String jobNameTemplate = "%s%s%%c".formatted(commandName, deviceName);
+    
+    for (int i = 65; i < 91 && result == null; i++) {
+      result = createJobIfNameAvailable(jobNameTemplate.formatted(i), deviceName, commandName);
+    }
+
+    if (result != null) {
+      return result;
+    }
+    return createNamedJob(commandName, deviceName, UUID.randomUUID().toString());
   }
 
-  public JobOutput createNamedJob(String jobName, String deviceName, String commandName) {
+  private JobOutput createJobIfNameAvailable(String name, String deviceName, String commandName) {
+    if (repository.findByName(name).isEmpty()) {
+      return createNamedJob(commandName, deviceName, name);
+    }
+    return null;
+  }
+
+  public JobOutput createNamedJob(String commandName, String deviceName, String jobName) {
     var optJob = createOptionalJob(jobName, deviceName, commandName);
     return optJob
         .map(repository::save)

@@ -34,17 +34,17 @@ public class EasyJobController {
     return service.getJobByName(name);
   }
 
-  @GetMapping("/{deviceName}/{commandName}")
-  public JobOutput createJob(@PathVariable String deviceName, @PathVariable String commandName) {
-    return service.createJob(deviceName, commandName);
+  @GetMapping("/{commandName}/{deviceName}")
+  public JobOutput createJob(@PathVariable String commandName, @PathVariable String deviceName) {
+    return service.createJob(commandName, deviceName);
   }
 
-  @GetMapping("/{deviceName}/{commandName}/name/{jobName}")
+  @GetMapping("/{commandName}/{deviceName}/as/{jobName}")
   public JobOutput createNamedJob(
-      @PathVariable String jobName,
+      @PathVariable String commandName,
       @PathVariable String deviceName,
-      @PathVariable String commandName) {
-    return service.createNamedJob(jobName, deviceName, commandName);
+      @PathVariable String jobName) {
+    return service.createNamedJob(commandName, deviceName, jobName);
   }
 
   @GetMapping("/call/{id}/as/{name}")
