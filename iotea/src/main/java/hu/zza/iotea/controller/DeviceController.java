@@ -2,6 +2,7 @@ package hu.zza.iotea.controller;
 
 import hu.zza.iotea.model.dto.DeviceInput;
 import hu.zza.iotea.model.dto.DeviceOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
 import hu.zza.iotea.service.DeviceService;
 import java.util.List;
 import java.util.Optional;
@@ -28,18 +29,27 @@ public class DeviceController {
   }
 
   @GetMapping("/id/{id}")
-  public Optional<DeviceOutput> getDeviceById(@PathVariable Integer id) {
-    return service.getDeviceById(id);
+  public DeviceOutput getDeviceById(@PathVariable Integer id) {
+    return service
+        .getDeviceById(id)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Device with id: %d".formatted(id)));
   }
 
   @GetMapping("/uid/{uid}")
-  public Optional<DeviceOutput> getDeviceByUid(@PathVariable String uid) {
-    return service.getDeviceByUid(uid);
+  public DeviceOutput getDeviceByUid(@PathVariable String uid) {
+    return service
+        .getDeviceByUid(uid)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Device with uid: %s".formatted(uid)));
   }
 
   @GetMapping("/name/{name}")
-  public Optional<DeviceOutput> getDeviceByName(@PathVariable String name) {
-    return service.getDeviceByName(name);
+  public DeviceOutput getDeviceByName(@PathVariable String name) {
+    return service
+        .getDeviceByName(name)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Device with name: %s".formatted(name)));
   }
 
   @GetMapping("/ip/{ip}")

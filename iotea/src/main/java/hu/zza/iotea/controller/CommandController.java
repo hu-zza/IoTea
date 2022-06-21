@@ -2,6 +2,7 @@ package hu.zza.iotea.controller;
 
 import hu.zza.iotea.model.dto.CommandInput;
 import hu.zza.iotea.model.dto.CommandOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
 import hu.zza.iotea.service.CommandService;
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +28,19 @@ public class CommandController {
   }
 
   @GetMapping("/id/{id}")
-  public Optional<CommandOutput> getCommandById(@PathVariable Integer id) {
-    return service.getCommandById(id);
+  public CommandOutput getCommandById(@PathVariable Integer id) {
+    return service
+        .getCommandById(id)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Command with id: %d".formatted(id)));
   }
 
   @GetMapping("/name/{name}")
-  public Optional<CommandOutput> getCommandByName(@PathVariable String name) {
-    return service.getCommandByName(name);
+  public CommandOutput getCommandByName(@PathVariable String name) {
+    return service
+        .getCommandByName(name)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Command with name: %s".formatted(name)));
   }
 
   @PostMapping

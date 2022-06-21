@@ -104,6 +104,11 @@ class DeviceControllerIT {
   }
 
   @Test
+  void getNotFoundDeviceById() {
+    client.get().uri("/api/devices/id/" + Integer.MAX_VALUE).exchange().expectStatus().isNotFound();
+  }
+
+  @Test
   void getDeviceByUid() {
     var devices = helper.createDummyInputs(9, 10);
     helper.postInputs(devices);

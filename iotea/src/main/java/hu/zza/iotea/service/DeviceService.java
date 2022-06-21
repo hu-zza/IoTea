@@ -26,6 +26,7 @@ public class DeviceService {
   private DeviceInputMapper inMapper;
   private DeviceOutputMapper outMapper;
 
+  // simple exposure for hu.zza.iotea.model.util.mapping package
   Device getById(Integer id) {
     return repository.findById(id).orElseThrow();
   }

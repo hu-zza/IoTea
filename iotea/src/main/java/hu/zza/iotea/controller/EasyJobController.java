@@ -1,9 +1,9 @@
 package hu.zza.iotea.controller;
 
 import hu.zza.iotea.model.dto.JobOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
 import hu.zza.iotea.service.JobService;
 import java.util.List;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +25,18 @@ public class EasyJobController {
   }
 
   @GetMapping("/id/{id}")
-  public Optional<JobOutput> getJobById(@PathVariable Integer id) {
-    return service.getJobById(id);
+  public JobOutput getJobById(@PathVariable Integer id) {
+    return service
+        .getJobById(id)
+        .orElseThrow(() -> new EntityNotFoundProblem("There is no Job with id: %d".formatted(id)));
   }
 
   @GetMapping("/name/{name}")
-  public Optional<JobOutput> getJobByName(@PathVariable String name) {
-    return service.getJobByName(name);
+  public JobOutput getJobByName(@PathVariable String name) {
+    return service
+        .getJobByName(name)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Job with name: %s".formatted(name)));
   }
 
   @GetMapping("/{commandName}/{deviceName}")

@@ -40,15 +40,27 @@ spring:
 spring:
   profiles:
     active: dev
+  http:
+    encoding:
+      force: true
+  mvc:
+    throw-exception-if-no-handler-found: true
   jpa:
     hibernate:
       ddl-auto: none
   flyway:
     connectRetries: 15
     connectRetriesInterval: 60
+  resources:
+    add-mappings: false
+  jackson:
+    serialization:
+      write_dates_as_timestamps: true
 
 server:
   error:
+    whitelabel:
+      enabled: false
     include-message: always
 
 springdoc:

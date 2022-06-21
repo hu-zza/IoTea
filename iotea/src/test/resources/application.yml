@@ -10,6 +10,9 @@ spring:
   flyway:
     connectRetries: 15
     connectRetriesInterval: 60
+  jackson:
+    serialization:
+      write_dates_as_timestamps: true
 
 logging:
   level:

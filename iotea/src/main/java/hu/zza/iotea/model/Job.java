@@ -40,7 +40,9 @@ public class Job implements Identifiable {
 
   public String run(Commander commander, JobContext context) {
     var runBuilder =
-        new Run.RunBuilder().started(LocalDateTime.now()).parameters(context.getParameters());
+        new Run.RunBuilder()
+            .started(LocalDateTime.now())
+            .parameters(context.getParameters());
 
     var payload = command.build(context.getParameters());
     var response = commander.sendPayload(device, payload);
