@@ -12,7 +12,7 @@
 	<artifactId>iotea</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>iotea</name>
-	<description>Manager for smart lights</description>
+	<description>Simple and concise interface to manage IoT devices for both machines and humans.</description>
 	<properties>
 		<java.version>17</java.version>
 		<mapstruct.version>1.5.1.Final</mapstruct.version>
