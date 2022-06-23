@@ -4,7 +4,9 @@ import hu.zza.iotea.model.Job;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JobRepository extends JpaRepository<Job, Integer> {
   @Query("SELECT d.id FROM Device d WHERE name = :name")
   Optional<Integer> getIdByName(String name);
