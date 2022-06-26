@@ -13,11 +13,11 @@ public class IoTeaApplication {
   public static void main(String[] args) {
     SpringApplication.run(IoTeaApplication.class, args);
   }
+
   @Bean
   public ObjectMapper objectMapper() {
-    return new ObjectMapper().registerModules(
-        new ProblemModule(),
-        new ConstraintViolationProblemModule(),
-        new JavaTimeModule());
+    return new ObjectMapper()
+        .registerModules(
+            new ProblemModule(), new ConstraintViolationProblemModule(), new JavaTimeModule());
   }
 }

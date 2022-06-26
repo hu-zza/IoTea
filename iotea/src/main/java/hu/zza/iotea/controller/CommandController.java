@@ -44,6 +44,7 @@ public class CommandController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public CommandOutput postDevice(@Valid @RequestBody CommandInput command) {
     return service.saveCommand(command);
   }

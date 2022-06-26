@@ -40,11 +40,13 @@ public class EasyJobController {
   }
 
   @GetMapping("/{commandName}/{deviceName}")
+  @ResponseStatus(HttpStatus.CREATED)
   public JobOutput createJob(@PathVariable String commandName, @PathVariable String deviceName) {
     return service.createJob(commandName, deviceName);
   }
 
   @GetMapping("/{commandName}/{deviceName}/as/{jobName}")
+  @ResponseStatus(HttpStatus.CREATED)
   public JobOutput createNamedJob(
       @PathVariable String commandName,
       @PathVariable String deviceName,
@@ -58,11 +60,13 @@ public class EasyJobController {
   }
 
   @GetMapping("/run/{name}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public JobOutput runJobByNameAlias(@PathVariable String name) {
     return service.runJob(name);
   }
 
   @GetMapping("/run/{name}/{parameters}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public JobOutput runJobByNameAlias(@PathVariable String name, @PathVariable String parameters) {
     return service.runJob(name, parameters);
   }

@@ -44,16 +44,19 @@ public class JobController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public JobOutput postJob(@Valid @RequestBody JobInput job) {
     return service.saveJob(job);
   }
 
   @PostMapping("/id/{id}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public JobOutput runJobById(@PathVariable Integer id, @Valid @RequestBody JobContext context) {
     return service.runJob(id, context);
   }
 
   @PostMapping("/name/{name}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public JobOutput runJobByName(@PathVariable String name, @Valid @RequestBody JobContext context) {
     return service.runJob(name, context);
   }

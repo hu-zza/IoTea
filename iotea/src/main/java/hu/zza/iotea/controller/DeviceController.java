@@ -58,6 +58,7 @@ public class DeviceController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public DeviceOutput postDevice(@Valid @RequestBody DeviceInput device) {
     return service.saveDevice(device);
   }
