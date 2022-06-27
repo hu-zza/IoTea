@@ -9,7 +9,6 @@ import org.hibernate.Hibernate;
 @Table(name = "devices")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Device implements Identifiable {
@@ -45,5 +44,11 @@ public class Device implements Identifiable {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "Device (id: %d, uid: %s, name: %s, address: %s, port: %d)"
+        .formatted(id, uid, name, address, port);
   }
 }

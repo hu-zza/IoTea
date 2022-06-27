@@ -47,4 +47,9 @@ public class DeviceAddress {
   public String getAsDatabaseColumn() {
     return converter.convertToDatabaseColumn(ip);
   }
+
+  @Override
+  public String toString() {
+    return "DeviceAddress (ip: %s, reachable: %b)".formatted(ip, isReachable());
+  }
 }

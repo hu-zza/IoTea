@@ -10,7 +10,6 @@ import org.hibernate.Hibernate;
 @Table(name = "commands")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Command implements Identifiable {
@@ -50,5 +49,10 @@ public class Command implements Identifiable {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "Command (id: %d, name: %s, template: %s, note: %s)".formatted(id, name, template, note);
   }
 }

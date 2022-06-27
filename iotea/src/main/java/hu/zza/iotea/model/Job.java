@@ -11,7 +11,6 @@ import org.hibernate.Hibernate;
 @Table(name = "jobs")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Job implements Identifiable {
   @Id
@@ -64,5 +63,10 @@ public class Job implements Identifiable {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "Job (id: %d, name: %s, device: %s, command: %s)".formatted(id, name, device, command);
   }
 }
