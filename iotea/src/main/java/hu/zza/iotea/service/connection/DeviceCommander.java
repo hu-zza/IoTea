@@ -24,9 +24,8 @@ public class DeviceCommander implements Commander {
       return sender.send(device.getAddress(), device.getPort(), payload);
 
     } catch (Exception exception) {
-      var message =
-          "Cannot send command to Device (ID: %d, UID: %s, name: %s)"
-              .formatted(device.getId(), device.getUid(), device.getName());
+
+      var message = "Cannot send command to %s".formatted(device);
       logger.warn(message, exception);
       throw new ConnectionProblem(message);
     }

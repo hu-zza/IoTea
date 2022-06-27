@@ -131,25 +131,27 @@ public class JobService {
   }
 
   public JobOutput createNamedJob(String commandName, String deviceName, String jobName) {
-    var optJob = createOptionalJob(jobName, deviceName, commandName);
-    return optJob
-        .map(repository::save)
-        .map(outMapper::toDto)
-        .orElseThrow(() -> new ServiceProblem("")); // TODO
+    var job = createJob(jobName, deviceName, commandName);
+    repository.save(job);
+    return outMapper.toDto(job);
   }
 
-  private Optional<Job> createOptionalJob(String jobName, String deviceName, String commandName) {
+  private Job createJob(String jobName, String deviceName, String commandName) {
     var device = deviceService.getByName(deviceName);
     var command = commandService.getByName(commandName);
 
-    return Optional.ofNullable(
-        command.isPresent() && device.isPresent()
-            ? new Job(null, jobName, device.get(), command.get())
-            : null);
+    if (command.isPresent() && device.isPresent()) {
+      return new Job(null, jobName, device.get(), command.get());
+    } else {
+      throw new ServiceProblem(
+          "Cannot create Job (name: %s) from %s and %s.".formatted(jobName, device, command));
+    }
   }
 
   private Job getByName(String name) {
-    return repository.findByName(name).orElseThrow(() -> new ServiceProblem("")); // TODO
+    return repository
+        .findByName(name)
+        .orElseThrow(() -> new ServiceProblem("There is no Job with name: %s".formatted(name)));
   }
 
   public JobOutput runJob(String name) {

@@ -18,14 +18,12 @@ public class TelnetSender implements Sender {
 
       } catch (Exception exception) {
         throw new SenderException(
-            "Cannot send payload to the address '%s' (port: %d)".formatted(address.getIp(), port),
-            exception);
+            "Cannot send payload to the %s (port: %d)".formatted(address, port), exception);
       }
     }
     throw new SenderException(
         "Cannot send payload due to unreachable address",
-        new IllegalStateException(
-            "The address '%s' (port: %d) is unreachable".formatted(address.getIp(), port)));
+        new IllegalStateException("%s (port: %d) is unreachable".formatted(address, port)));
   }
 
   private String send(BufferedWriter out, BufferedReader in, String payload) throws IOException {
