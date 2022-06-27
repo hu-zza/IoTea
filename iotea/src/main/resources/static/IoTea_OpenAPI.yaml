@@ -1047,11 +1047,18 @@ components:
       type: object
       properties:
         started:
-          type: string
-          format: date-time
-          example: "2022-01-10T20:30:40.299970222"
+          type: array
+          items:
+            type: integer
+            format: int32
+          example: [ 2022, 01, 10, 20, 30, 40, 299970222 ]
         parameters:
           type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+                format: int32
           example: [ ]
         payload:
           type: string

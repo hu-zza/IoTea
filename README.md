@@ -26,7 +26,7 @@ Táblája (`jobs`) kapcsolótábla, viszont rendelkezik egyedi kulcsokkal (PK: i
 `echo '{"uid": "0x000000003ac864d5", "name": "Desk", "ip": "192.168.0.50", "port": 55443}' | http POST :8080/api/devices`
 
 ```json
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 Content-Length: 111
 Content-Type: application/json
 
@@ -44,17 +44,17 @@ Content-Type: application/json
 
 ##### Egy (paraméter nélküli) *Command* létrehozása
 
-`echo '{"name": "YeeToggle", "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}"}'  | http POST :8080/api/commands`
+`echo '{"name": "YeeToggle", "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}", "note": "Toggle command for Yeelight devices."}'  | http POST :8080/api/commands`
 
 ```json
-HTTP/1.1 200 OK
-Content-Length: 102
+HTTP/1.1 201 Created
+Content-Length: 138
 Content-Type: application/json
 
 {
     "id": 1,
     "name": "YeeToggle",
-    "note": "",
+    "note": "Toggle command for Yeelight devices.",
     "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}"
 }
 ```
@@ -65,7 +65,7 @@ Content-Type: application/json
 `echo '{"name": "ToggleDesk", "device_id": 1, "command_id": 1}' | http POST :8080/api/jobs`
 
 ```json
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 Content-Length: 275
 Content-Type: application/json
 
@@ -98,8 +98,8 @@ Content-Type: application/json
 `echo '{}' | http :8080/api/jobs/id/1`
 
 ```json
-HTTP/1.1 200 OK
-Content-Length: 483
+HTTP/1.1 202 Accepted
+Content-Length: 482
 Content-Type: application/json
 
 {
@@ -126,7 +126,15 @@ Content-Type: application/json
         "payload": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}",
         "raw_parameters": null,
         "response": "{\"method\":\"props\",\"params\":{\"power\":\"on\"}}",
-        "started": "2022-01-10T20:30:40.299970222"
+        "started": [
+            2022,
+            1,
+            10,
+            20,
+            30,
+            40,
+            299970222
+        ]
     }
 }
 ```
