@@ -4,6 +4,7 @@ import hu.zza.iotea.model.Job;
 import hu.zza.iotea.model.JobContext;
 import hu.zza.iotea.model.dto.JobInput;
 import hu.zza.iotea.model.dto.JobOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
 import hu.zza.iotea.model.exception.ServiceProblem;
 import hu.zza.iotea.model.util.Numbers;
 import hu.zza.iotea.model.util.Parameters;
@@ -96,7 +97,9 @@ public class JobService {
   }
 
   private Job getById(Integer id) {
-    return repository.findById(id).orElseThrow(() -> new ServiceProblem("")); // TODO
+    return repository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundProblem("There is no Job with id: %d".formatted(id)));
   }
 
   /**
@@ -151,7 +154,8 @@ public class JobService {
   private Job getByName(String name) {
     return repository
         .findByName(name)
-        .orElseThrow(() -> new ServiceProblem("There is no Job with name: %s".formatted(name)));
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Job with name: %s".formatted(name)));
   }
 
   public JobOutput runJob(String name) {

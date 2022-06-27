@@ -1,7 +1,6 @@
 package hu.zza.iotea.controller;
 
 import hu.zza.iotea.model.dto.JobOutput;
-import hu.zza.iotea.model.exception.EntityNotFoundProblem;
 import hu.zza.iotea.service.JobService;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -12,31 +11,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @AllArgsConstructor
 public class EasyJobController {
+  private JobController controller;
   private JobService service;
 
   @GetMapping
   public List<JobOutput> getAllJobs() {
-    return service.getAllJobs();
+    return controller.getAllJobs();
   }
 
   @GetMapping("/{identifier}")
   public List<JobOutput> getJobsByIdentifier(@PathVariable String identifier) {
-    return service.getJobsByIdentifier(identifier);
+    return controller.getJobsByIdentifier(identifier);
   }
 
   @GetMapping("/id/{id}")
   public JobOutput getJobById(@PathVariable Integer id) {
-    return service
-        .getJobById(id)
-        .orElseThrow(() -> new EntityNotFoundProblem("There is no Job with id: %d".formatted(id)));
+    return controller.getJobById(id);
   }
 
   @GetMapping("/name/{name}")
   public JobOutput getJobByName(@PathVariable String name) {
-    return service
-        .getJobByName(name)
-        .orElseThrow(
-            () -> new EntityNotFoundProblem("There is no Job with name: %s".formatted(name)));
+    return controller.getJobByName(name);
   }
 
   @GetMapping("/{commandName}/{deviceName}")
@@ -61,19 +56,19 @@ public class EasyJobController {
 
   @GetMapping("/run/{name}")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public JobOutput runJobByNameAlias(@PathVariable String name) {
+  public JobOutput runJobByName(@PathVariable String name) {
     return service.runJob(name);
   }
 
   @GetMapping("/run/{name}/{parameters}")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public JobOutput runJobByNameAlias(@PathVariable String name, @PathVariable String parameters) {
+  public JobOutput runJobByName(@PathVariable String name, @PathVariable String parameters) {
     return service.runJob(name, parameters);
   }
 
   @GetMapping("/delete/{name}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteJobByName(@PathVariable String name) {
-    service.deleteByName(name);
+    controller.deleteJobByName(name);
   }
 }
