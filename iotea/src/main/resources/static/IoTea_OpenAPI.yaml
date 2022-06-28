@@ -38,6 +38,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates a Device
   /api/devices/{identifier}:
     get:
@@ -81,6 +83,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/DeviceNotFound'
       summary: Gets a Device identified by {id}
     put:
       tags:
@@ -107,6 +113,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Device under specified {id}
     delete:
       tags:
@@ -123,6 +137,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Device identified by {id}
   /api/devices/uid/{uid}:
     get:
@@ -143,6 +159,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/DeviceNotFound'
       summary: Gets a Device identified by {uid}
     put:
       tags:
@@ -168,6 +188,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Device under specified {uid}
     delete:
       tags:
@@ -183,6 +211,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Device identified by {uid}
   /api/devices/name/{name}:
     get:
@@ -204,6 +234,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
       summary: Gets a Device identified by {name}
+      "400":
+        $ref: '#/components/responses/BadRequest'
+      "404":
+        $ref: '#/components/responses/DeviceNotFound'
     put:
       tags:
         - Device Management
@@ -228,6 +262,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/DeviceOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/DeviceOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Device under specified {name}
     delete:
       tags:
@@ -243,6 +285,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Device identified by {name}
   /api/devices/ip/{ip}:
     get:
@@ -299,6 +343,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates a Command
   /api/commands/{identifier}:
     get:
@@ -342,6 +388,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/CommandNotFound'
       summary: Gets a Command identified by {id}
     put:
       tags:
@@ -368,6 +418,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CommandOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Command under specified {id}
     delete:
       tags:
@@ -384,6 +442,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Command identified by {id}
   /api/commands/name/{name}:
     get:
@@ -404,6 +464,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/CommandNotFound'
       summary: Gets a Command identified by {name}
     put:
       tags:
@@ -429,6 +493,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/CommandOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CommandOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Command under specified {name}
     delete:
       tags:
@@ -444,6 +516,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Command identified by {name}
 
   /api/jobs:
@@ -478,6 +552,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates a Job
   /api/jobs/{identifier}:
     get:
@@ -521,6 +597,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
       summary: Gets a Job identified by {id}
     put:
       tags:
@@ -547,6 +627,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Job under specified {id}
     post:
       tags:
@@ -573,6 +661,12 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
+        "500":
+          $ref: '#/components/responses/ConnectionException'
       summary: Runs a Job specified by {id} with parameters (request body)
     delete:
       tags:
@@ -589,6 +683,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Job identified by {id}
   /api/jobs/name/{name}:
     get:
@@ -609,6 +705,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
       summary: Gets a Job identified by {name}
     put:
       tags:
@@ -634,6 +734,14 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "201":
+          description: Created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates or updates a Job under specified {name}
     post:
       tags:
@@ -659,6 +767,12 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
+        "500":
+          $ref: '#/components/responses/ConnectionException'
       summary: Runs a Job specified by {name} with parameters (request body)
     delete:
       tags:
@@ -674,6 +788,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Job identified by {name}
 
   /api:
@@ -733,6 +849,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
       summary: Gets a Job identified by {id}
   /api/name/{name}:
     get:
@@ -753,6 +873,10 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
       summary: Gets a Job identified by {name}
   /api/call/{id}/as/{name}:
     get:
@@ -780,6 +904,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Sets the {name} of a Job identified by {id}
   /api/{deviceName}/{commandName}:
     get:
@@ -806,6 +932,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates a Job with auto-generated name
   /api/{deviceName}/{commandName}/as/{jobName}:
     get:
@@ -836,6 +964,8 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Creates a Job with the specified {jobName}
   /api/run/{name}:
     get:
@@ -856,6 +986,12 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
+        "500":
+          $ref: '#/components/responses/ConnectionException'
       summary: Runs a Job specified by {name}
   /api/run/{name}/{parameters}:
     get:
@@ -882,6 +1018,12 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/JobOutput'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/JobNotFound'
+        "500":
+          $ref: '#/components/responses/ConnectionException'
       summary: Runs a Job specified by {name} with raw {parameters}
   /api/delete/{name}:
     get:
@@ -898,6 +1040,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "400":
+          $ref: '#/components/responses/BadRequest'
       summary: Deletes a Job identified by {name}
 components:
   schemas:
@@ -930,6 +1074,7 @@ components:
           type: integer
           format: int32
           example: 55443
+
     DeviceOutput:
       type: object
       properties:
@@ -949,6 +1094,7 @@ components:
           type: integer
           format: int32
           example: 55443
+
     DeviceAddressOutput:
       type: object
       properties:
@@ -980,6 +1126,7 @@ components:
           minLength: 0
           type: string
           example: 'Toggle command for Yeelight devices.'
+
     CommandOutput:
       type: object
       properties:
@@ -1021,6 +1168,7 @@ components:
           type: integer
           format: int32
           example: 1
+
     JobOutput:
       type: object
       properties:
@@ -1037,12 +1185,14 @@ components:
           $ref: '#/components/schemas/CommandOutput'
         result:
           $ref: '#/components/schemas/Run'
+
     JobContext:
       type: object
       properties:
         parameters:
           type: array
           example: '[100]'
+
     Run:
       type: object
       properties:
@@ -1069,6 +1219,7 @@ components:
         raw_parameters:
           type: string
           example: null
+
     EntityNotFoundException:
       required:
         - status
@@ -1097,6 +1248,7 @@ components:
           type: string
           description: Detailed exception message
           example: 'There is no Device with id: 1'
+
     ServiceException:
       required:
         - status
@@ -1125,6 +1277,33 @@ components:
           type: string
           description: Detailed exception message
           example: 'Cannot create Job (name: SwitchLamp)'
+
+    Exception:
+      required:
+        - status
+        - type
+        - title
+        - detail
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP response status code
+          format: int32
+          example: 400
+        type:
+          type: string
+          description: Fixed type of the exception
+          example: IoTea/bad-request
+        title:
+          type: string
+          description: Human-readable type of exception
+          example: Bad request
+        detail:
+          type: string
+          description: Detailed exception message
+          example: '400 BAD_REQUEST \"Type mismatch.\";'
+
     ConnectionException:
       required:
         - status
@@ -1153,3 +1332,46 @@ components:
           type: string
           description: Detailed exception message
           example: 'Cannot send command to Device (id: 1, uid: A-972, name: Desk, address: DeviceAddress (ip: 192.168.0.50, reachable: false), port: 55443)'
+
+  responses:
+    DeviceNotFound:
+      description: The specified Device was not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/EntityNotFoundException'
+
+    CommandNotFound:
+      description: The specified Command was not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/EntityNotFoundException'
+
+    JobNotFound:
+      description: The specified Job was not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/EntityNotFoundException'
+
+    ServiceException:
+      description: Cannot complete service task due to an exception
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ServiceException'
+
+    BadRequest:
+      description: Bad Request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Exception'
+
+    ConnectionException:
+      description: Cannot complete task due to a connection exception
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ConnectionException'
