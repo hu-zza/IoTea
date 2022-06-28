@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -62,12 +63,14 @@ public class JobController {
   }
 
   @PutMapping("/id/{id}")
-  public JobOutput putJobToId(@PathVariable Integer id, @Valid @RequestBody JobInput job) {
+  public ResponseEntity<JobOutput> putJobToId(
+      @PathVariable Integer id, @Valid @RequestBody JobInput job) {
     return service.updateJob(() -> Optional.of(id), job);
   }
 
   @PutMapping("/name/{name}")
-  public JobOutput putJobToName(@PathVariable String name, @Valid @RequestBody JobInput job) {
+  public ResponseEntity<JobOutput> putJobToName(
+      @PathVariable String name, @Valid @RequestBody JobInput job) {
     job.setName(name);
     return service.updateJob(() -> service.getIdByName(name), job);
   }

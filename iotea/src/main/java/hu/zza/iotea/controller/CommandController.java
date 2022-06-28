@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -50,13 +51,13 @@ public class CommandController {
   }
 
   @PutMapping("/id/{id}")
-  public CommandOutput putDeviceToId(
+  public ResponseEntity<CommandOutput> putDeviceToId(
       @PathVariable Integer id, @Valid @RequestBody CommandInput command) {
     return service.updateCommand(() -> Optional.of(id), command);
   }
 
   @PutMapping("/name/{name}")
-  public CommandOutput putDeviceToName(
+  public ResponseEntity<CommandOutput> putDeviceToName(
       @PathVariable String name, @Valid @RequestBody CommandInput command) {
     command.setName(name);
     return service.updateCommand(() -> service.getIdByName(name), command);

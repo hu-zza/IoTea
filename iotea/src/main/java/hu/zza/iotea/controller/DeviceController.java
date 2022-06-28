@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -64,20 +65,20 @@ public class DeviceController {
   }
 
   @PutMapping("/id/{id}")
-  public DeviceOutput putDeviceToId(
+  public ResponseEntity<DeviceOutput> putDeviceToId(
       @PathVariable Integer id, @Valid @RequestBody DeviceInput device) {
     return service.updateDevice(() -> Optional.of(id), device);
   }
 
   @PutMapping("/uid/{uid}")
-  public DeviceOutput putDeviceToUid(
+  public ResponseEntity<DeviceOutput> putDeviceToUid(
       @PathVariable String uid, @Valid @RequestBody DeviceInput device) {
     device.setUid(uid);
     return service.updateDevice(() -> service.getIdByUid(uid), device);
   }
 
   @PutMapping("/name/{name}")
-  public DeviceOutput putDeviceToName(
+  public ResponseEntity<DeviceOutput> putDeviceToName(
       @PathVariable String name, @Valid @RequestBody DeviceInput device) {
     device.setName(name);
     return service.updateDevice(() -> service.getIdByName(name), device);

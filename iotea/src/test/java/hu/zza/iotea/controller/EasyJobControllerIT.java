@@ -145,12 +145,12 @@ class EasyJobControllerIT {
 
   @Test
   void createJob() {
-    client.get().uri("/api/name_5/name_10").exchange().expectStatus().isOk();
+    client.get().uri("/api/name_5/name_10").exchange().expectStatus().isCreated();
   }
 
   @Test
   void createNamedJob() {
-    client.get().uri("/api/name_15/name_20/as/15-20").exchange().expectStatus().isOk();
+    client.get().uri("/api/name_15/name_20/as/15-20").exchange().expectStatus().isCreated();
   }
 
   @Test

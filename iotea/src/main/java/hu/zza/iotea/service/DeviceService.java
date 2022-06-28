@@ -4,10 +4,13 @@ import hu.zza.iotea.model.Device;
 import hu.zza.iotea.model.DeviceAddress;
 import hu.zza.iotea.model.dto.DeviceInput;
 import hu.zza.iotea.model.dto.DeviceOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
+import hu.zza.iotea.model.exception.ServiceProblem;
 import hu.zza.iotea.model.util.Numbers;
 import hu.zza.iotea.model.util.mapping.DeviceInputMapper;
 import hu.zza.iotea.model.util.mapping.DeviceOutputMapper;
 import hu.zza.iotea.repository.DeviceRepository;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -16,6 +19,7 @@ import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +32,10 @@ public class DeviceService {
 
   // simple exposure for hu.zza.iotea.model.util.mapping package
   Device getById(Integer id) {
-    return repository.findById(id).orElseThrow();
+    return repository
+        .findById(id)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Device with id: %d".formatted(id)));
   }
 
   public Optional<Integer> getIdByUid(String uid) {
@@ -99,7 +106,8 @@ public class DeviceService {
   }
 
   @Transactional
-  public DeviceOutput updateDevice(Supplier<Optional<Integer>> idSupplier, DeviceInput input) {
+  public ResponseEntity<DeviceOutput> updateDevice(
+      Supplier<Optional<Integer>> idSupplier, DeviceInput input) {
     var optId = idSupplier.get();
     var device = inMapper.toEntity(input);
     optId.ifPresentOrElse(device::setId, () -> device.setId(null));
@@ -109,10 +117,13 @@ public class DeviceService {
 
       if (!repository.existsById(id)) {
         repository.insertWithId(device);
-        return getDeviceById(id).orElseThrow();
+        return ResponseEntity.created(URI.create("/api/devices/id/%d".formatted(id)))
+            .body(
+                getDeviceById(id)
+                    .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(device))));
       }
     }
-    return saveDevice(device);
+    return ResponseEntity.ok(saveDevice(device));
   }
 
   public void deleteById(Integer id) {

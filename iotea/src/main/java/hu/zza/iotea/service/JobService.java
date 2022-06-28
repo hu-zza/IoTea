@@ -12,11 +12,13 @@ import hu.zza.iotea.model.util.mapping.JobInputMapper;
 import hu.zza.iotea.model.util.mapping.JobOutputMapper;
 import hu.zza.iotea.repository.JobRepository;
 import hu.zza.iotea.service.connection.Commander;
+import java.net.URI;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,7 +76,8 @@ public class JobService {
   }
 
   @Transactional
-  public JobOutput updateJob(Supplier<Optional<Integer>> idSupplier, JobInput input) {
+  public ResponseEntity<JobOutput> updateJob(
+      Supplier<Optional<Integer>> idSupplier, JobInput input) {
     var optId = idSupplier.get();
     var job = inMapper.toEntity(input);
     optId.ifPresentOrElse(job::setId, () -> job.setId(null));
@@ -84,10 +87,13 @@ public class JobService {
 
       if (!repository.existsById(id)) {
         repository.insertWithId(job);
-        return getJobById(id).orElseThrow();
+        return ResponseEntity.created(URI.create("/api/jobs/id/%d".formatted(id)))
+            .body(
+                getJobById(id)
+                    .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(job))));
       }
     }
-    return saveJob(job);
+    return ResponseEntity.ok(saveJob(job));
   }
 
   public JobOutput setName(Integer id, String name) {

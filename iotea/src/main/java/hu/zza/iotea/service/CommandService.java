@@ -3,16 +3,20 @@ package hu.zza.iotea.service;
 import hu.zza.iotea.model.Command;
 import hu.zza.iotea.model.dto.CommandInput;
 import hu.zza.iotea.model.dto.CommandOutput;
+import hu.zza.iotea.model.exception.EntityNotFoundProblem;
+import hu.zza.iotea.model.exception.ServiceProblem;
 import hu.zza.iotea.model.util.Numbers;
 import hu.zza.iotea.model.util.mapping.CommandInputMapper;
 import hu.zza.iotea.model.util.mapping.CommandOutputMapper;
 import hu.zza.iotea.repository.CommandRepository;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +27,12 @@ public class CommandService {
   private CommandInputMapper inMapper;
   private CommandOutputMapper outMapper;
 
+  // simple exposure for hu.zza.iotea.model.util.mapping package
   Command getById(Integer id) {
-    return repository.findById(id).orElseThrow();
+    return repository
+        .findById(id)
+        .orElseThrow(
+            () -> new EntityNotFoundProblem("There is no Command with id: %d".formatted(id)));
   }
 
   public Optional<Integer> getIdByName(String name) {
@@ -75,7 +83,8 @@ public class CommandService {
   }
 
   @Transactional
-  public CommandOutput updateCommand(Supplier<Optional<Integer>> idSupplier, CommandInput update) {
+  public ResponseEntity<CommandOutput> updateCommand(
+      Supplier<Optional<Integer>> idSupplier, CommandInput update) {
     var optId = idSupplier.get();
     var command = inMapper.toEntity(update);
     optId.ifPresentOrElse(command::setId, () -> command.setId(null));
@@ -85,10 +94,13 @@ public class CommandService {
 
       if (!repository.existsById(id)) {
         repository.insertWithId(command);
-        return getCommandById(id).orElseThrow();
+        return ResponseEntity.created(URI.create("/api/commands/id/%d".formatted(id)))
+            .body(
+                getCommandById(id)
+                    .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(command))));
       }
     }
-    return saveCommand(command);
+    return ResponseEntity.ok(saveCommand(command));
   }
 
   public void deleteById(Integer id) {

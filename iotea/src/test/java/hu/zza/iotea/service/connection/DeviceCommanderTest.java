@@ -23,7 +23,7 @@ class DeviceCommanderTest {
                     "..."));
 
     assertEquals(
-        "Connection exception: Cannot send command to Device (ID: 3, UID: U-3, name: N3)",
+        "Connection exception: Cannot send command to Device (id: 3, uid: U-3, name: N3, address: DeviceAddress (ip: localhost/127.0.0.1, reachable: false), port: 80)",
         exception.getMessage());
   }
 }
