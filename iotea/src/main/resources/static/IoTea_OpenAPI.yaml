@@ -1097,25 +1097,6 @@ components:
           type: string
           description: Detailed exception message
           example: 'There is no Device with id: 1'
-        examples:
-          DeviceNotFoundByUid:
-            value:
-              status: 404
-              type: IoTea/entity-not-found-exception
-              title: Entity not found exception
-              detail: 'There is no Device with uid: A-972'
-          CommandNotFoundById:
-            value:
-              status: 404
-              type: IoTea/entity-not-found-exception
-              title: Entity not found exception
-              detail: 'There is no Command with id: 23'
-          JobNotFoundByName:
-            value:
-              status: 404
-              type: IoTea/entity-not-found-exception
-              title: Entity not found exception
-              detail: 'There is no Job with name: Toggle'
     ServiceException:
       required:
         - status
@@ -1157,7 +1138,7 @@ components:
           description: HTTP response status code
           format: int32
           default: 500
-            example: 500
+          example: 500
         type:
           type: string
           description: Fixed type of the exception
@@ -1172,5 +1153,3 @@ components:
           type: string
           description: Detailed exception message
           example: 'Cannot send command to Device (id: 1, uid: A-972, name: Desk, address: DeviceAddress (ip: 192.168.0.50, reachable: false), port: 55443)'
-
-
