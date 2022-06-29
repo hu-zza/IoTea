@@ -23,7 +23,7 @@ Táblája (`jobs`) kapcsolótábla, viszont rendelkezik egyedi kulcsokkal (PK: i
 
 ##### Egy *Device* létrehozása
 
-`echo '{"uid": "0x000000003ac864d5", "name": "Desk", "ip": "192.168.0.50", "port": 55443}' | http POST :8080/api/devices`
+`http :8080/api/devices uid=0x000000003ac864d5 name=Desk ip=192.168.0.50 port=55443`
 
 ```json
 HTTP/1.1 201 Created
@@ -44,7 +44,7 @@ Content-Type: application/json
 
 ##### Egy (paraméter nélküli) *Command* létrehozása
 
-`echo '{"name": "YeeToggle", "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}", "note": "Toggle command for Yeelight devices."}'  | http POST :8080/api/commands`
+`http :8080/api/commands name=YeeToggle template='{"id": 1, "method": "toggle", "params": []}' note='Toggle command for Yeelight devices.'`
 
 ```json
 HTTP/1.1 201 Created
@@ -62,7 +62,7 @@ Content-Type: application/json
 
 ##### Egy *Job* létrehozása
 
-`echo '{"name": "ToggleDesk", "device_id": 1, "command_id": 1}' | http POST :8080/api/jobs`
+`http :8080/api/jobs name=ToggleDesk device_id=1 command_id=1`
 
 ```json
 HTTP/1.1 201 Created
@@ -87,7 +87,7 @@ Content-Type: application/json
         "uid": "0x000000003ac864d5"
     },
     "id": 1,
-    "name": "YeeToggle",
+    "name": "ToggleDesk",
     "result": null
 }
 ```
@@ -95,7 +95,7 @@ Content-Type: application/json
 
 ##### Egy *Job* paraméter nélküli meghívása
 
-`echo '{}' | http :8080/api/jobs/id/1`
+`http :8080/api/jobs/name/ToggleDesk parameters:='[]'`
 
 ```json
 HTTP/1.1 202 Accepted
