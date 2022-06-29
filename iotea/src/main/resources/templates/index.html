@@ -81,42 +81,42 @@
         <h4 class="card-header">Devices</h4>
         <div class="card-body">
           <div class="container-fluid pb-5">
-        <table class="table table-dark table-hover" id="IoTea_devices">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>UID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Reachable</th>
-            <!-- <th>Actions</th> -->
-          </tr>
-          </thead>
-          <tbody th:remove="all-but-first">
-          <tr th:id="'device_' + ${device.id}" th:each="device : ${devices}" id="device_1">
-            <td th:text="${device.id}">1</td>
-            <td th:text="${device.uid}">2f4c4331-6f74-47e0-8273-baafee1e88c9</td>
-            <td th:text="${device.name}">Ceiling lamp</td>
-            <td th:text="${device.address.ip}">192.168.0.60</td>
-            <td th:text="${device.address.reachable}">true</td>
-          </tr>
-          <tr id="device_2">
-            <td>2</td>
-            <td>14e7ad66-42c7-44cc-a5a8-ecba31bb4c5b</td>
-            <td>Lamp @ desk</td>
-            <td>192.168.0.61</td>
-            <td>true</td>
-          </tr>
-          <tr id="device_3">
-            <td>3</td>
-            <td>fe18e0dd-5293-40c6-90af-6fcf5c8a3dce</td>
-            <td>Reading light</td>
-            <td>192.168.0.62</td>
-            <td>false</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+            <table class="table table-dark table-hover" id="IoTea_devices">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>UID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Reachable</th>
+                <!-- <th>Actions</th> -->
+              </tr>
+              </thead>
+              <tbody th:remove="all-but-first">
+              <tr th:id="'device_' + ${device.id}" th:each="device : ${devices}" id="device_1">
+                <td th:text="${device.id}">1</td>
+                <td th:text="${device.uid}">2f4c4331-6f74-47e0-8273-baafee1e88c9</td>
+                <td th:text="${device.name}">Ceiling lamp</td>
+                <td th:text="${device.address.ip}">192.168.0.60</td>
+                <td th:text="${device.address.reachable}">true</td>
+              </tr>
+              <tr id="device_2">
+                <td>2</td>
+                <td>14e7ad66-42c7-44cc-a5a8-ecba31bb4c5b</td>
+                <td>Lamp @ desk</td>
+                <td>192.168.0.61</td>
+                <td>true</td>
+              </tr>
+              <tr id="device_3">
+                <td>3</td>
+                <td>fe18e0dd-5293-40c6-90af-6fcf5c8a3dce</td>
+                <td>Reading light</td>
+                <td>192.168.0.62</td>
+                <td>false</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -124,52 +124,52 @@
         <h4 class="card-header">Commands</h4>
         <div class="card-body">
           <div class="container-fluid pb-5">
-        <table class="table table-dark table-hover" id="IoTea_commands">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Template</th>
-            <th>Note</th>
-            <!-- <th>Actions</th> -->
-          </tr>
-          </thead>
-          <tbody th:remove="all-but-first">
-          <tr th:id="'command_' + ${command.id}" th:each="command : ${commands}" id="command_1">
-            <td th:text="${command.id}">1</td>
-            <td th:text="${command.name}">YeeDay</td>
-            <td th:text="${command.template}">{"id": 1, "method": "set_power", "params": ["%s",
-              "smooth", 1000, 1]}
-            </td>
-            <td th:text="${command.note} ?: ''">Yeelight power (day mode)</td>
-          </tr>
-          <tr id="command_2">
-            <td>2</td>
-            <td>YeeNight</td>
-            <td>{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 5]}</td>
-            <td>Yeelight power (night mode)</td>
-          </tr>
-          <tr id="command_3">
-            <td>3</td>
-            <td>YeeBright</td>
-            <td>{"id":1, "method": "set_bright", "params": [%d, "smooth", 1000]}</td>
-            <td>Yeelight set bright</td>
-          </tr>
-          <tr id="command_4">
-            <td>4</td>
-            <td>YeeToggle</td>
-            <td>{"id": 1, "method": "toggle", "params": []}</td>
-            <td>Yeelight toggle</td>
-          </tr>
-          <tr id="command_5">
-            <td>5</td>
-            <td>YeeProp</td>
-            <td>{"id": 1, "method": "get_prop", "params": ["%s"]}</td>
-            <td>Yeelight get property</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+            <table class="table table-dark table-hover" id="IoTea_commands">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Template</th>
+                <th>Note</th>
+                <!-- <th>Actions</th> -->
+              </tr>
+              </thead>
+              <tbody th:remove="all-but-first">
+              <tr th:id="'command_' + ${command.id}" th:each="command : ${commands}" id="command_1">
+                <td th:text="${command.id}">1</td>
+                <td th:text="${command.name}">YeeDay</td>
+                <td th:text="${command.template}">{"id": 1, "method": "set_power", "params": ["%s",
+                  "smooth", 1000, 1]}
+                </td>
+                <td th:text="${command.note} ?: ''">Yeelight power (day mode)</td>
+              </tr>
+              <tr id="command_2">
+                <td>2</td>
+                <td>YeeNight</td>
+                <td>{"id": 1, "method": "set_power", "params": ["%s", "smooth", 1000, 5]}</td>
+                <td>Yeelight power (night mode)</td>
+              </tr>
+              <tr id="command_3">
+                <td>3</td>
+                <td>YeeBright</td>
+                <td>{"id":1, "method": "set_bright", "params": [%d, "smooth", 1000]}</td>
+                <td>Yeelight set bright</td>
+              </tr>
+              <tr id="command_4">
+                <td>4</td>
+                <td>YeeToggle</td>
+                <td>{"id": 1, "method": "toggle", "params": []}</td>
+                <td>Yeelight toggle</td>
+              </tr>
+              <tr id="command_5">
+                <td>5</td>
+                <td>YeeProp</td>
+                <td>{"id": 1, "method": "get_prop", "params": ["%s"]}</td>
+                <td>Yeelight get property</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
