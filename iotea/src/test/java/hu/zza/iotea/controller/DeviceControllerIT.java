@@ -12,8 +12,7 @@ import hu.zza.iotea.repository.JobRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -217,5 +216,11 @@ class DeviceControllerIT {
     // delete all except the third : name_33
 
     helper.resultListCheckWithMockOutputs("/api/devices", 1);
+  }
+
+  @Test
+  void dbConstraintViolation() {
+    var devices = List.of(helper.createDummyInput(34), helper.createDummyInput(34));
+    helper.postInputs(devices);
   }
 }
