@@ -140,6 +140,110 @@ Content-Type: application/json
 ```
 
 
+##### Egy (paraméterezett) *Command* létrehozása
+
+`http :8080/api/commands name=YeeBright template='{"id": 1, "method": "set_bright", "params": [%d, "%s", %d]}' note='Set brightness command for Yeelight devices. (1-100%, smooth / sudden, 30-... ms)'`
+
+```json
+HTTP/1.1 201 Created
+Content-Length: 201
+Content-Type: application/json
+
+{
+    "id": 2,
+    "name": "YeeBright",
+    "note": "Set brightness command for Yeelight devices. (1-100%, smooth / sudden, 30-... ms)",
+    "template": "{\"id\": 1, \"method\": \"set_bright\", \"params\": [%d, \"%s\", %d]}"
+}
+
+```
+
+
+##### Újabb *Job* létrehozása
+
+`http :8080/api/jobs name=BrightDesk device_id=1 command_id=2`
+
+
+```json
+HTTP/1.1 201 Created
+Content-Length: 375
+Content-Type: application/json
+
+{
+    "command": {
+        "id": 2,
+        "name": "YeeBright",
+        "note": "Set brightness command for Yeelight devices. (1-100%, smooth / sudden, 30-... ms)",
+        "template": "{\"id\": 1, \"method\": \"set_bright\", \"params\": [%d, \"%s\", %d]}"
+    },
+    "device": {
+        "address": {
+            "ip": "192.168.0.50",
+            "reachable": true
+        },
+        "id": 1,
+        "name": "Desk",
+        "port": 55443,
+        "uid": "0x000000003ac864d5"
+    },
+    "id": 2,
+    "name": "BrightDesk",
+    "result": null
+}
+```
+
+
+##### Egy *Job* paraméterezett meghívása
+
+`http :8080/api/jobs/name/BrightDesk parameters:='[100, "smooth", 30000]'`
+
+
+```json
+HTTP/1.1 202 Accepted
+Content-Length: 642
+Content-Type: application/json
+
+{
+    "command": {
+        "id": 2,
+        "name": "YeeBright",
+        "note": "Set brightness command for Yeelight devices. (1-100%, smooth / sudden, 30-... ms)",
+        "template": "{\"id\": 1, \"method\": \"set_bright\", \"params\": [%d, \"%s\", %d]}"
+    },
+    "device": {
+        "address": {
+            "ip": "192.168.0.50",
+            "reachable": true
+        },
+        "id": 1,
+        "name": "Desk",
+        "port": 55443,
+        "uid": "0x000000003ac864d5"
+    },
+    "id": 2,
+    "name": "BrightDesk",
+    "result": {
+        "parameters": [
+            100,
+            "smooth",
+            30000
+        ],
+        "payload": "{\"id\": 1, \"method\": \"set_bright\", \"params\": [100, \"smooth\", 30000]}",
+        "raw_parameters": null,
+        "response": "{\"method\":\"props\",\"params\":{\"active_bright\":100,\"nl_br\":100}}",
+        "started": [
+            2022,
+            1,
+            10,
+            20,
+            30,
+            40,
+            299970222
+        ]
+    }
+}
+```
+
 ---
 
 ## Felépítés
