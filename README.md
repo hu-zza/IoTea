@@ -66,14 +66,14 @@ Content-Type: application/json
 
 ```json
 HTTP/1.1 201 Created
-Content-Length: 275
+Content-Length: 312
 Content-Type: application/json
 
 {
     "command": {
         "id": 1,
         "name": "YeeToggle",
-        "note": "",
+        "note": "Toggle command for Yeelight devices.",
         "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}"
     },
     "device": {
@@ -99,22 +99,22 @@ Content-Type: application/json
 
 ```json
 HTTP/1.1 202 Accepted
-Content-Length: 482
+Content-Length: 519
 Content-Type: application/json
 
 {
     "command": {
         "id": 1,
         "name": "YeeToggle",
-        "note": "",
+        "note": "Toggle command for Yeelight devices.",
         "template": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}"
     },
     "device": {
-        "id": 1,
         "address": {
             "ip": "192.168.0.50",
             "reachable": true
         },
+        "id": 1,
         "name": "Desk",
         "port": 55443,
         "uid": "0x000000003ac864d5"
@@ -125,7 +125,7 @@ Content-Type: application/json
         "parameters": [],
         "payload": "{\"id\": 1, \"method\": \"toggle\", \"params\": []}",
         "raw_parameters": null,
-        "response": "{\"method\":\"props\",\"params\":{\"power\":\"on\"}}",
+        "response": "{\"method\":\"props\",\"params\":{\"power\":\"off\"}}",
         "started": [
             2022,
             1,
@@ -200,7 +200,7 @@ Content-Type: application/json
 
 ```json
 HTTP/1.1 202 Accepted
-Content-Length: 642
+Content-Length: 643
 Content-Type: application/json
 
 {
