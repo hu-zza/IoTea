@@ -92,8 +92,11 @@ public class JobService {
                 getJobById(id)
                     .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(job))));
       }
+      return ResponseEntity.ok(saveJob(job));
     }
-    return ResponseEntity.ok(saveJob(job));
+    var persisted = saveJob(job);
+    var uri = URI.create("/api/jobs/id/%d".formatted(persisted.getId()));
+    return ResponseEntity.created(uri).body(persisted);
   }
 
   public JobOutput setName(Integer id, String name) {

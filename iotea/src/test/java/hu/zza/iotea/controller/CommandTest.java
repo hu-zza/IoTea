@@ -2,7 +2,7 @@ package hu.zza.iotea.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import hu.zza.iotea.model.*;
+import hu.zza.iotea.model.Command;
 import org.junit.jupiter.api.Test;
 
 class CommandTest {

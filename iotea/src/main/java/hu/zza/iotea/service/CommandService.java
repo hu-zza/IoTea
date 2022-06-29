@@ -99,8 +99,11 @@ public class CommandService {
                 getCommandById(id)
                     .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(command))));
       }
+      return ResponseEntity.ok(saveCommand(command));
     }
-    return ResponseEntity.ok(saveCommand(command));
+    var persisted = saveCommand(command);
+    var uri = URI.create("/api/commands/id/%d".formatted(persisted.getId()));
+    return ResponseEntity.created(uri).body(persisted);
   }
 
   public void deleteById(Integer id) {

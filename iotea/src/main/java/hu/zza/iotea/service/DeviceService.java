@@ -122,8 +122,11 @@ public class DeviceService {
                 getDeviceById(id)
                     .orElseThrow(() -> new ServiceProblem("Cannot insert %s".formatted(device))));
       }
+      return ResponseEntity.ok(saveDevice(device));
     }
-    return ResponseEntity.ok(saveDevice(device));
+    var persisted = saveDevice(device);
+    var uri = URI.create("/api/devices/id/%d".formatted(persisted.getId()));
+    return ResponseEntity.created(uri).body(persisted);
   }
 
   public void deleteById(Integer id) {
