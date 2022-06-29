@@ -1120,7 +1120,7 @@ components:
           maxLength: 30000
           minLength: 0
           type: string
-          example: '{"method": "toggle", "params": []}'
+          example: '{"id": 1, "method": "toggle", "params": []}'
         note:
           maxLength: 30000
           minLength: 0
